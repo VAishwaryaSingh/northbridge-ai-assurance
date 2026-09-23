@@ -104,7 +104,7 @@ Criteria met on the full ToR list: 1 of 8 on point estimate (recall on other rul
 - **Refs:** R16, R17, R18; C02, C03, C05, C06.
 
 ## F-10 No intended-use or limitations statement for users (Medium)
-- **Condition:** the README does not state intended use, what the tool cannot detect (for example false negatives on real books), that it is a demonstration on fictional data, or its production status. "Rule-based checks" are mentioned only in the accuracy section (line 108), and the README does not say that no LLM or model is used.
+- **Condition:** the README does not state intended use, what the tool cannot detect (for example false negatives on real books), that it is a demonstration on fictional data, or its production status. "Rule-based checks" are mentioned only in the accuracy section (line 108), and the README does not say that no LLM or model is used (a plain statement that it is rules-based, calls no LLM and is not production software was added to the README after the pinned commit).
 - **Criteria:** users are told what the tool is, what it can and cannot detect, and that outputs need review (UK transparency principle; ISO/IEC 42001 information for users).
 - **Cause:** no limitations section was written.
 - **Effect:** users may rely on the tool for more than it can do, and may over-rely on a clean run.

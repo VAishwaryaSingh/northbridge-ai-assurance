@@ -134,6 +134,11 @@ Entries are written as testing is performed (contemporaneous). Times are UTC. Le
 <li><strong>Adverse effects recorded:</strong> BT-044 duplicate payment no longer flagged as A5 (ambiguity with a duplicate bill in the dataset); published synthetic precision 0.778 to 0.712 (10 new A1 supplier-bill flags).</li>
 <li><strong>Limit:</strong> fixes designed against the same dataset used to retest; not evidence of accuracy on real books.</li>
 </ul>
+<h2 id="e-08-northbridge-readme-updated-after-the-review">E-08 Northbridge README updated after the review</h2>
+<ul>
+<li><strong>Time:</strong> 2026-09-23. At the owner's request a plain statement was added to the Northbridge README working tree (not part of the pinned commit): the tool is rules-based, calls no LLM or AI model, is a demonstration on fictional and sandbox data, is not production software, and every flag needs human review.</li>
+<li><strong>Effect on this review:</strong> all evidence and findings refer to the pinned commit <code>9c4127a</code>, which did not contain the statement. F-10 describes that commit. The added sentence covers part of F-10 (no LLM, not production, human review of flags); intended use and the known limitations (F-01, F-02, F-08) are still not stated in the README.</li>
+</ul>
 <h2 id="test-dataset">Test dataset</h2>
 <p>Synthetic ledger in the same schema as Northbridge (<code>ledger_test.db</code>) plus ground-truth labels (<code>labels.csv</code>). Built by <code>../test_scripts/build_dataset.py</code> (seeded, reproducible). No real data.</p>
 <p><strong>Frozen before the first run</strong> (hashes in <code>../evidence_log.md</code> E-01). Do not edit; regenerate and re-hash if changed.</p>

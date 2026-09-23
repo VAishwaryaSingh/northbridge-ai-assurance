@@ -83,3 +83,7 @@ Entries are written as testing is performed (contemporaneous). Times are UTC. Le
 - **Headline:** recall 0.903 to 0.968; precision 0.560 to 0.600; FPR 0.111 to 0.101; duplicate supplier bills 0/3 to 3/3; output identical across 7 row orderings (was 6 of 7 differing); variance sentences with an opposing driver 17/52 to 0/59.
 - **Adverse effects recorded:** BT-044 duplicate payment no longer flagged as A5 (ambiguity with a duplicate bill in the dataset); published synthetic precision 0.778 to 0.712 (10 new A1 supplier-bill flags).
 - **Limit:** fixes designed against the same dataset used to retest; not evidence of accuracy on real books.
+
+## E-08 Northbridge README updated after the review
+- **Time:** 2026-09-23. At the owner's request a plain statement was added to the Northbridge README working tree (not part of the pinned commit): the tool is rules-based, calls no LLM or AI model, is a demonstration on fictional and sandbox data, is not production software, and every flag needs human review.
+- **Effect on this review:** all evidence and findings refer to the pinned commit `9c4127a`, which did not contain the statement. F-10 describes that commit. The added sentence covers part of F-10 (no LLM, not production, human review of flags); intended use and the known limitations (F-01, F-02, F-08) are still not stated in the README.
