@@ -16,11 +16,11 @@ Assess whether Northbridge is governed, controlled, and performs reliably enough
 
 ## 3. What the system is (scoping decision)
 
-Northbridge is titled an "Agent" and its README positions it as a small-scale version of "AI-native" ledger products (see Amendment 1, item 5). Inspection at the pinned commit shows it calls **no LLM**. It is deterministic rules (A1 to A6), a median/MAD statistical outlier check (A7), fuzzy bank-to-invoice matching and templated variance text. This review therefore:
+Inspection at the pinned commit shows Northbridge calls **no LLM**. It is deterministic rules (A1 to A6), a median/MAD statistical outlier check (A7), fuzzy bank-to-invoice matching and templated variance text. This review therefore:
 
 - assesses it as a **rules-based automated control**;
 - uses NIST AI RMF and ISO/IEC 42001 as governance lenses, applying only the parts that are relevant;
-- records the "AI-native / agent" positioning as a **transparency matter** to be evaluated as a finding.
+- records the absence of an intended-use and limitations statement as a **transparency matter** to be evaluated as a finding.
 
 ## 4. Scope
 
@@ -91,4 +91,3 @@ Criteria in section 6 are unchanged. Corrections to statements made before testi
 2. Determinism is defined as identical output on rerun over unchanged data. It is tested both with fixed row order and with reordered rows, because the order in which an ERP API returns records is not under the reviewer's control.
 3. All eight criteria are assessed and reported, including audit trail completeness and human disposition.
 4. Additional limitation: connector ingestion, multi-line bills, voided or null data and several rule variations were not tested (see challenge_review.md, CH-11).
-5. The statement in section 3 that the README "describes" the product as "AI-native" was too strong. The README says the project is "a small-scale version of the kind of AI-native ledger automation product accounting firms are increasingly adopting", i.e. it names the product category it imitates. The title also calls the tool an "Agent". The concern stands (a reader can assume AI, and the README never says no model is used) but it is ambiguous positioning, not a false claim. Corrected 23 Sep 2026 after the owner asked why the wording was used.

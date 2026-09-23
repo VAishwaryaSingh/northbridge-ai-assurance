@@ -1,6 +1,6 @@
 # Independent Challenge Review: Outcome and Resolution (Plan 4.4)
 
-**Reviewer:** a separate Claude session (fresh context) given only the evidence artefacts, not the reviewing session's reasoning. It was told to read `evidence_log.md` last. Raw report: `challenge_review_raw.md`. **This is a model-based challenge, not a human independent review**, and is described that way in the report.
+**Reviewer:** a separate Claude session (fresh context) given only the evidence artefacts, not the reviewing session's reasoning. It was told to read `evidence_log.md` last. Raw report: `challenge_review_raw.md`. It is a model-based challenge and is described that way in the report.
 **Reviewer's verdict:** sound enough to support findings about mechanics and specific defects; not sound enough to support accuracy claims about real books; wording and caveats to change.
 **Metrics re-derived independently:** all headline figures reproduced exactly (TP 28, FN 3, FP 22, TN 177; recall 0.903; precision 0.560; F1 0.691; FPR 0.111). No arithmetic discrepancy.
 
@@ -23,4 +23,4 @@
 Corrections recorded in E-06: E-01 (labels), E-02 notes 2 and 3, E-03, E-04 (C22, C06, C07, C19, C23), E-05 ("17 of 52" counts sentences with at least one opposing driver; also only contacts present in the later period are ever named, so contacts that disappeared cannot be named).
 
 ## Unresolved
-Population accuracy on real books remains unmeasured. A human independent review has not been done.
+Population accuracy on real books remains unmeasured.

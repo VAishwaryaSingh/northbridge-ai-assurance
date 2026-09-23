@@ -12,7 +12,7 @@ A reusable checklist for assessing an AI or automated decision system used in a 
 
 | # | Question | Why it matters | Evidence |
 |---|---|---|---|
-| 0.1 | Does the system call an LLM, a trained model, or only fixed rules and statistics? Read the code or vendor documentation; do not rely on the description. | Northbridge is titled an "Agent" and positioned as a small-scale version of AI-native products, yet calls no LLM. That changed which risks applied. | Code search, dependency list, network destinations |
+| 0.1 | Does the system call an LLM, a trained model, or only fixed rules and statistics? Read the code or vendor documentation; do not rely on the description. | Northbridge calls no LLM. Finding that out early changed which risks applied. | Code search, dependency list, network destinations |
 | 0.2 | Is the description of the system accurate and consistent across README, marketing, dashboard and documents? | Misdescription misleads users about behaviour and reliability. | Documents compared |
 | 0.3 | Who developed it, who is reviewing it, and were AI coding tools used? | Independence and provenance must be disclosed. | Independence statement |
 | 0.4 | What version is under review (commit, release, model version)? Is it pinned for the review? | Evidence must refer to a fixed subject. | Commit hash or release id |
@@ -134,7 +134,7 @@ A reusable checklist for assessing an AI or automated decision system used in a 
 - **Criteria before results:** set thresholds first; report every criterion, including the ones that are not met.
 - **Findings:** Condition, Criteria, Cause, Effect, Recommendation, with a High, Medium or Low rating and references to risks and controls.
 - **Sensitivity and uncertainty:** show how outcomes change under alternative labelling; note clustering of errors and small samples.
-- **Challenge:** have the testing challenged by someone who has not seen your reasoning. A model-based challenge is useful but is not independent human review; say which you used.
+- **Challenge:** have the testing challenged by someone who has not seen your reasoning. Say whether the challenge was human or model-based.
 - **Wording:** "conclusion", not "audit opinion". Do not claim assurance or certification for a self-assessment.
 - **Remediation:** if you fix things, do it on a copy or in a labelled version, retest with the same frozen data, and report costs and side effects as well as improvements.
 

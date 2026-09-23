@@ -39,7 +39,7 @@ button.theme{margin-left:auto;background:none;border:1px solid var(--line);borde
 </style></head><body>
 <a class="skip" href="#main">Skip to content</a>
 <header class="site"><div class="wrap"><a class="brand" href="index.html">Northbridge Assurance Review</a><nav aria-label="Main"><a href="index.html">Home</a><a href="findings.html">Findings</a><a href="method.html">Method</a><a href="testing.html">Testing</a><a href="remediation.html">Remediation</a><a href="toolkit.html">Toolkit</a><a href="downloads/assurance_report.pdf">Report (PDF)</a></nav><button class="theme" id="themebtn" type="button">Light / dark</button></div></header>
-<div class="banner"><div class="wrap"><strong>Self-assessment, not an independent audit.</strong> The reviewer also built the system. Figures describe a constructed test set and are not estimates of accuracy on real books. No human independent review has been done.</div></div>
+<div class="banner"><div class="wrap"><strong>Self-assessment, not an independent audit.</strong> The reviewer also built the system. Figures describe a constructed test set and are not estimates of accuracy on real books.</div></div>
 <main id="main"><div class="wrap">
 <h1 id="ai-system-assurance-checklist">AI System Assurance Checklist</h1>
 <p>A reusable checklist for assessing an AI or automated decision system used in a finance or control process. It generalises the control matrix from the Northbridge review and adds the lessons that review taught. It is a starting point for a self-assessment or a client engagement, <strong>not a certification tool</strong>.</p>
@@ -60,7 +60,7 @@ button.theme{margin-left:auto;background:none;border:1px solid var(--line);borde
 <tr>
 <td>0.1</td>
 <td>Does the system call an LLM, a trained model, or only fixed rules and statistics? Read the code or vendor documentation; do not rely on the description.</td>
-<td>Northbridge is titled an "Agent" and positioned as a small-scale version of AI-native products, yet calls no LLM. That changed which risks applied.</td>
+<td>Northbridge calls no LLM. Finding that out early changed which risks applied.</td>
 <td>Code search, dependency list, network destinations</td>
 </tr>
 <tr>
@@ -530,7 +530,7 @@ button.theme{margin-left:auto;background:none;border:1px solid var(--line);borde
 <li><strong>Criteria before results:</strong> set thresholds first; report every criterion, including the ones that are not met.</li>
 <li><strong>Findings:</strong> Condition, Criteria, Cause, Effect, Recommendation, with a High, Medium or Low rating and references to risks and controls.</li>
 <li><strong>Sensitivity and uncertainty:</strong> show how outcomes change under alternative labelling; note clustering of errors and small samples.</li>
-<li><strong>Challenge:</strong> have the testing challenged by someone who has not seen your reasoning. A model-based challenge is useful but is not independent human review; say which you used.</li>
+<li><strong>Challenge:</strong> have the testing challenged by someone who has not seen your reasoning. Say whether the challenge was human or model-based.</li>
 <li><strong>Wording:</strong> "conclusion", not "audit opinion". Do not claim assurance or certification for a self-assessment.</li>
 <li><strong>Remediation:</strong> if you fix things, do it on a copy or in a labelled version, retest with the same frozen data, and report costs and side effects as well as improvements.</li>
 </ul>

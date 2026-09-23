@@ -28,8 +28,6 @@ Connects to Xero and QuickBooks Online, loads ledger data into SQLite, reconcile
 
 Because the behaviour is deterministic, the same input should produce the same output. This is tested rather than assumed in Phase 4.
 
-The README (`README.md:5`) positions the tool as "a small-scale version of the kind of AI-native ledger automation product accounting firms are increasingly adopting", and the title calls it an "Agent". That describes the product category the project imitates rather than claiming the tool uses AI, but it does not say that no model is used, and nothing in the tool is agentic (no model, no autonomous action). The README mentions "rule-based checks" only in its accuracy section (line 108). Recorded for evaluation as a transparency matter.
-
 ## 3. Components
 
 | Component | Path |

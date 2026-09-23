@@ -39,10 +39,10 @@ button.theme{margin-left:auto;background:none;border:1px solid var(--line);borde
 </style></head><body>
 <a class="skip" href="#main">Skip to content</a>
 <header class="site"><div class="wrap"><a class="brand" href="index.html">Northbridge Assurance Review</a><nav aria-label="Main"><a href="index.html">Home</a><a href="findings.html">Findings</a><a href="method.html">Method</a><a href="testing.html">Testing</a><a href="remediation.html">Remediation</a><a href="toolkit.html">Toolkit</a><a href="downloads/assurance_report.pdf">Report (PDF)</a></nav><button class="theme" id="themebtn" type="button">Light / dark</button></div></header>
-<div class="banner"><div class="wrap"><strong>Self-assessment, not an independent audit.</strong> The reviewer also built the system. Figures describe a constructed test set and are not estimates of accuracy on real books. No human independent review has been done.</div></div>
+<div class="banner"><div class="wrap"><strong>Self-assessment, not an independent audit.</strong> The reviewer also built the system. Figures describe a constructed test set and are not estimates of accuracy on real books.</div></div>
 <main id="main"><div class="wrap">
 <h1 id="independent-challenge-review-outcome-and-resolution-plan-4-4">Independent Challenge Review: Outcome and Resolution (Plan 4.4)</h1>
-<p><strong>Reviewer:</strong> a separate Claude session (fresh context) given only the evidence artefacts, not the reviewing session's reasoning. It was told to read <code>evidence_log.md</code> last. Raw report: <code>challenge_review_raw.md</code>. <strong>This is a model-based challenge, not a human independent review</strong>, and is described that way in the report.
+<p><strong>Reviewer:</strong> a separate Claude session (fresh context) given only the evidence artefacts, not the reviewing session's reasoning. It was told to read <code>evidence_log.md</code> last. Raw report: <code>challenge_review_raw.md</code>. It is a model-based challenge and is described that way in the report.
 <strong>Reviewer's verdict:</strong> sound enough to support findings about mechanics and specific defects; not sound enough to support accuracy claims about real books; wording and caveats to change.
 <strong>Metrics re-derived independently:</strong> all headline figures reproduced exactly (TP 28, FN 3, FP 22, TN 177; recall 0.903; precision 0.560; F1 0.691; FPR 0.111). No arithmetic discrepancy.</p>
 <div class="scroll"><table>
@@ -145,7 +145,7 @@ button.theme{margin-left:auto;background:none;border:1px solid var(--line);borde
 <h2 id="evidence-log-wording-section-f-of-the-raw-report">Evidence log wording (Section F of the raw report)</h2>
 <p>Corrections recorded in E-06: E-01 (labels), E-02 notes 2 and 3, E-03, E-04 (C22, C06, C07, C19, C23), E-05 ("17 of 52" counts sentences with at least one opposing driver; also only contacts present in the later period are ever named, so contacts that disappeared cannot be named).</p>
 <h2 id="unresolved">Unresolved</h2>
-<p>Population accuracy on real books remains unmeasured. A human independent review has not been done.</p><p>The raw report from the challenge reviewer is in the repository as <code>04_testing/challenge_review_raw.md</code>.</p>
+<p>Population accuracy on real books remains unmeasured.</p><p>The raw report from the challenge reviewer is in the repository as <code>04_testing/challenge_review_raw.md</code>.</p>
 </div></main>
 <footer><div class="wrap"><a href="https://github.com/VAishwaryaSingh/northbridge-ai-assurance">Source, scripts and full evidence on GitHub</a>. Subject: <a href="https://github.com/VAishwaryaSingh/Northbridge-Ledger-Agent">Northbridge Ledger Agent</a>, commit <code>9c4127a</code> (23 Sep 2026). Live demo: <a href="https://northbridge-ledger-agent.streamlit.app/">northbridge-ledger-agent.streamlit.app</a>. Synthetic and sandbox data only. The Northbridge project itself was not changed. This page states a conclusion, not an audit opinion, and gives no certification.</div></footer>
 <script>

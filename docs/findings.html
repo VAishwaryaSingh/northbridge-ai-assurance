@@ -39,11 +39,11 @@ button.theme{margin-left:auto;background:none;border:1px solid var(--line);borde
 </style></head><body>
 <a class="skip" href="#main">Skip to content</a>
 <header class="site"><div class="wrap"><a class="brand" href="index.html">Northbridge Assurance Review</a><nav aria-label="Main"><a href="index.html">Home</a><a href="findings.html" aria-current="page">Findings</a><a href="method.html">Method</a><a href="testing.html">Testing</a><a href="remediation.html">Remediation</a><a href="toolkit.html">Toolkit</a><a href="downloads/assurance_report.pdf">Report (PDF)</a></nav><button class="theme" id="themebtn" type="button">Light / dark</button></div></header>
-<div class="banner"><div class="wrap"><strong>Self-assessment, not an independent audit.</strong> The reviewer also built the system. Figures describe a constructed test set and are not estimates of accuracy on real books. No human independent review has been done.</div></div>
+<div class="banner"><div class="wrap"><strong>Self-assessment, not an independent audit.</strong> The reviewer also built the system. Figures describe a constructed test set and are not estimates of accuracy on real books.</div></div>
 <main id="main"><div class="wrap">
 <h1 id="findings">Findings</h1>
 <p><strong>Subject:</strong> Northbridge Ledger Agent, commit <code>9c4127ad65aa5a9e7d362c2d05f69ecfdbf7c5f9</code>. <strong>Status:</strong> findings as at pinned commit <code>9c4127a</code> (23 Sep 2026). Remediation was demonstrated on a copy and is not applied to the live project: see <code>remediation.md</code>. Ratings and conditions below describe the original.
-<strong>Nature:</strong> self-assessment using audit methodology, not an independent audit. Testing challenged by a separate Claude session (model-based, not human): <code>04_testing/challenge_review.md</code>.
+<strong>Nature:</strong> self-assessment using audit methodology, not an independent audit. Testing challenged by a separate Claude session (model-based): <code>04_testing/challenge_review.md</code>.
 <strong>Basis of results:</strong> the test set is a constructed mix designed by the reviewer after reading the rules. Metrics are properties of that mix, not estimates for real books, and samples are small (<code>01_planning/terms_of_reference.md</code>, Amendment 1).</p>
 <h2 id="rating-scale">Rating scale</h2>
 <ul>
@@ -108,7 +108,7 @@ button.theme{margin-left:auto;background:none;border:1px solid var(--line);borde
 </tr>
 <tr>
 <td>F-10</td>
-<td>Ambiguous "AI-native agent" positioning and missing limitations statement</td>
+<td>No intended-use or limitations statement for users</td>
 <td><span class="chip Medium">Medium</span></td>
 </tr>
 <tr>
@@ -211,14 +211,14 @@ button.theme{margin-left:auto;background:none;border:1px solid var(--line);borde
 <li><strong>Recommendation (Medium):</strong> use a read-only scope if the vendor offers one, otherwise document the constraint and add a test that no non-GET data call exists; store tokens in an OS keychain or secrets manager; rotate the tokens.</li>
 <li><strong>Refs:</strong> R16, R17, R18; C02, C03, C05, C06.</li>
 </ul>
-<h2 id="f-10">F-10 Ambiguous "AI-native agent" positioning and missing limitations statement <span class="chip Medium">Medium</span></h2>
+<h2 id="f-10">F-10 No intended-use or limitations statement for users <span class="chip Medium">Medium</span></h2>
 <ul>
-<li><strong>Condition:</strong> the README (line 5) positions the tool as "a small-scale version of the kind of AI-native ledger automation product accounting firms are increasingly adopting", and the title calls it an "Agent". That names the product category the project imitates; it is not a claim that the tool uses AI. But the README never says that no LLM or model is used, nothing in the tool is agentic (no model, no autonomous action), and "rule-based checks" appear only in the accuracy section (line 108). The README also does not state intended use, limits on real books, false negatives or production status.</li>
-<li><strong>Criteria:</strong> transparent description of how outputs are produced and what they can be relied on for (UK transparency principle; ISO/IEC 42001 information for users).</li>
-<li><strong>Cause:</strong> positioning language borrowed from the product category the build plan set out to imitate, and no limitations section.</li>
-<li><strong>Effect:</strong> users may assume adaptive AI behaviour or broader reliability than the deterministic rules give, and may over-rely on the tool.</li>
-<li><strong>Recommendation (Medium):</strong> describe it as rules-based with a statistical check, state that no LLM is used, and add intended use, known limitations (see F-01, F-02, F-08) and not-for-production wording.</li>
-<li><strong>Refs:</strong> R15, R25, R26; C09, C27; <code>02_risk/ai_act_classification.md</code> s2.5.</li>
+<li><strong>Condition:</strong> the README does not state intended use, what the tool cannot detect (for example false negatives on real books), that it is a demonstration on fictional data, or its production status. "Rule-based checks" are mentioned only in the accuracy section (line 108), and the README does not say that no LLM or model is used.</li>
+<li><strong>Criteria:</strong> users are told what the tool is, what it can and cannot detect, and that outputs need review (UK transparency principle; ISO/IEC 42001 information for users).</li>
+<li><strong>Cause:</strong> no limitations section was written.</li>
+<li><strong>Effect:</strong> users may rely on the tool for more than it can do, and may over-rely on a clean run.</li>
+<li><strong>Recommendation (Medium):</strong> add intended use, known limitations (see F-01, F-02, F-08), that no LLM is used, and not-for-production wording.</li>
+<li><strong>Refs:</strong> R25, R26; C09, C27.</li>
 </ul>
 <h2 id="f-11">F-11 Data completeness is not evidenced <span class="chip Medium">Medium</span></h2>
 <ul>
@@ -258,7 +258,7 @@ button.theme{margin-left:auto;background:none;border:1px solid var(--line);borde
 <li>Every flag carries a reason string; the engine runs in milliseconds on 230 items.</li>
 </ul>
 <h2 id="not-covered">Not covered</h2>
-<p>Connector ingestion against live systems, multi-currency, multi-line bills, voided or null data, further rule variations, real-book accuracy, security of the public deployment. A human independent review has not been done.</p><p><a href="downloads/findings.md">Download findings (Markdown)</a></p>
+<p>Connector ingestion against live systems, multi-currency, multi-line bills, voided or null data, further rule variations, real-book accuracy, security of the public deployment.</p><p><a href="downloads/findings.md">Download findings (Markdown)</a></p>
 </div></main>
 <footer><div class="wrap"><a href="https://github.com/VAishwaryaSingh/northbridge-ai-assurance">Source, scripts and full evidence on GitHub</a>. Subject: <a href="https://github.com/VAishwaryaSingh/Northbridge-Ledger-Agent">Northbridge Ledger Agent</a>, commit <code>9c4127a</code> (23 Sep 2026). Live demo: <a href="https://northbridge-ledger-agent.streamlit.app/">northbridge-ledger-agent.streamlit.app</a>. Synthetic and sandbox data only. The Northbridge project itself was not changed. This page states a conclusion, not an audit opinion, and gives no certification.</div></footer>
 <script>

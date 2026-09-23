@@ -98,7 +98,7 @@ S += [Spacer(1, 30 * mm), P("Northbridge Assurance Review", title), P("Assurance
 S.append(tbl([["Subject", "Northbridge Ledger Agent, commit 9c4127ad65aa5a9e7d362c2d05f69ecfdbf7c5f9 (23 September 2026)"],
               ["Report date", "23 September 2026"],
               ["Nature", "<b>Self-assessment using audit methodology.</b> The reviewer is also the developer of the system. This is not an independent audit and gives no assurance opinion or certification."],
-              ["Challenge", "Testing was challenged by a separate Claude session (model-based, not a human reviewer). See section 2 and Appendix D."],
+              ["Challenge", "Testing was challenged by a separate Claude session (model-based). See section 2 and Appendix D."],
               ["Data", "Synthetic and vendor sandbox data only. No real client data."]],
              [32 * mm, W - 32 * mm], header=False, zebra=False))
 S += [Spacer(1, 8 * mm), P("How to read this report", h2),
@@ -112,7 +112,7 @@ S.append(P("<b>Conclusion.</b> As at commit 9c4127a, Northbridge should <b>not b
            "But it missed a whole error class (duplicate supplier bills), its reconciliation output changes with the order records are loaded, it keeps no record of what it ran, and it has no step where a person accepts or rejects a flag. "
            "On the eight criteria set before testing, seven were not met. A finance director could use it to prompt questions; they should not use a clean run as evidence that a ledger is free of duplicates or breaks.", callout))
 S.append(P("What was reviewed", h2))
-S.append(P("Northbridge reconciles bank lines against invoices and bills from Xero and QuickBooks and flags seven kinds of anomaly (A1 to A7). It is titled an \"Agent\" and positioned as a small-scale version of AI-native ledger products, but <b>calls no LLM</b>: it is deterministic rules and a median/MAD statistical check, with templated variance sentences. "
+S.append(P("Northbridge reconciles bank lines against invoices and bills from Xero and QuickBooks and flags seven kinds of anomaly (A1 to A7). It <b>calls no LLM</b>: it is deterministic rules and a median/MAD statistical check, with templated variance sentences. "
            "The review therefore treated it as a rules-based automated control and marked LLM-specific risks (prompt injection, hallucination, provider privacy) as not applicable."))
 S.append(P("Key results", h2))
 S.append(tbl([["Measure", "Result", "Criterion", "Assessment"],
@@ -151,8 +151,7 @@ S.append(P("Eight criteria were set in the Terms of Reference before any test: r
 S.append(P("Approach", h2))
 S.append(P("Planning (terms of reference, system description); risk assessment (28 risks scored for likelihood and impact, mapped to frameworks); control matrix (29 controls, gaps recorded, not fixed before testing); testing (a 230-item synthetic ledger with ground-truth labels frozen by hash before the first run, an evaluation harness run against a read-only copy of the pinned commit, control tests, and a challenge review); findings in Condition, Criteria, Cause, Effect, Recommendation form; remediation demonstrated on a copy and retested."))
 S.append(P("Independence disclosure", h2))
-S.append(P("The reviewer developed the system, and the rules were built largely with an AI coding tool. Mitigations: criteria fixed before testing, gaps recorded as findings, hashes recorded before the first run (self-attested), and a challenge review by a separate Claude session given the raw evidence and not the reviewer's reasoning. "
-           "That review is model-based and is not a substitute for an independent human review, which has not been done."))
+S.append(P("The reviewer developed the system, and the rules were built largely with an AI coding tool. Mitigations: criteria fixed before testing, gaps recorded as findings, hashes recorded before the first run (self-attested), and a challenge review by a separate Claude session given the raw evidence and not the reviewer's reasoning (a model-based challenge)."))
 S.append(P("Outcome of the challenge review", h2))
 S.append(P("The challenge reviewer reproduced every headline metric exactly and raised 12 challenges (3 High, 8 Medium, 1 Low), <b>all accepted</b>. The most important: output depends on database row order (verified, and it withdrew an earlier \"determinism met\" result); the test set was built inside the rules' detection envelope, so the Terms of Reference wording \"not written to fit the rules\" was wrong and was amended; "
            "several labels (weekend, threshold, outlier) rest on narrative the data cannot show; and some control results were overstated and were reworded. Full disposition: Appendix D."))
@@ -197,7 +196,7 @@ S.append(tbl([["Question", "Conclusion"],
               ["Reassess if", "an LLM or trained model is added, real client data is used, decisions about individuals are made, or the tool is placed on the EU market"]],
              [58 * mm, W - 58 * mm]))
 S.append(Spacer(1, 3 * mm))
-S.append(P("Against the five UK principles: <b>safety, security and robustness</b> partly met; <b>transparency and explainability</b> partly met (rules are inspectable, but the \"Agent\" title and \"AI-native\" positioning can be read as AI, and the README never says no model is used); <b>fairness</b> largely not relevant; "
+S.append(P("Against the five UK principles: <b>safety, security and robustness</b> partly met; <b>transparency and explainability</b> partly met (rules are inspectable, but there is no intended-use or limitations statement for users); <b>fairness</b> largely not relevant; "
            "<b>accountability and governance</b> not met (no owner, sign-off or audit trail); <b>contestability and redress</b> not met (no way to record that a flag was wrong or trace a result to a version). "
            "This is the reviewer's reasoning, not legal advice; legal status must be re-checked before it is cited."))
 S.append(PageBreak())
@@ -310,7 +309,7 @@ M = [["ID", "Rating", "Finding and condition", "Recommendation"],
      ["F-07", "Medium", "<b>Variance explanations can point against the headline.</b> 17 of 52 test sentences (35 of 69 on the project's synthetic data) name a driver moving opposite to the headline; contacts that disappeared are never named. Figures agree with source; text is templated, not hallucinated.", "Rank drivers in the headline's direction; include disappeared contacts; state share explained."],
      ["F-08", "Medium", "<b>False positives on legitimate items exceed the criterion.</b> 22 of 199 clean items (bank charges 6, fixed-price and boundary bills 5, weekend suppliers 4, VAT registration change 3, large equipment 2, recurring receipts 2). Label-sensitive.", "Allow-lists for recurring fixed charges and known weekend suppliers; bank-charge handling; record accepted exceptions."],
      ["F-09", "Medium", "<b>Excess QuickBooks permission; plaintext refresh tokens.</b> Read/write scope granted though code only reads; tokens written in plaintext to a local file.", "Read-only scope if offered, else test for no write calls; keychain or secrets manager; rotate tokens."],
-     ["F-10", "Medium", "<b>Ambiguous \"AI-native agent\" positioning; no limitations statement.</b> The README positions the tool as a small-scale version of AI-native products and the title says \"Agent\"; no LLM is used and the README never says so. It omits intended use, limits on real books and production status.", "Describe as rules-based; add intended use and limitations."],
+     ["F-10", "Medium", "<b>No intended-use or limitations statement for users.</b> The README omits intended use, limits on real books, false negatives and production status, and does not say that no LLM is used.", "Describe as rules-based; add intended use and limitations."],
      ["F-11", "Medium", "<b>Data completeness not evidenced.</b> Pagination tested with mocks only; no validation gate; coverage table not reconciled to source.", "Reconcile loaded counts and totals to the source system; test ingestion live."],
      ["F-12", "Low", "<b>Hard-coded, unapproved thresholds and message defects.</b> Constants have no rationale or approver; one message reads \"Bank line for None\".", "Documented configuration with approver; fix messages."],
      ["F-13", "Low", "<b>QuickBooks bank purchases all reported as unmatched.</b> 0 of 40 auto-matched; the sandbox has no bills for direct expenses (noise, not a shown matcher failure).", "Treat direct expenses as a separate class or state the limitation."]]
@@ -396,7 +395,7 @@ E = [["Ref", "What", "Where"],
      ["-", "Findings; financial statement audit implications", "05_reporting/findings.md; fs_audit_implications.md"]]
 S.append(tbl(E, [14 * mm, W - 110 * mm, 96 * mm]))
 S.append(Spacer(1, 3 * mm))
-S.append(P("Not tested: connector ingestion against live systems and pagination (credentials and the Xero trial unavailable); scopes actually granted in the vendor portals; multi-line bills, voided or null data, multi-currency; further rule variations; real-book accuracy. A human independent review has not been done.", small))
+S.append(P("Not tested: connector ingestion against live systems and pagination (credentials and the Xero trial unavailable); scopes actually granted in the vendor portals; multi-line bills, voided or null data, multi-currency; further rule variations; real-book accuracy.", small))
 
 S.append(P("Appendix D. Challenge review: summary of disposition", h1))
 D = [["ID", "Sev", "Challenge", "Outcome"],

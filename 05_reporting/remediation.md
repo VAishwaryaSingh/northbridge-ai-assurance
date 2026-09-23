@@ -1,6 +1,6 @@
 # Remediation and Retest (Plan 5.2)
 
-**Approach:** the Northbridge project was **not changed**. Fixes were made in a scratch copy of the pinned commit (`04_testing/_subject_remediated`, not committed to any repository) and delivered as a patch, `05_reporting/remediation.patch` (606 lines). The patch applies cleanly to a fresh checkout of `9c4127a` and its 10 unit tests pass there. The original working tree was verified unchanged (same HEAD, no modified files) after the work.
+**Approach:** the Northbridge project was **not changed**. Fixes were made in a scratch copy of the pinned commit (`04_testing/_subject_remediated`, not committed to any repository) and delivered as a patch, `05_reporting/remediation.patch` (599 lines). The patch applies cleanly to a fresh checkout of `9c4127a` and its 10 unit tests pass there. The original working tree was verified unchanged (same HEAD, no modified files) after the work.
 
 **To apply it (owner's decision):** `git apply remediation.patch` in a Northbridge checkout at `9c4127a`, review the diff, run `python -m unittest discover -s tests -t .`, then commit and tag a release.
 
@@ -16,7 +16,7 @@
 | F-05 | README now states intended use and known limitations, including that the published scores test mechanics, not accuracy | Partly (dashboard fallback score label not changed) |
 | F-06 | 10 regression tests (`tests/`), dependencies pinned (`requirements.txt`, `requirements.lock`), `src/version.py` | Remediated in copy (no release tag created: that is the owner's action) |
 | F-07 | Variance sentences name only the largest contributors moving in the headline's direction, include contacts that disappeared, state the share explained, or say no single contact explains the change | Remediated, verified |
-| F-10 | README describes the tool as rules-based with no LLM; adds intended use and limitations | Remediated in copy (dashboard title still says "Agent") |
+| F-10 | README states that the tool is rules-based with no LLM, its intended use, known limitations and not-for-production status | Remediated in copy |
 | F-12 | Parameters moved to `src/config.py` with an empty `PARAMETER_APPROVAL` record; "Bank line for None" and the weekend message corrected | Remediated in copy (parameters remain unapproved until the owner completes the record) |
 | F-04, F-08, F-09, F-11, F-13 | Not changed: they need design or process decisions, vendor scope options, live credentials or an allow-list design | Open: recommendations stand |
 

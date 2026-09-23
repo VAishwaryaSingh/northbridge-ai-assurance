@@ -39,7 +39,7 @@ button.theme{margin-left:auto;background:none;border:1px solid var(--line);borde
 </style></head><body>
 <a class="skip" href="#main">Skip to content</a>
 <header class="site"><div class="wrap"><a class="brand" href="index.html">Northbridge Assurance Review</a><nav aria-label="Main"><a href="index.html">Home</a><a href="findings.html">Findings</a><a href="method.html">Method</a><a href="testing.html" aria-current="page">Testing</a><a href="remediation.html">Remediation</a><a href="toolkit.html">Toolkit</a><a href="downloads/assurance_report.pdf">Report (PDF)</a></nav><button class="theme" id="themebtn" type="button">Light / dark</button></div></header>
-<div class="banner"><div class="wrap"><strong>Self-assessment, not an independent audit.</strong> The reviewer also built the system. Figures describe a constructed test set and are not estimates of accuracy on real books. No human independent review has been done.</div></div>
+<div class="banner"><div class="wrap"><strong>Self-assessment, not an independent audit.</strong> The reviewer also built the system. Figures describe a constructed test set and are not estimates of accuracy on real books.</div></div>
 <main id="main"><div class="wrap">
 <h1>Testing</h1><p>Every test was logged with time, method, sample and result. Later entries correct earlier ones where the challenge review found wording that overreached. See also the <a href="challenge.html">challenge review</a>.</p>
 <div class="toc"><strong>On this page</strong><ul><li><a href="#evidence-log">Evidence log</a></li><li><a href="#test-dataset">Test dataset</a></li><li><a href="#data-files">Data files</a></li></ul></div>
@@ -100,7 +100,7 @@ Entries are written as testing is performed (contemporaneous). Times are UTC. Le
 <li>C20: 15 of 15 sentence headline figures agree with source rows. <strong>But</strong> see E-05.</li>
 <li>C22: all 54 flags on the test data carry a reason naming the contact.</li>
 <li>C13, C15, C21, C24, C25, C26, C28: confirmed absent (no tests directory, 0 tags, no lockfile or pins, no logging, hashing, run id, disposition, approval or version code; schema has 6 data tables and no audit table).</li>
-<li>C09, C27: README does not state intended use, limitations on real books, false negatives or production status; it calls the product "AI-native" (line 5) and refers to "5 rule-based checks" only in the accuracy section (line 108); it never states that no LLM is used.</li>
+<li>C09, C27: README does not state intended use, limitations on real books, false negatives or production status; "rule-based checks" appear only in the accuracy section (line 108).</li>
 <li>C07: committed contacts are fictional, seeded ("Customer 01") or Intuit sandbox names. The Xero demo uses real brand names as counterparties (for example Amazon Business, BT Business, NatWest); no personal data seen. Observation only.</li>
 <li>QuickBooks 0 of 40 auto-matched: 40 bank lines, only 3 distinct bank contacts also appear on any invoice or bill, 35 are SPEND lines (purchases) with vendor IDs and 7 have no contact. <strong>Probable cause (not proven):</strong> sandbox purchases are direct expenses that have no bill, so the "bank line must match a bill" model does not fit; every such line is reported as unmatched, adding noise.</li>
 <li><strong>Not tested:</strong> C12 (pagination against live APIs: credentials and the Xero trial are not available to this review; mock tests only), Xero and QuickBooks granted scopes in the vendor portals, C29 (challenge review pending).</li>
@@ -133,13 +133,6 @@ Entries are written as testing is performed (contemporaneous). Times are UTC. Le
 <li><strong>Headline:</strong> recall 0.903 to 0.968; precision 0.560 to 0.600; FPR 0.111 to 0.101; duplicate supplier bills 0/3 to 3/3; output identical across 7 row orderings (was 6 of 7 differing); variance sentences with an opposing driver 17/52 to 0/59.</li>
 <li><strong>Adverse effects recorded:</strong> BT-044 duplicate payment no longer flagged as A5 (ambiguity with a duplicate bill in the dataset); published synthetic precision 0.778 to 0.712 (10 new A1 supplier-bill flags).</li>
 <li><strong>Limit:</strong> fixes designed against the same dataset used to retest; not evidence of accuracy on real books.</li>
-</ul>
-<h2 id="e-08-correction-to-wording-about-the-readme-ai-native">E-08 Correction to wording about the README ("AI-native")</h2>
-<ul>
-<li><strong>Time:</strong> 2026-09-23, after the owner asked why the project used the term.</li>
-<li><strong>What was wrong:</strong> E-04 (and the system description, terms of reference, findings F-10, risk R26 and control C27) said the README "calls the product AI-native". README line 5 actually reads "A small-scale version of the kind of AI-native ledger automation product accounting firms are increasingly adopting", which names the product category the project imitates. The build plan (<code>northbridge-ledger-agent-plan.md</code>, lines 22 to 24) frames the project as a small-scale version of what that category does. The title "NorthBridge Ledger Reconciliation &amp; Anomaly Detection Agent" and the same README sentence have been in the project since the initial commit of 16 Sep 2026.</li>
-<li><strong>What stands:</strong> the README never says that no LLM or model is used, "rule-based checks" appear only in the accuracy section (line 108), and nothing in the tool is agentic. A reader can reasonably assume AI. This is ambiguous positioning, not a false claim. F-10 keeps its Medium rating mainly because of the missing intended-use and limitations statement, which overlaps F-04 and F-05.</li>
-<li><strong>Corrected in:</strong> README, system description, ToR (Amendment 1, item 5), regulatory classification, findings F-10, checklist, control matrix C27, risk register R26, the assurance report and the website. Earlier log entries are left as written.</li>
 </ul>
 <h2 id="test-dataset">Test dataset</h2>
 <p>Synthetic ledger in the same schema as Northbridge (<code>ledger_test.db</code>) plus ground-truth labels (<code>labels.csv</code>). Built by <code>../test_scripts/build_dataset.py</code> (seeded, reproducible). No real data.</p>

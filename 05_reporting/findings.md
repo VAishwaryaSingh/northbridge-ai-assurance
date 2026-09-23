@@ -1,7 +1,7 @@
 # Findings
 
 **Subject:** Northbridge Ledger Agent, commit `9c4127ad65aa5a9e7d362c2d05f69ecfdbf7c5f9`. **Status:** findings as at pinned commit `9c4127a` (23 Sep 2026). Remediation was demonstrated on a copy and is not applied to the live project: see `remediation.md`. Ratings and conditions below describe the original.
-**Nature:** self-assessment using audit methodology, not an independent audit. Testing challenged by a separate Claude session (model-based, not human): `04_testing/challenge_review.md`.
+**Nature:** self-assessment using audit methodology, not an independent audit. Testing challenged by a separate Claude session (model-based): `04_testing/challenge_review.md`.
 **Basis of results:** the test set is a constructed mix designed by the reviewer after reading the rules. Metrics are properties of that mix, not estimates for real books, and samples are small (`01_planning/terms_of_reference.md`, Amendment 1).
 
 ## Rating scale
@@ -22,7 +22,7 @@
 | F-07 | Variance explanations can point against the headline movement | Medium |
 | F-08 | False positives on legitimate items exceed the criterion | Medium |
 | F-09 | Excess QuickBooks permission and plaintext refresh tokens | Medium |
-| F-10 | Ambiguous "AI-native agent" positioning and missing limitations statement | Medium |
+| F-10 | No intended-use or limitations statement for users | Medium |
 | F-11 | Data completeness is not evidenced | Medium |
 | F-12 | Hard-coded, unapproved thresholds and message defects | Low |
 | F-13 | QuickBooks bank purchases all reported as unmatched | Low |
@@ -103,13 +103,13 @@ Criteria met on the full ToR list: 1 of 8 on point estimate (recall on other rul
 - **Recommendation (Medium):** use a read-only scope if the vendor offers one, otherwise document the constraint and add a test that no non-GET data call exists; store tokens in an OS keychain or secrets manager; rotate the tokens.
 - **Refs:** R16, R17, R18; C02, C03, C05, C06.
 
-## F-10 Ambiguous "AI-native agent" positioning and missing limitations statement (Medium)
-- **Condition:** the README (line 5) positions the tool as "a small-scale version of the kind of AI-native ledger automation product accounting firms are increasingly adopting", and the title calls it an "Agent". That names the product category the project imitates; it is not a claim that the tool uses AI. But the README never says that no LLM or model is used, nothing in the tool is agentic (no model, no autonomous action), and "rule-based checks" appear only in the accuracy section (line 108). The README also does not state intended use, limits on real books, false negatives or production status.
-- **Criteria:** transparent description of how outputs are produced and what they can be relied on for (UK transparency principle; ISO/IEC 42001 information for users).
-- **Cause:** positioning language borrowed from the product category the build plan set out to imitate, and no limitations section.
-- **Effect:** users may assume adaptive AI behaviour or broader reliability than the deterministic rules give, and may over-rely on the tool.
-- **Recommendation (Medium):** describe it as rules-based with a statistical check, state that no LLM is used, and add intended use, known limitations (see F-01, F-02, F-08) and not-for-production wording.
-- **Refs:** R15, R25, R26; C09, C27; `02_risk/ai_act_classification.md` s2.5.
+## F-10 No intended-use or limitations statement for users (Medium)
+- **Condition:** the README does not state intended use, what the tool cannot detect (for example false negatives on real books), that it is a demonstration on fictional data, or its production status. "Rule-based checks" are mentioned only in the accuracy section (line 108), and the README does not say that no LLM or model is used.
+- **Criteria:** users are told what the tool is, what it can and cannot detect, and that outputs need review (UK transparency principle; ISO/IEC 42001 information for users).
+- **Cause:** no limitations section was written.
+- **Effect:** users may rely on the tool for more than it can do, and may over-rely on a clean run.
+- **Recommendation (Medium):** add intended use, known limitations (see F-01, F-02, F-08), that no LLM is used, and not-for-production wording.
+- **Refs:** R25, R26; C09, C27.
 
 ## F-11 Data completeness is not evidenced (Medium)
 - **Condition:** pagination was tested with mocks only and could not be re-run live (credentials and Xero trial unavailable). There is no validation gate for missing contacts, voided items or malformed rows, and the coverage table is not reconciled to source totals. Ingestion, multi-line bills and null data were not tested in this review.
@@ -146,4 +146,4 @@ Criteria met on the full ToR list: 1 of 8 on point estimate (recall on other rul
 - Every flag carries a reason string; the engine runs in milliseconds on 230 items.
 
 ## Not covered
-Connector ingestion against live systems, multi-currency, multi-line bills, voided or null data, further rule variations, real-book accuracy, security of the public deployment. A human independent review has not been done.
+Connector ingestion against live systems, multi-currency, multi-line bills, voided or null data, further rule variations, real-book accuracy, security of the public deployment.

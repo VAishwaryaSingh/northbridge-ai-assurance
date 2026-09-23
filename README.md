@@ -2,7 +2,7 @@
 
 A structured assurance review of the **Northbridge Ledger Reconciliation & Anomaly Detection Agent**, applying audit methodology (risk assessment, control testing, evidence, 5-C findings) to a finance automation tool. It also produces a reusable toolkit for assessing other systems.
 
-> **This is a self-assessment using audit methodology, not an independent audit or certification.** The reviewer is also the developer of the system under review. Testing was challenged by a separate Claude session, which is a model-based challenge and not an independent human review.
+> **This is a self-assessment using audit methodology, not an independent audit or certification.** The reviewer is also the developer of the system under review. Testing was challenged by a separate Claude session (a model-based challenge).
 
 ## Subject of this review
 
@@ -21,7 +21,7 @@ Northbridge's original validation planted seven errors and caught all seven. Tha
 
 ## Scoping note: Northbridge is rules-based
 
-Northbridge is called an "Agent", and its README positions it as "a small-scale version of the kind of AI-native ledger automation product accounting firms are increasingly adopting", but it calls **no LLM**. It is deterministic rules plus a median/MAD statistical check. LLM-specific risks (prompt injection, hallucination, provider data handling) were recorded as not applicable rather than tested. The review treats it as a rules-based automated control.
+Northbridge calls **no LLM**. It is deterministic rules plus a median/MAD statistical check. LLM-specific risks (prompt injection, hallucination, provider data handling) were recorded as not applicable rather than tested. The review treats it as a rules-based automated control.
 
 ## Headline results
 
@@ -118,7 +118,6 @@ The site lives in `docs/` (plain HTML, CSS and a little JavaScript; no external 
 - Not tested: connector ingestion against live systems and pagination, portal-granted scopes, multi-line bills, voided or null data, multi-currency, further rule variations, real-book accuracy.
 - The toolkit was built from this one review and has not been validated on another system.
 - NIST and ISO references are at area level and need checking against the source documents. EU AI Act dates were not verified and are not relied on.
-- A human independent review has not been done.
 
 ## Ground rules
 

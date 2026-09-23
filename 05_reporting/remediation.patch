@@ -1,21 +1,14 @@
 diff --git a/README.md b/README.md
-index 2b336b4..8f643d7 100644
+index 2b336b4..1f53628 100644
 --- a/README.md
 +++ b/README.md
-@@ -2,12 +2,24 @@
- 
- **Status: core engine + multi-ledger proof complete (Phases 1-8) — connects to live Xero and QuickBooks organisations, reconciles, detects anomalies, and explains variance on both.**
- 
--A small-scale version of the kind of AI-native ledger automation product accounting firms are increasingly adopting: connects to a live Xero (and QuickBooks Online) organisation via OAuth, reconciles bank transactions against invoices/bills, flags anomalies (duplicates, VAT miscodings, threshold-adjacent amounts, weekend postings, duplicate payments, statistical outliers), and explains period-over-period variance in plain English.
-+A small-scale, **rules-based** ledger automation tool (deterministic rules and a median/MAD statistical check; it does not call an LLM or any AI model): connects to a live Xero (and QuickBooks Online) organisation via OAuth, reconciles bank transactions against invoices/bills, flags anomalies (duplicates, VAT miscodings, threshold-adjacent amounts, weekend postings, duplicate payments, statistical outliers), and explains period-over-period variance in plain English.
- 
- Built against a fictional company ("Northbridge Creative", a UK digital marketing consultancy) seeded with realistic Xero transactions and 7 deliberately planted anomalies, so the detector's accuracy could be honestly measured against a private answer key rather than just claimed. The same engine also runs, unmodified, against a real QuickBooks Online sandbox — proving it's ledger-agnostic, not a Xero-only script.
+@@ -8,6 +8,18 @@ Built against a fictional company ("Northbridge Creative", a UK digital marketin
  
  **Live demo:** https://northbridge-ledger-agent.streamlit.app/ (runs against a frozen snapshot of the seeded data, since the live Xero connection needs local credentials)
  
 +## Intended use and limitations
 +
-+**Intended use:** a demonstration of ledger reconciliation and anomaly review on fictional or vendor sandbox data. It is **not production software** and has not been validated on real books. Every flag needs a human review, and the tool does not record that review.
++**How it works and intended use:** the checks are deterministic rules plus a statistical outlier test (median/MAD); the tool does not call an LLM or any AI model. It is a demonstration of ledger reconciliation and anomaly review on fictional or vendor sandbox data. It is **not production software** and has not been validated on real books. Every flag needs a human review, and the tool does not record that review.
 +
 +**Known limitations** (from an assurance review of commit 9c4127a; see the review repository):
 +- The 7/7 and 84/84 results use planted anomalies written to fit the rules. They test mechanics, not accuracy on real data. The dashboard's Xero score is a published constant when the private answer key is absent.

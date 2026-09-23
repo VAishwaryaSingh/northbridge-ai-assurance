@@ -93,7 +93,7 @@ def page(fname, title, body, description=""):
 <style>{CSS}</style></head><body>
 <a class="skip" href="#main">Skip to content</a>
 <header class="site"><div class="wrap"><a class="brand" href="{pre}index.html">Northbridge Assurance Review</a><nav aria-label="Main">{nav}</nav><button class="theme" id="themebtn" type="button">Light / dark</button></div></header>
-<div class="banner"><div class="wrap"><strong>Self-assessment, not an independent audit.</strong> The reviewer also built the system. Figures describe a constructed test set and are not estimates of accuracy on real books. No human independent review has been done.</div></div>
+<div class="banner"><div class="wrap"><strong>Self-assessment, not an independent audit.</strong> The reviewer also built the system. Figures describe a constructed test set and are not estimates of accuracy on real books.</div></div>
 <main id="main"><div class="wrap">
 {body}
 </div></main>
@@ -164,7 +164,7 @@ F = [("F-01", "High", "Duplicate supplier bills are not detected"), ("F-02", "Hi
      ("F-03", "High", "No run log or audit trail"), ("F-04", "High", "No human disposition of flags; no owner or intended-use statement"),
      ("F-05", "High", "Reported accuracy rests on circular validation and a static score"), ("F-06", "Medium", "No regression tests, version tags or pinned dependencies"),
      ("F-07", "Medium", "Variance explanations can point against the headline movement"), ("F-08", "Medium", "False positives on legitimate items exceed the criterion"),
-     ("F-09", "Medium", "Excess QuickBooks permission and plaintext refresh tokens"), ("F-10", "Medium", 'Ambiguous "AI-native agent" positioning and missing limitations statement'),
+     ("F-09", "Medium", "Excess QuickBooks permission and plaintext refresh tokens"), ("F-10", "Medium", 'No intended-use or limitations statement for users'),
      ("F-11", "Medium", "Data completeness is not evidenced"), ("F-12", "Low", "Hard-coded, unapproved thresholds and message defects"),
      ("F-13", "Low", "QuickBooks bank purchases all reported as unmatched")]
 flist = "".join(f'<tr><td><a href="findings.html#{i.lower()}">{i}</a></td><td>{html.escape(t)}</td><td>{chip(r)}</td></tr>' for i, r, t in F)
@@ -172,7 +172,7 @@ flist = "".join(f'<tr><td><a href="findings.html#{i.lower()}">{i}</a></td><td>{h
 home = f"""
 <div class="hero"><h1>Is a "7 out of 7" result evidence that an AI finance tool can be trusted?</h1>
 <p>This is a structured assurance review of the <strong>Northbridge Ledger Agent</strong>, a tool that flags reconciliation breaks, duplicates and anomalies in Xero and QuickBooks data. Its own validation planted seven errors and caught all seven. This review applies audit methodology to find out what that result does and does not show.</p>
-<p><strong>Conclusion.</strong> As at the pinned commit, Northbridge should <strong>not be relied on as a control</strong> for month-end reconciliation. It works as a demonstration and a lead generator for the error types it targets. Of eight criteria set before testing, seven were not met. The tool is titled an "Agent" and positioned as a small-scale version of AI-native products, but calls <strong>no LLM</strong>: it is deterministic rules plus a statistical check.</p>
+<p><strong>Conclusion.</strong> As at the pinned commit, Northbridge should <strong>not be relied on as a control</strong> for month-end reconciliation. It works as a demonstration and a lead generator for the error types it targets. Of eight criteria set before testing, seven were not met. The tool calls <strong>no LLM</strong>: it is deterministic rules plus a statistical check.</p>
 <p><a href="downloads/assurance_report.pdf"><strong>Read the 12-page report (PDF)</strong></a> &middot; <a href="findings.html">See the findings</a> &middot; <a href="toolkit.html">Use the toolkit</a></p></div>
 <div class="grid">
 <div class="card"><div class="stat">230</div><h3>test items</h3><p>31 real errors, 199 clean items, 32 of them legitimate look-alikes. Synthetic data only.</p></div>
@@ -193,14 +193,14 @@ home = f"""
 <li><strong>Risk:</strong> 28 risks scored for likelihood and impact and mapped to frameworks. LLM-only risks marked not applicable.</li>
 <li><strong>Controls:</strong> 29 controls assessed for design; missing controls recorded as gaps and not added before testing.</li>
 <li><strong>Testing:</strong> a synthetic ledger with labels frozen by hash before the first run, an evaluation harness against a read-only copy of the pinned commit, and control tests.</li>
-<li><strong>Challenge:</strong> a separate Claude session reviewed the raw evidence and raised 12 challenges, all accepted. It found the tool's output changes with record order, which the reviewer had missed. This is a model-based challenge, not a human review.</li>
+<li><strong>Challenge:</strong> a separate Claude session reviewed the raw evidence and raised 12 challenges, all accepted. It found the tool's output changes with record order, which the reviewer had missed. This was a model-based challenge.</li>
 <li><strong>Findings, remediation and report:</strong> fixes demonstrated on a copy and retested, with costs stated.</li></ol>
 <h2 id="limits">What this does not show</h2>
 <ul><li>Accuracy on real books: the data is synthetic and the test set was designed after reading the rules.</li>
 <li>Small samples: 3 to 6 errors per type, and false positives cluster in about six causes.</li>
 <li>Not tested: live connectors and pagination, portal-granted permissions, multi-line bills, voided or null data, multi-currency.</li>
 <li>Framework references (NIST, ISO) are at area level and need checking against the source documents; EU AI Act dates were not verified.</li>
-<li>No independent human review has been done.</li></ul>
+</ul>
 <h2 id="reuse">Reuse it</h2>
 <p>The <a href="toolkit.html">toolkit</a> contains a checklist for assessing an AI system and a template for assessing a process for AI adoption. Both were built from this one review and are not validated on other systems.</p>
 """

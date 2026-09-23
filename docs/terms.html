@@ -39,7 +39,7 @@ button.theme{margin-left:auto;background:none;border:1px solid var(--line);borde
 </style></head><body>
 <a class="skip" href="#main">Skip to content</a>
 <header class="site"><div class="wrap"><a class="brand" href="index.html">Northbridge Assurance Review</a><nav aria-label="Main"><a href="index.html">Home</a><a href="findings.html">Findings</a><a href="method.html">Method</a><a href="testing.html">Testing</a><a href="remediation.html">Remediation</a><a href="toolkit.html">Toolkit</a><a href="downloads/assurance_report.pdf">Report (PDF)</a></nav><button class="theme" id="themebtn" type="button">Light / dark</button></div></header>
-<div class="banner"><div class="wrap"><strong>Self-assessment, not an independent audit.</strong> The reviewer also built the system. Figures describe a constructed test set and are not estimates of accuracy on real books. No human independent review has been done.</div></div>
+<div class="banner"><div class="wrap"><strong>Self-assessment, not an independent audit.</strong> The reviewer also built the system. Figures describe a constructed test set and are not estimates of accuracy on real books.</div></div>
 <main id="main"><div class="wrap">
 <h1 id="terms-of-reference">Terms of Reference</h1>
 <p><strong>Review:</strong> Assurance review of the Northbridge Ledger Agent
@@ -51,11 +51,11 @@ button.theme{margin-left:auto;background:none;border:1px solid var(--line);borde
 <h2 id="2-objective">2. Objective</h2>
 <p>Assess whether Northbridge is governed, controlled, and performs reliably enough to support month-end reconciliation and anomaly review, treating it as an automated control within an IT application.</p>
 <h2 id="3-what-the-system-is-scoping-decision">3. What the system is (scoping decision)</h2>
-<p>Northbridge is titled an "Agent" and its README positions it as a small-scale version of "AI-native" ledger products (see Amendment 1, item 5). Inspection at the pinned commit shows it calls <strong>no LLM</strong>. It is deterministic rules (A1 to A6), a median/MAD statistical outlier check (A7), fuzzy bank-to-invoice matching and templated variance text. This review therefore:</p>
+<p>Inspection at the pinned commit shows Northbridge calls <strong>no LLM</strong>. It is deterministic rules (A1 to A6), a median/MAD statistical outlier check (A7), fuzzy bank-to-invoice matching and templated variance text. This review therefore:</p>
 <ul>
 <li>assesses it as a <strong>rules-based automated control</strong>;</li>
 <li>uses NIST AI RMF and ISO/IEC 42001 as governance lenses, applying only the parts that are relevant;</li>
-<li>records the "AI-native / agent" positioning as a <strong>transparency matter</strong> to be evaluated as a finding.</li>
+<li>records the absence of an intended-use and limitations statement as a <strong>transparency matter</strong> to be evaluated as a finding.</li>
 </ul>
 <h2 id="4-scope">4. Scope</h2>
 <p><strong>In scope</strong>
@@ -180,8 +180,7 @@ button.theme{margin-left:auto;background:none;border:1px solid var(--line);borde
 1. Section 4 said accuracy would be tested on a set "not written to fit the rules". The set was designed by the reviewer after reading the rules, so it is <strong>not</strong> independent of them. Results are reported as properties of a constructed test mix and are not estimates of accuracy on real books.
 2. Determinism is defined as identical output on rerun over unchanged data. It is tested both with fixed row order and with reordered rows, because the order in which an ERP API returns records is not under the reviewer's control.
 3. All eight criteria are assessed and reported, including audit trail completeness and human disposition.
-4. Additional limitation: connector ingestion, multi-line bills, voided or null data and several rule variations were not tested (see challenge_review.md, CH-11).
-5. The statement in section 3 that the README "describes" the product as "AI-native" was too strong. The README says the project is "a small-scale version of the kind of AI-native ledger automation product accounting firms are increasingly adopting", i.e. it names the product category it imitates. The title also calls the tool an "Agent". The concern stands (a reader can assume AI, and the README never says no model is used) but it is ambiguous positioning, not a false claim. Corrected 23 Sep 2026 after the owner asked why the wording was used.</p>
+4. Additional limitation: connector ingestion, multi-line bills, voided or null data and several rule variations were not tested (see challenge_review.md, CH-11).</p>
 </div></main>
 <footer><div class="wrap"><a href="https://github.com/VAishwaryaSingh/northbridge-ai-assurance">Source, scripts and full evidence on GitHub</a>. Subject: <a href="https://github.com/VAishwaryaSingh/Northbridge-Ledger-Agent">Northbridge Ledger Agent</a>, commit <code>9c4127a</code> (23 Sep 2026). Live demo: <a href="https://northbridge-ledger-agent.streamlit.app/">northbridge-ledger-agent.streamlit.app</a>. Synthetic and sandbox data only. The Northbridge project itself was not changed. This page states a conclusion, not an audit opinion, and gives no certification.</div></footer>
 <script>

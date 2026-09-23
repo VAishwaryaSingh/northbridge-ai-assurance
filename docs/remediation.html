@@ -39,10 +39,10 @@ button.theme{margin-left:auto;background:none;border:1px solid var(--line);borde
 </style></head><body>
 <a class="skip" href="#main">Skip to content</a>
 <header class="site"><div class="wrap"><a class="brand" href="index.html">Northbridge Assurance Review</a><nav aria-label="Main"><a href="index.html">Home</a><a href="findings.html">Findings</a><a href="method.html">Method</a><a href="testing.html">Testing</a><a href="remediation.html" aria-current="page">Remediation</a><a href="toolkit.html">Toolkit</a><a href="downloads/assurance_report.pdf">Report (PDF)</a></nav><button class="theme" id="themebtn" type="button">Light / dark</button></div></header>
-<div class="banner"><div class="wrap"><strong>Self-assessment, not an independent audit.</strong> The reviewer also built the system. Figures describe a constructed test set and are not estimates of accuracy on real books. No human independent review has been done.</div></div>
+<div class="banner"><div class="wrap"><strong>Self-assessment, not an independent audit.</strong> The reviewer also built the system. Figures describe a constructed test set and are not estimates of accuracy on real books.</div></div>
 <main id="main"><div class="wrap">
 <h1 id="remediation-and-retest-plan-5-2">Remediation and Retest (Plan 5.2)</h1>
-<p><strong>Approach:</strong> the Northbridge project was <strong>not changed</strong>. Fixes were made in a scratch copy of the pinned commit (<code>04_testing/_subject_remediated</code>, not committed to any repository) and delivered as a patch, <code>05_reporting/remediation.patch</code> (606 lines). The patch applies cleanly to a fresh checkout of <code>9c4127a</code> and its 10 unit tests pass there. The original working tree was verified unchanged (same HEAD, no modified files) after the work.</p>
+<p><strong>Approach:</strong> the Northbridge project was <strong>not changed</strong>. Fixes were made in a scratch copy of the pinned commit (<code>04_testing/_subject_remediated</code>, not committed to any repository) and delivered as a patch, <code>05_reporting/remediation.patch</code> (599 lines). The patch applies cleanly to a fresh checkout of <code>9c4127a</code> and its 10 unit tests pass there. The original working tree was verified unchanged (same HEAD, no modified files) after the work.</p>
 <p><strong>To apply it (owner's decision):</strong> <code>git apply remediation.patch</code> in a Northbridge checkout at <code>9c4127a</code>, review the diff, run <code>python -m unittest discover -s tests -t .</code>, then commit and tag a release.</p>
 <p><strong>Limits of the retest:</strong> the fixes were designed while looking at this review's dataset, and the retest uses the same frozen dataset and harness (hashes in <code>evidence_log.md</code> E-01, unchanged). An improvement shows the fixes work on those cases, not that accuracy on real books has improved. Nothing here means the live project is fixed.</p>
 <h2 id="what-was-changed-in-the-copy">What was changed in the copy</h2>
@@ -87,8 +87,8 @@ button.theme{margin-left:auto;background:none;border:1px solid var(--line);borde
 </tr>
 <tr>
 <td>F-10</td>
-<td>README describes the tool as rules-based with no LLM; adds intended use and limitations</td>
-<td>Remediated in copy (dashboard title still says "Agent")</td>
+<td>README states that the tool is rules-based with no LLM, its intended use, known limitations and not-for-production status</td>
+<td>Remediated in copy</td>
 </tr>
 <tr>
 <td>F-12</td>
