@@ -13,6 +13,7 @@ ROOT = Path(__file__).resolve().parent.parent
 DOCS = ROOT / "docs"
 NORTHBRIDGE_REPO = "https://github.com/VAishwaryaSingh/Northbridge-Ledger-Agent"
 NORTHBRIDGE_DEMO = "https://northbridge-ledger-agent.streamlit.app/"
+ASSURANCE_REPO = "https://github.com/VAishwaryaSingh/northbridge-ai-assurance"
 COMMIT = "9c4127ad65aa5a9e7d362c2d05f69ecfdbf7c5f9"
 
 NAV = [("index.html", "Home"), ("findings.html", "Findings"), ("method.html", "Method"), ("testing.html", "Testing"),
@@ -96,7 +97,7 @@ def page(fname, title, body, description=""):
 <main id="main"><div class="wrap">
 {body}
 </div></main>
-<footer><div class="wrap">Subject: <a href="{NORTHBRIDGE_REPO}">Northbridge Ledger Agent</a>, commit <code>{COMMIT[:7]}</code> (23 Sep 2026). Live demo: <a href="{NORTHBRIDGE_DEMO}">northbridge-ledger-agent.streamlit.app</a>. Synthetic and sandbox data only. The Northbridge project itself was not changed. This page states a conclusion, not an audit opinion, and gives no certification.</div></footer>
+<footer><div class="wrap"><a href="{ASSURANCE_REPO}">Source, scripts and full evidence on GitHub</a>. Subject: <a href="{NORTHBRIDGE_REPO}">Northbridge Ledger Agent</a>, commit <code>{COMMIT[:7]}</code> (23 Sep 2026). Live demo: <a href="{NORTHBRIDGE_DEMO}">northbridge-ledger-agent.streamlit.app</a>. Synthetic and sandbox data only. The Northbridge project itself was not changed. This page states a conclusion, not an audit opinion, and gives no certification.</div></footer>
 <script>{JS}</script></body></html>"""
 
 

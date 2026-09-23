@@ -107,7 +107,9 @@ The control tests read the project's private answer key from the Northbridge wor
 
 ## Website
 
-A static website version lives in `docs/` (plain HTML, CSS and a little JavaScript; no external dependencies). Rebuild it with `python tools/build_site.py` (needs `markdown` and `openpyxl`). To publish with GitHub Pages: push the repository, then Settings, Pages, deploy from branch `main`, folder `/docs`. Preview locally with `python -m http.server --directory docs`.
+**Live site:** https://vaishwaryasingh.github.io/northbridge-ai-assurance/ (repository: https://github.com/VAishwaryaSingh/northbridge-ai-assurance)
+
+The site lives in `docs/` (plain HTML, CSS and a little JavaScript; no external dependencies). Rebuild it with `python tools/build_site.py` (needs `markdown` and `openpyxl`). It is served by GitHub Pages from branch `main`, folder `/docs`. Preview locally with `python -m http.server --directory docs`.
 
 ## Limitations
 
