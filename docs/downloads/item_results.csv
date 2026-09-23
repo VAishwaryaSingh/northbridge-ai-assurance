@@ -1,0 +1,231 @@
+item_id,unit_type,group,is_error,error_type,expected_rule,flagged_by,flagged,detected_by_expected_rule,note
+AP-001,bill,clean,0,,,,0,0,Ordinary Harbour Cloud Hosting bill
+AP-002,bill,clean,0,,,,0,0,Ordinary Harbour Cloud Hosting bill
+AP-003,bill,clean,0,,,,0,0,Ordinary Harbour Cloud Hosting bill
+AP-004,bill,clean,0,,,,0,0,Ordinary Harbour Cloud Hosting bill
+AP-005,bill,clean,0,,,,0,0,Ordinary Harbour Cloud Hosting bill
+AP-006,bill,clean,0,,,,0,0,Ordinary Harbour Cloud Hosting bill
+AP-007,bill,clean,0,,,,0,0,Ordinary Pixelworks Software bill
+AP-008,bill,clean,0,,,,0,0,Ordinary Pixelworks Software bill
+AP-009,bill,clean,0,,,,0,0,Ordinary Pixelworks Software bill
+AP-010,bill,clean,0,,,,0,0,Ordinary Pixelworks Software bill
+AP-011,bill,clean,0,,,,0,0,Ordinary Pixelworks Software bill
+AP-012,bill,clean,0,,,,0,0,Ordinary Stationery Direct bill
+AP-013,bill,clean,0,,,,0,0,Ordinary Stationery Direct bill
+AP-014,bill,clean,0,,,,0,0,Ordinary Stationery Direct bill
+AP-015,bill,clean,0,,,,0,0,Ordinary Stationery Direct bill
+AP-016,bill,clean,0,,,,0,0,Ordinary Stationery Direct bill
+AP-017,bill,clean,0,,,,0,0,Ordinary Office Depot UK bill
+AP-018,bill,clean,0,,,,0,0,Ordinary Office Depot UK bill
+AP-019,bill,clean,0,,,,0,0,Ordinary Office Depot UK bill
+AP-020,bill,clean,0,,,,0,0,Ordinary Office Depot UK bill
+AP-021,bill,clean,0,,,,0,0,Ordinary Office Depot UK bill
+AP-022,bill,clean,0,,,,0,0,Ordinary Rail Europe Ltd bill
+AP-023,bill,clean,0,,,,0,0,Ordinary Rail Europe Ltd bill
+AP-024,bill,error,1,VAT_MISCODE,A2,A2,1,1,Rail Europe Ltd is VAT-registered and normally INPUT2; this bill coded NONE (VAT lost)
+AP-025,bill,clean,0,,,,0,0,Ordinary Rail Europe Ltd bill
+AP-026,bill,clean,0,,,,0,0,Ordinary City Cabs bill
+AP-027,bill,clean,0,,,,0,0,Ordinary City Cabs bill
+AP-028,bill,clean,0,,,,0,0,Ordinary City Cabs bill
+AP-029,bill,clean,0,,,,0,0,Ordinary City Cabs bill
+AP-030,bill,clean,0,,,,0,0,Ordinary Skyline Hotels bill
+AP-031,bill,clean,0,,,,0,0,Ordinary Skyline Hotels bill
+AP-032,bill,clean,0,,,,0,0,Ordinary Skyline Hotels bill
+AP-033,bill,clean,0,,,,0,0,Ordinary Skyline Hotels bill
+AP-034,bill,clean,0,,,,0,0,Ordinary AdSpark Media bill
+AP-035,bill,clean,0,,,,0,0,Ordinary AdSpark Media bill
+AP-036,bill,error,1,VAT_MISCODE,A2,A2,1,1,AdSpark Media is VAT-registered and normally INPUT2; this bill coded NONE (VAT lost)
+AP-037,bill,clean,0,,,,0,0,Ordinary AdSpark Media bill
+AP-038,bill,clean,0,,,,0,0,Ordinary AdSpark Media bill
+AP-039,bill,clean,0,,,,0,0,Ordinary Brightside Print bill
+AP-040,bill,clean,0,,,,0,0,Ordinary Brightside Print bill
+AP-041,bill,clean,0,,,,0,0,Ordinary Brightside Print bill
+AP-042,bill,clean,0,,,,0,0,Ordinary Brightside Print bill
+AP-043,bill,clean,0,,,,0,0,Ordinary Brightside Print bill
+AP-044,bill,clean,0,,,,0,0,Ordinary Marlowe Legal LLP bill
+AP-045,bill,clean,0,,,,0,0,Ordinary Marlowe Legal LLP bill
+AP-046,bill,clean,0,,,,0,0,Ordinary Marlowe Legal LLP bill
+AP-047,bill,clean,0,,,,0,0,Ordinary Marlowe Legal LLP bill
+AP-048,bill,clean,0,,,,0,0,Ordinary Pearce Accounting bill
+AP-049,bill,clean,0,,,,0,0,Ordinary Pearce Accounting bill
+AP-050,bill,clean,0,,,,0,0,Ordinary Pearce Accounting bill
+AP-051,bill,clean,0,,,,0,0,Ordinary Pearce Accounting bill
+AP-052,bill,clean,0,,,,0,0,Ordinary Northern Power Ltd bill
+AP-053,bill,clean,0,,,,0,0,Ordinary Northern Power Ltd bill
+AP-054,bill,error,1,VAT_MISCODE,A2,A2,1,1,Northern Power Ltd is VAT-registered and normally INPUT2; this bill coded NONE (VAT lost)
+AP-055,bill,clean,0,,,,0,0,Ordinary Northern Power Ltd bill
+AP-056,bill,clean,0,,,,0,0,Ordinary Northern Power Ltd bill
+AP-057,bill,clean,0,,,,0,0,Ordinary Northern Power Ltd bill
+AP-058,bill,clean,0,,,,0,0,Ordinary Clearwater Utilities bill
+AP-059,bill,clean,0,,,,0,0,Ordinary Clearwater Utilities bill
+AP-060,bill,clean,0,,,,0,0,Ordinary Clearwater Utilities bill
+AP-061,bill,clean,0,,,,0,0,Ordinary Clearwater Utilities bill
+AP-062,bill,clean,0,,,,0,0,Ordinary Clearwater Utilities bill
+AP-063,bill,clean,0,,,,0,0,Ordinary Clearwater Utilities bill
+AP-064,bill,clean,0,,,,0,0,Ordinary Aoife Byrne Freelance bill
+AP-065,bill,clean,0,,,,0,0,Ordinary Aoife Byrne Freelance bill
+AP-066,bill,clean,0,,,,0,0,Ordinary Aoife Byrne Freelance bill
+AP-067,bill,clean,0,,,,0,0,Ordinary Aoife Byrne Freelance bill
+AP-068,bill,clean,0,,,,0,0,Ordinary Studio Kite Ltd bill
+AP-069,bill,clean,0,,,,0,0,Ordinary Studio Kite Ltd bill
+AP-070,bill,error,1,VAT_MISCODE,A2,A2,1,1,Studio Kite Ltd is VAT-registered and normally INPUT2; this bill coded NONE (VAT lost)
+AP-071,bill,clean,0,,,,0,0,Ordinary Studio Kite Ltd bill
+AP-072,bill,clean,0,,,,0,0,Ordinary DevCraft Contractors bill
+AP-073,bill,clean,0,,,,0,0,Ordinary DevCraft Contractors bill
+AP-074,bill,clean,0,,,,0,0,Ordinary DevCraft Contractors bill
+AP-075,bill,clean,0,,,,0,0,Ordinary DevCraft Contractors bill
+AP-076,bill,clean,0,,,,0,0,Ordinary Techbench Supplies bill
+AP-077,bill,clean,0,,,,0,0,Ordinary Techbench Supplies bill
+AP-078,bill,clean,0,,,,0,0,Ordinary Techbench Supplies bill
+AP-079,bill,clean,0,,,,0,0,Ordinary Techbench Supplies bill
+AP-080,bill,clean,0,,,,0,0,Ordinary Ergo Office Furniture bill
+AP-081,bill,clean,0,,,,0,0,Ordinary Ergo Office Furniture bill
+AP-082,bill,clean,0,,,,0,0,Ordinary Ergo Office Furniture bill
+AP-083,bill,clean,0,,,,0,0,Ordinary Ergo Office Furniture bill
+AP-084,bill,clean,0,,,,0,0,"Fixed monthly subscription, same amount each month (legitimate)"
+AP-085,bill,clean,0,,,,0,0,"Fixed monthly subscription, same amount each month (legitimate)"
+AP-086,bill,clean,0,,,,0,0,"Fixed monthly subscription, same amount each month (legitimate)"
+AP-087,bill,clean,0,,,,0,0,"Fixed monthly subscription, same amount each month (legitimate)"
+AP-088,bill,clean,0,,,,0,0,"Fixed monthly subscription, same amount each month (legitimate)"
+AP-089,bill,clean,0,,,,0,0,"Fixed monthly subscription, same amount each month (legitimate)"
+AP-090,bill,error,1,THRESHOLD,A3,A3,1,1,Split job: two bills same week both just under 500 approval limit
+AP-091,bill,error,1,THRESHOLD,A3,A3,1,1,Second half of split job (see previous)
+AP-092,bill,error,1,THRESHOLD,A3,A3,1,1,Single bill priced 3 GBP under the approval limit after quote revised
+AP-093,bill,clean_hard,0,,,A3;A7,1,0,Legitimate fixed-price licence that happens to sit in the 475-500 band
+AP-094,bill,clean_hard,0,,,A3;A7,1,0,Legitimate fixed-price licence that happens to sit in the 475-500 band
+AP-095,bill,clean_hard,0,,,A3;A7,1,0,Legitimate fixed-price licence that happens to sit in the 475-500 band
+AP-096,bill,clean_hard,0,,,A7,1,0,"Boundary: just below the 95% band, should not flag"
+AP-097,bill,clean_hard,0,,,A7,1,0,"Boundary: exactly at limit, should not flag"
+AP-098,bill,error,1,WEEKEND,A4,A4;A7,1,1,"Bill dated on a weekend for a supplier that does not trade at weekends (unusual timing, review)"
+AP-099,bill,error,1,WEEKEND,A4,A4,1,1,"Bill dated on a weekend for a supplier that does not trade at weekends (unusual timing, review)"
+AP-100,bill,error,1,WEEKEND,A4,A4,1,1,"Bill dated on a weekend for a supplier that does not trade at weekends (unusual timing, review)"
+AP-101,bill,clean_hard,0,,,A4,1,0,Kestrel Couriers trades at weekends; a weekend date is legitimate
+AP-102,bill,clean_hard,0,,,A4,1,0,Kestrel Couriers trades at weekends; a weekend date is legitimate
+AP-103,bill,clean,0,,,,0,0,Ordinary Kestrel Couriers bill
+AP-104,bill,clean,0,,,,0,0,Ordinary Kestrel Couriers bill
+AP-105,bill,clean_hard,0,,,A4,1,0,Marlow Events Catering trades at weekends; a weekend date is legitimate
+AP-106,bill,clean_hard,0,,,A4,1,0,Marlow Events Catering trades at weekends; a weekend date is legitimate
+AP-107,bill,clean,0,,,,0,0,Ordinary Marlow Events Catering bill
+AP-108,bill,clean,0,,,,0,0,Ordinary Marlow Events Catering bill
+AP-109,bill,clean_hard,0,,,A2,1,0,Before supplier's VAT registration on 1 Jun 2026: NONE is correct
+AP-110,bill,clean_hard,0,,,A2,1,0,Before supplier's VAT registration on 1 Jun 2026: NONE is correct
+AP-111,bill,clean_hard,0,,,A2,1,0,Before supplier's VAT registration on 1 Jun 2026: NONE is correct
+AP-112,bill,clean,0,,,,0,0,After VAT registration: INPUT2 is correct
+AP-113,bill,clean,0,,,,0,0,After VAT registration: INPUT2 is correct
+AP-114,bill,clean,0,,,,0,0,After VAT registration: INPUT2 is correct
+AP-115,bill,clean,0,,,,0,0,After VAT registration: INPUT2 is correct
+AP-116,bill,error,1,OUTLIER,A7,A7,1,1,Amount roughly 9x the normal amount for this account with no supporting explanation
+AP-117,bill,error,1,OUTLIER,A7,A7,1,1,Amount roughly 9x the normal amount for this account with no supporting explanation
+AP-118,bill,error,1,OUTLIER,A7,A7,1,1,Amount roughly 9x the normal amount for this account with no supporting explanation
+AP-119,bill,clean_hard,0,,,A7,1,0,Legitimate one-off capital purchase (new equipment); large but valid
+AP-120,bill,clean_hard,0,,,A7,1,0,Legitimate one-off capital purchase (new equipment); large but valid
+AP-121,bill,error,1,DUP_AP,A1,,0,0,"Duplicate of AP-039 (same supplier, same amount, days later)"
+AP-122,bill,error,1,DUP_AP,A1,,0,0,"Duplicate of AP-030 (same supplier, same amount, days later)"
+AP-123,bill,error,1,DUP_AP,A1,,0,0,"Duplicate of AP-048 (same supplier, same amount, days later)"
+AR-001,invoice,clean,0,,,,0,0,Monthly retainer for Alder Group (legitimate recurring)
+AR-002,invoice,clean,0,,,,0,0,Monthly retainer for Alder Group (legitimate recurring)
+AR-003,invoice,clean,0,,,,0,0,Monthly retainer for Alder Group (legitimate recurring)
+AR-004,invoice,clean,0,,,,0,0,Monthly retainer for Alder Group (legitimate recurring)
+AR-005,invoice,clean,0,,,,0,0,Monthly retainer for Alder Group (legitimate recurring)
+AR-006,invoice,clean,0,,,,0,0,Monthly retainer for Alder Group (legitimate recurring)
+AR-007,invoice,clean,0,,,,0,0,Monthly retainer for Brookes Partners (legitimate recurring)
+AR-008,invoice,clean,0,,,,0,0,Monthly retainer for Brookes Partners (legitimate recurring)
+AR-009,invoice,clean,0,,,,0,0,Monthly retainer for Brookes Partners (legitimate recurring)
+AR-010,invoice,clean,0,,,,0,0,Monthly retainer for Brookes Partners (legitimate recurring)
+AR-011,invoice,clean,0,,,,0,0,Monthly retainer for Brookes Partners (legitimate recurring)
+AR-012,invoice,clean,0,,,,0,0,Monthly retainer for Brookes Partners (legitimate recurring)
+AR-013,invoice,clean,0,,,,0,0,Monthly retainer for Crestline Retail (legitimate recurring)
+AR-014,invoice,clean,0,,,,0,0,Monthly retainer for Crestline Retail (legitimate recurring)
+AR-015,invoice,clean,0,,,,0,0,Monthly retainer for Crestline Retail (legitimate recurring)
+AR-016,invoice,clean,0,,,,0,0,Monthly retainer for Crestline Retail (legitimate recurring)
+AR-017,invoice,clean,0,,,,0,0,Monthly retainer for Crestline Retail (legitimate recurring)
+AR-018,invoice,clean,0,,,,0,0,Monthly retainer for Crestline Retail (legitimate recurring)
+AR-019,invoice,clean,0,,,,0,0,Consulting invoice
+AR-020,invoice,clean,0,,,,0,0,Consulting invoice
+AR-021,invoice,clean,0,,,,0,0,Consulting invoice
+AR-022,invoice,clean,0,,,,0,0,Consulting invoice
+AR-023,invoice,clean,0,,,,0,0,Consulting invoice
+AR-024,invoice,clean,0,,,,0,0,Consulting invoice
+AR-025,invoice,clean,0,,,,0,0,Consulting invoice
+AR-026,invoice,clean,0,,,,0,0,Consulting invoice
+AR-027,invoice,clean,0,,,,0,0,Consulting invoice
+AR-028,invoice,clean,0,,,,0,0,Consulting invoice
+AR-029,invoice,clean,0,,,,0,0,Consulting invoice
+AR-030,invoice,clean,0,,,,0,0,Consulting invoice
+AR-031,invoice,clean,0,,,,0,0,Consulting invoice
+AR-032,invoice,clean,0,,,,0,0,Consulting invoice
+AR-033,invoice,clean,0,,,,0,0,Consulting invoice
+AR-034,invoice,clean,0,,,,0,0,Consulting invoice
+AR-035,invoice,clean,0,,,,0,0,Consulting invoice
+AR-036,invoice,clean,0,,,,0,0,Consulting invoice
+AR-037,invoice,clean,0,,,,0,0,Consulting invoice
+AR-038,invoice,clean,0,,,,0,0,Consulting invoice
+AR-039,invoice,clean_hard,0,,,,0,0,"Bi-weekly billing at same amount, 14 days apart (legitimate)"
+AR-040,invoice,clean_hard,0,,,,0,0,"Bi-weekly billing at same amount, 14 days apart (legitimate)"
+AR-041,invoice,clean_hard,0,,,,0,0,"Bi-weekly billing at same amount, 14 days apart (legitimate)"
+AR-042,invoice,clean_hard,0,,,,0,0,"Bi-weekly billing at same amount, 14 days apart (legitimate)"
+AR-043,invoice,clean_hard,0,,,,0,0,Same amount and date as another customer's invoice (different customer)
+AR-044,invoice,clean_hard,0,,,,0,0,Same amount and date as another customer's invoice (different customer)
+AR-045,invoice,clean_hard,0,,,,0,0,Invoice later reversed by credit note
+AR-046,invoice,clean_hard,0,,,,0,0,Credit note reversing the invoice above (negative total)
+AR-047,invoice,error,1,DUP_AR,A1,A1,1,1,"Duplicate of AR-019 (same customer and amount, within days)"
+AR-048,invoice,error,1,DUP_AR,A1,A1,1,1,"Duplicate of AR-027 (same customer and amount, within days)"
+AR-049,invoice,error,1,DUP_AR,A1,A1,1,1,"Duplicate of AR-035 (same customer and amount, within days)"
+AR-050,invoice,error,1,DUP_AR,A1,A1,1,1,Entered again (2th time) with same customer and amount: AR-031
+AR-051,invoice,error,1,DUP_AR,A1,A1,1,1,Entered again (3th time) with same customer and amount: AR-031
+BT-001,bank_txn,clean_hard,0,,,,0,0,Rounding difference of GBP 0.01 vs bill (should still reconcile)
+BT-002,bank_txn,clean_hard,0,,,,0,0,Rounding difference of GBP -0.50 vs bill (should still reconcile)
+BT-003,bank_txn,clean_hard,0,,,,0,0,Rounding difference of GBP 1.25 vs bill (should still reconcile)
+BT-004,bank_txn,clean_hard,0,,,,0,0,Rounding difference of GBP -2.99 vs bill (should still reconcile)
+BT-005,bank_txn,clean,0,,,,0,0,Payment of AP-020 by bank
+BT-006,bank_txn,clean,0,,,,0,0,Payment of AP-013 by bank
+BT-007,bank_txn,clean,0,,,,0,0,Payment of AP-080 by bank
+BT-008,bank_txn,clean,0,,,,0,0,Payment of AP-032 by bank
+BT-009,bank_txn,clean,0,,,,0,0,Payment of AP-058 by bank
+BT-010,bank_txn,clean,0,,,,0,0,Payment of AP-079 by bank
+BT-011,bank_txn,clean,0,,,,0,0,Payment of AP-078 by bank
+BT-012,bank_txn,clean,0,,,,0,0,Payment of AP-059 by bank
+BT-013,bank_txn,clean,0,,,,0,0,Payment of AP-065 by bank
+BT-014,bank_txn,clean,0,,,,0,0,Payment of AP-025 by bank
+BT-015,bank_txn,clean,0,,,,0,0,Payment of AP-005 by bank
+BT-016,bank_txn,clean,0,,,,0,0,Payment of AP-003 by bank
+BT-017,bank_txn,clean,0,,,,0,0,Payment of AP-056 by bank
+BT-018,bank_txn,clean,0,,,,0,0,Payment of AP-046 by bank
+BT-019,bank_txn,clean,0,,,,0,0,Payment of AP-017 by bank
+BT-020,bank_txn,clean,0,,,,0,0,Payment of AP-031 by bank
+BT-021,bank_txn,clean,0,,,,0,0,Receipt for AR-007
+BT-022,bank_txn,clean,0,,,,0,0,Receipt for AR-035
+BT-023,bank_txn,clean,0,,,A5,1,0,Receipt for AR-002
+BT-024,bank_txn,clean,0,,,,0,0,Receipt for AR-027
+BT-025,bank_txn,clean,0,,,,0,0,Receipt for AR-029
+BT-026,bank_txn,clean,0,,,,0,0,Receipt for AR-011
+BT-027,bank_txn,clean,0,,,,0,0,Receipt for AR-021
+BT-028,bank_txn,clean,0,,,,0,0,Receipt for AR-022
+BT-029,bank_txn,clean,0,,,,0,0,Receipt for AR-010
+BT-030,bank_txn,clean,0,,,,0,0,Receipt for AR-017
+BT-031,bank_txn,clean,0,,,,0,0,Receipt for AR-004
+BT-032,bank_txn,clean,0,,,,0,0,Receipt for AR-036
+BT-033,bank_txn,clean,0,,,,0,0,Receipt for AR-016
+BT-034,bank_txn,clean,0,,,,0,0,Receipt for AR-032
+BT-035,bank_txn,clean,0,,,A5,1,0,Receipt for AR-015
+BT-036,bank_txn,clean,0,,,,0,0,Receipt for AR-024
+BT-037,bank_txn,clean,0,,,,0,0,Receipt for AR-031
+BT-038,bank_txn,clean,0,,,,0,0,Receipt for AR-018
+BT-039,bank_txn,clean,0,,,,0,0,Receipt for AR-006
+BT-040,bank_txn,clean,0,,,,0,0,Receipt for AR-028
+BT-041,bank_txn,error,1,DUP_PAY,A5,A5,1,1,Bill AP-021 already paid via recorded payment; second bank payment of the same amount
+BT-042,bank_txn,error,1,DUP_PAY,A5,A5,1,1,Bill AP-063 already paid via recorded payment; second bank payment of the same amount
+BT-043,bank_txn,error,1,DUP_PAY,A5,A5,1,1,Bill AP-049 already paid via recorded payment; second bank payment of the same amount
+BT-044,bank_txn,error,1,DUP_PAY,A5,A5,1,1,Bill AP-048 already paid via recorded payment; second bank payment of the same amount
+BT-045,bank_txn,error,1,BREAK,A6,A6,1,1,Payment to a payee with no bill or invoice in the ledger
+BT-046,bank_txn,error,1,BREAK,A6,A6,1,1,Payment to a payee with no bill or invoice in the ledger
+BT-047,bank_txn,error,1,BREAK,A6,A6,1,1,Payment to a payee with no bill or invoice in the ledger
+BT-048,bank_txn,error,1,BREAK,A6,A6,1,1,Short payment against AP-082: bank amount differs from bill by more than tolerance
+BT-049,bank_txn,error,1,BREAK,A6,A6,1,1,Short payment against AP-070: bank amount differs from bill by more than tolerance
+BT-050,bank_txn,error,1,BREAK,A6,A6,1,1,Bank line with no contact and no matching document
+BT-051,bank_txn,clean_hard,0,,,A6,1,0,Monthly bank charge; legitimately has no bill (reconciliation will list it as unmatched)
+BT-052,bank_txn,clean_hard,0,,,A6,1,0,Monthly bank charge; legitimately has no bill (reconciliation will list it as unmatched)
+BT-053,bank_txn,clean_hard,0,,,A6,1,0,Monthly bank charge; legitimately has no bill (reconciliation will list it as unmatched)
+BT-054,bank_txn,clean_hard,0,,,A6,1,0,Monthly bank charge; legitimately has no bill (reconciliation will list it as unmatched)
+BT-055,bank_txn,clean_hard,0,,,A6,1,0,Monthly bank charge; legitimately has no bill (reconciliation will list it as unmatched)
+BT-056,bank_txn,clean_hard,0,,,A6,1,0,Monthly bank charge; legitimately has no bill (reconciliation will list it as unmatched)

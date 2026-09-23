@@ -1,0 +1,8 @@
+rule,items_flagged,correct_for_this_rule,flagged_error_of_other_type,false_positives_on_clean,precision_strict,false_positive_items
+A1,8,8,0,0,1.000,
+A2,7,4,0,3,0.571,AP-109;AP-110;AP-111
+A3,6,3,0,3,0.500,AP-093;AP-094;AP-095
+A4,7,3,0,4,0.429,AP-101;AP-102;AP-105;AP-106
+A5,3,3,0,0,1.000,
+A6,12,6,0,6,0.500,BT-051;BT-052;BT-053;BT-054;BT-055;BT-056
+A7,11,3,1,7,0.273,AP-093;AP-094;AP-095;AP-096;AP-097;AP-119;AP-120

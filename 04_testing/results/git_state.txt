@@ -1,0 +1,16 @@
+commits: 13
+tags: 0
+HEAD: 9c4127ad65aa5a9e7d362c2d05f69ecfdbf7c5f9
+9c4127a 2026-09-23 Add data-coverage table, 5,000-row synthetic scale test, progress bar, paging
+34b863f 2026-09-18 Add Evidence section to README with real Xero/QuickBooks screenshots
+b238db1 2026-09-16 Log pause point: Evidence section shot list pending owner screenshots
+f8d8a1a 2026-09-16 Log Session 8: dual-ERP dashboard shipped and confirmed live
+9627ccc 2026-09-16 Add QuickBooks section to the dashboard alongside Xero
+b186300 2026-09-16 Log Session 7: Phase 8 QuickBooks connector complete
+e3f0f93 2026-09-16 Phase 8: QuickBooks Online connector, ledger-agnostic via a shared adapter
+12b3f4a 2026-09-16 Log Session 6: Phase 9 removal, dashboard deployment
+540e3a8 2026-09-16 Add live dashboard demo link to README
+4fb6a5f 2026-09-16 Make dashboard deployable: ship a frozen demo DB and score fallback
+ee65769 2026-09-16 Remove Phase 9 from the public plan doc
+7a36bfa 2026-09-16 Drop video scope from plan; log Phase 7 completion
+6fbe056 2026-09-16 Initial commit: NorthBridge Ledger Reconciliation & Anomaly Detection Agent

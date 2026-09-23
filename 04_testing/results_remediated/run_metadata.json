@@ -1,0 +1,24 @@
+{
+  "run_utc": "2026-09-23T17:56:36+00:00",
+  "subject_commit": "9c4127ad65aa5a9e7d362c2d05f69ecfdbf7c5f9",
+  "python": "3.11.2",
+  "platform": "Linux-6.6.141-09476-g954adab60416-aarch64-with-glibc2.36",
+  "packages": {
+    "pandas": "3.0.5",
+    "scikit-learn": "1.9.1",
+    "streamlit": "1.64.0",
+    "requests": "2.34.2"
+  },
+  "ledger_test_db_sha256": "a1270db5f7d33f535d97bc1c42578bfbbcd2c87458c16207ee2fbd2423e08781",
+  "labels_csv_sha256": "d6ea3f10879170009f86411d165a904aaede41bc172e945f7d0075786bab3779",
+  "determinism": {
+    "runs": 5,
+    "distinct_hashes": 1,
+    "hash": "fddb1840e495d2ee09c63a32c9e3ceedf8685e93dd91a0fef6a1e9fbdd78d6a2",
+    "identical": true,
+    "in_process_hash": "fddb1840e495d2ee09c63a32c9e3ceedf8685e93dd91a0fef6a1e9fbdd78d6a2",
+    "in_process_matches": true
+  },
+  "flags_total": 54,
+  "flags_on_unknown_records": 0
+}

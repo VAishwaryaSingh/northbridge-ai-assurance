@@ -1,0 +1,6 @@
+scenario,TP,FN,FP,TN,recall,precision,F1,FPR
+S0 Base (as frozen),28,3,22,177,0.903,0.56,0.691,0.111
+S1 Weekend and threshold errors relabelled as review indicators (clean),22,3,28,177,0.88,0.44,0.587,0.137
+S2 Drop 6 bank charges,28,3,16,177,0.903,0.636,0.747,0.083
+"S3 Drop bank charges, legit weekend, fixed-price/boundary bills (15 hard cases)",28,3,7,177,0.903,0.8,0.848,0.038
+S4 Drop duplicate supplier bills (A1 scope),28,0,22,177,1.0,0.56,0.718,0.111

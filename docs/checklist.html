@@ -1,0 +1,545 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>AI system assurance checklist - Northbridge Assurance Review</title>
+<meta name="description" content="Self-assessment of a ledger anomaly-detection tool using audit methodology.">
+<style>
+:root{--bg:#fff;--fg:#1b1f27;--muted:#5a6270;--line:#d9dee6;--soft:#f3f5f9;--brand:#1f3864;--link:#1a5fb4;--bad:#b71c1c;--badbg:#fdecea;--warn:#8a5a00;--warnbg:#fff4d6;--ok:#1b6e34;--okbg:#e6f4ea;--code:#eef1f6}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#0f1420;--fg:#e6e9ef;--muted:#a3abb8;--line:#2b3446;--soft:#171e2e;--brand:#9db8ee;--link:#8ab4f8;--bad:#ff8a80;--badbg:#3a1a1a;--warn:#ffd27a;--warnbg:#3a2e12;--ok:#7fd99a;--okbg:#14301f;--code:#1d2536}}
+:root[data-theme=dark]{--bg:#0f1420;--fg:#e6e9ef;--muted:#a3abb8;--line:#2b3446;--soft:#171e2e;--brand:#9db8ee;--link:#8ab4f8;--bad:#ff8a80;--badbg:#3a1a1a;--warn:#ffd27a;--warnbg:#3a2e12;--ok:#7fd99a;--okbg:#14301f;--code:#1d2536}
+*{box-sizing:border-box}html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+a{color:var(--link)}a:focus-visible,button:focus-visible,input:focus-visible{outline:3px solid var(--link);outline-offset:2px}
+.skip{position:absolute;left:-999px;top:0;background:var(--brand);color:#fff;padding:8px 12px;z-index:10}.skip:focus{left:8px;top:8px}
+header.site{border-bottom:1px solid var(--line);background:var(--bg);position:sticky;top:0;z-index:5}
+.wrap{max-width:920px;margin:0 auto;padding:0 16px}
+header.site .wrap{display:flex;flex-wrap:wrap;align-items:center;gap:4px 14px;min-height:52px}
+.brand{font-weight:700;color:var(--brand);text-decoration:none;margin-right:6px}
+nav{display:flex;flex-wrap:wrap;gap:2px 4px}nav a{padding:6px 9px;border-radius:6px;text-decoration:none;color:var(--fg);font-size:.92rem}
+nav a:hover{background:var(--soft)}nav a[aria-current=page]{background:var(--soft);font-weight:600;box-shadow:inset 0 -2px 0 var(--brand)}
+.banner{background:var(--warnbg);color:var(--fg);border-bottom:1px solid var(--line);font-size:.88rem}
+.banner .wrap{padding-top:8px;padding-bottom:8px}.banner strong{color:var(--warn)}
+main{padding:24px 0 56px}h1{font-size:1.9rem;line-height:1.25;color:var(--brand);margin:.2em 0 .5em}h2{font-size:1.35rem;color:var(--brand);margin:1.8em 0 .5em;padding-top:.3em}h3{font-size:1.1rem;margin:1.4em 0 .4em}
+p,li{max-width:74ch}code{background:var(--code);padding:1px 5px;border-radius:4px;font-size:.88em}pre{background:var(--code);padding:12px;border-radius:8px;overflow:auto}pre code{background:none;padding:0}
+.scroll{overflow-x:auto;margin:12px 0;-webkit-overflow-scrolling:touch}table{border-collapse:collapse;width:100%;font-size:.9rem}
+th,td{border:1px solid var(--line);padding:6px 9px;text-align:left;vertical-align:top}th{background:var(--brand);color:#fff}@media (prefers-color-scheme:dark){:root:not([data-theme=light]) th{color:#0f1420}}
+tbody tr:nth-child(even){background:var(--soft)}
+.chip{display:inline-block;padding:1px 9px;border-radius:99px;font-size:.78rem;font-weight:700;white-space:nowrap}
+.High,.notmet{background:var(--badbg);color:var(--bad)}.Medium,.warn{background:var(--warnbg);color:var(--warn)}.Low,.met{background:var(--okbg);color:var(--ok)}
+.hero{background:var(--soft);border:1px solid var(--line);border-radius:12px;padding:20px 22px;margin:8px 0 22px}.hero p{max-width:none}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px;margin:14px 0}
+.card{border:1px solid var(--line);border-radius:10px;padding:12px 14px;background:var(--bg)}.card h3{margin:.1em 0 .3em;font-size:1rem}.card p{margin:.2em 0;font-size:.92rem;color:var(--muted)}
+.stat{font-size:1.6rem;font-weight:700;color:var(--brand);line-height:1.2}
+.filter{width:100%;max-width:420px;padding:8px 10px;border:1px solid var(--line);border-radius:6px;background:var(--bg);color:var(--fg);font:inherit;margin:6px 0}
+.chart text{fill:var(--fg);font:12px system-ui,sans-serif}.chart .muted{fill:var(--muted)}
+footer{border-top:1px solid var(--line);color:var(--muted);font-size:.85rem;padding:18px 0 34px}
+.toc{background:var(--soft);border:1px solid var(--line);border-radius:8px;padding:6px 16px;margin:14px 0}.toc ul{margin:.3em 0;padding-left:1.2em}
+button.theme{margin-left:auto;background:none;border:1px solid var(--line);border-radius:6px;color:var(--fg);padding:4px 9px;cursor:pointer;font:inherit;font-size:.85rem}
+@media (max-width:560px){h1{font-size:1.5rem}body{font-size:15.5px}}
+@media print{header.site,.filter,button.theme{display:none}body{font-size:11pt}}
+</style></head><body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site"><div class="wrap"><a class="brand" href="index.html">Northbridge Assurance Review</a><nav aria-label="Main"><a href="index.html">Home</a><a href="findings.html">Findings</a><a href="method.html">Method</a><a href="testing.html">Testing</a><a href="remediation.html">Remediation</a><a href="toolkit.html">Toolkit</a><a href="downloads/assurance_report.pdf">Report (PDF)</a></nav><button class="theme" id="themebtn" type="button">Light / dark</button></div></header>
+<div class="banner"><div class="wrap"><strong>Self-assessment, not an independent audit.</strong> The reviewer also built the system. Figures describe a constructed test set and are not estimates of accuracy on real books. No human independent review has been done.</div></div>
+<main id="main"><div class="wrap">
+<h1 id="ai-system-assurance-checklist">AI System Assurance Checklist</h1>
+<p>A reusable checklist for assessing an AI or automated decision system used in a finance or control process. It generalises the control matrix from the Northbridge review and adds the lessons that review taught. It is a starting point for a self-assessment or a client engagement, <strong>not a certification tool</strong>.</p>
+<p><strong>Provenance and limits.</strong> Built from one review (a rules-based ledger tool) plus general practice. It has not been validated on other systems. LLM sections are included from framework guidance and have not been exercised in practice. Framework references are area-level and must be checked against the source texts. Thresholds are examples: agree them with the system owner before testing.</p>
+<p><strong>How to use:</strong> work top to bottom. For each item record: applies (Y/N/why not), in place (Y/Partial/N), design test, operating test, evidence reference, result. Keep an evidence log as you go. Record gaps as gaps; do not fix them before testing.</p>
+<hr />
+<h2 id="0-before-anything-else-what-is-it-really">0. Before anything else: what is it really?</h2>
+<div class="scroll"><table>
+<thead>
+<tr>
+<th>#</th>
+<th>Question</th>
+<th>Why it matters</th>
+<th>Evidence</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0.1</td>
+<td>Does the system call an LLM, a trained model, or only fixed rules and statistics? Read the code or vendor documentation; do not rely on the description.</td>
+<td>Northbridge is titled an "Agent" and positioned as a small-scale version of AI-native products, yet calls no LLM. That changed which risks applied.</td>
+<td>Code search, dependency list, network destinations</td>
+</tr>
+<tr>
+<td>0.2</td>
+<td>Is the description of the system accurate and consistent across README, marketing, dashboard and documents?</td>
+<td>Misdescription misleads users about behaviour and reliability.</td>
+<td>Documents compared</td>
+</tr>
+<tr>
+<td>0.3</td>
+<td>Who developed it, who is reviewing it, and were AI coding tools used?</td>
+<td>Independence and provenance must be disclosed.</td>
+<td>Independence statement</td>
+</tr>
+<tr>
+<td>0.4</td>
+<td>What version is under review (commit, release, model version)? Is it pinned for the review?</td>
+<td>Evidence must refer to a fixed subject.</td>
+<td>Commit hash or release id</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="1-governance-and-scope">1. Governance and scope</h2>
+<div class="scroll"><table>
+<thead>
+<tr>
+<th>#</th>
+<th>Control / check</th>
+<th>Test of design</th>
+<th>Test of operating effectiveness</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1.1</td>
+<td>Named owner, intended use, users of the output, known limitations, escalation route</td>
+<td>Read the documentation</td>
+<td>Ask a user; check the limitations are visible where output is shown</td>
+</tr>
+<tr>
+<td>1.2</td>
+<td>Inventory entry: system, purpose, model and provider with versions, data used, change dates</td>
+<td>Inspect inventory</td>
+<td>Compare with what is actually deployed</td>
+</tr>
+<tr>
+<td>1.3</td>
+<td>Regulatory classification reasoned and dated (for example EU AI Act tier, UK principles, data protection)</td>
+<td>Read the reasoning</td>
+<td>Re-check status against primary sources; note triggers for reassessment</td>
+</tr>
+<tr>
+<td>1.4</td>
+<td>Impact and risk assessment done before use</td>
+<td>Inspect assessment</td>
+<td>Check it was updated after material changes</td>
+</tr>
+<tr>
+<td>1.5</td>
+<td>Acceptance criteria (accuracy, false positives, consistency, oversight) agreed with the owner before testing</td>
+<td>Inspect criteria</td>
+<td>Confirm they pre-date the test results</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="2-data">2. Data</h2>
+<div class="scroll"><table>
+<thead>
+<tr>
+<th>#</th>
+<th>Control / check</th>
+<th>Test of design</th>
+<th>Test of operating effectiveness</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2.1</td>
+<td>Completeness of data pulled: counts and totals reconciled to the source system</td>
+<td>Inspect the check</td>
+<td>Re-perform against source totals; test pagination and limits live</td>
+</tr>
+<tr>
+<td>2.2</td>
+<td>Validation of malformed, missing, voided or duplicate records</td>
+<td>Inspect rules</td>
+<td>Feed known bad records</td>
+</tr>
+<tr>
+<td>2.3</td>
+<td>Personal and confidential data identified, minimised, and lawful basis recorded</td>
+<td>Inspect data map</td>
+<td>Sample records for personal data; check retention</td>
+</tr>
+<tr>
+<td>2.4</td>
+<td>Data not silently changed by upstream systems (schema, field meaning, tax mapping)</td>
+<td>Inspect change notification</td>
+<td>Compare field mapping to source documentation</td>
+</tr>
+<tr>
+<td>2.5</td>
+<td>Test and demo data clearly separated from real data</td>
+<td>Inspect environments</td>
+<td>Sample committed or shared datasets</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="3-performance-and-accuracy-all-systems">3. Performance and accuracy (all systems)</h2>
+<div class="scroll"><table>
+<thead>
+<tr>
+<th>#</th>
+<th>Control / check</th>
+<th>Test of design</th>
+<th>Test of operating effectiveness</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>3.1</td>
+<td>Independent test set with ground truth, built <strong>without</strong> reference to how the system works</td>
+<td>Inspect how it was built and by whom</td>
+<td>Re-derive metrics from labels and outputs yourself</td>
+</tr>
+<tr>
+<td>3.2</td>
+<td>Clean items at least 50% of the set, so false positives can be measured</td>
+<td>Inspect composition</td>
+<td>Recount</td>
+</tr>
+<tr>
+<td>3.3</td>
+<td>Hard cases: near misses, legitimate items that look like errors, reversals, rounding, boundary values</td>
+<td>Inspect</td>
+<td>Report results separately for standard and hard items</td>
+</tr>
+<tr>
+<td>3.4</td>
+<td>Metrics per error type, not just overall: recall, precision, F1, false positive rate, with sample sizes and uncertainty</td>
+<td>Inspect</td>
+<td>Recompute; note that small samples give wide intervals</td>
+</tr>
+<tr>
+<td>3.5</td>
+<td>Sensitivity of pass/fail outcomes to labelling choices</td>
+<td>Inspect</td>
+<td>Relabel disputed items and rerun; report which outcomes flip</td>
+</tr>
+<tr>
+<td>3.6</td>
+<td>Error types the system claims to cover are all tested; error types it does not cover are stated</td>
+<td>Compare claims with tests</td>
+<td>List what a real error could look like that the system cannot see</td>
+</tr>
+<tr>
+<td>3.7</td>
+<td>Reported accuracy figures reproduce from the code and data</td>
+<td>Inspect how they are produced</td>
+<td>Rerun; check published constants are labelled as static</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Lessons from Northbridge:</strong> the developer's own validation planted errors written to fit the rules, so 7/7 said nothing about accuracy. The reviewer's own test set, built after reading the rules, was also not independent. State this openly and have someone else challenge the labels.</p>
+<h2 id="4-determinism-and-consistency">4. Determinism and consistency</h2>
+<div class="scroll"><table>
+<thead>
+<tr>
+<th>#</th>
+<th>Control / check</th>
+<th>Test of design</th>
+<th>Test of operating effectiveness</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>4.1</td>
+<td>Same input gives the same output across runs and fresh processes</td>
+<td>Inspect seeds and ordering</td>
+<td>Repeat runs in fresh processes and compare hashes</td>
+</tr>
+<tr>
+<td>4.2</td>
+<td><strong>Output does not depend on input order</strong> or other arbitrary factors</td>
+<td>Inspect sort keys and tie-breaks</td>
+<td>Reload the same data in reversed and shuffled row order and compare</td>
+</tr>
+<tr>
+<td>4.3</td>
+<td>For LLM systems: consistency across repeated runs at the configured temperature, and effect of prompt wording</td>
+<td>Inspect configuration</td>
+<td>Run N repeats; report agreement per item</td>
+</tr>
+<tr>
+<td>4.4</td>
+<td>Consistency across dependency versions</td>
+<td>Inspect pinning</td>
+<td>Rebuild in a clean environment</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Lesson:</strong> identical output for one fixed input order looked like determinism until rows were reordered. Test order and environment, not just repetition.</p>
+<h2 id="5-explanations-and-outputs">5. Explanations and outputs</h2>
+<div class="scroll"><table>
+<thead>
+<tr>
+<th>#</th>
+<th>Control / check</th>
+<th>Test of design</th>
+<th>Test of operating effectiveness</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>5.1</td>
+<td>Every output carries a reason naming the records relied on</td>
+<td>Inspect</td>
+<td>Sample outputs for each rule or output type, including null and edge values</td>
+</tr>
+<tr>
+<td>5.2</td>
+<td>Explanations are supported by the data and do not contradict the headline</td>
+<td>Inspect logic</td>
+<td>Re-perform a sample from source; check direction and completeness of named drivers</td>
+</tr>
+<tr>
+<td>5.3</td>
+<td>For LLM systems: explanations cite specific records; unsupported claims and invented records are counted</td>
+<td>Inspect</td>
+<td>Manual check of a sample; report supported claims ÷ claims checked</td>
+</tr>
+<tr>
+<td>5.4</td>
+<td>Messages state facts, not assumptions about the client</td>
+<td>Read templates</td>
+<td>Sample messages</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="6-human-oversight">6. Human oversight</h2>
+<div class="scroll"><table>
+<thead>
+<tr>
+<th>#</th>
+<th>Control / check</th>
+<th>Test of design</th>
+<th>Test of operating effectiveness</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>6.1</td>
+<td>Every flag or recommendation is dispositioned (accept, reject, reason) by a competent person before it has effect</td>
+<td>Inspect process and tool</td>
+<td>Sample flags; confirm a recorded disposition exists and is timely</td>
+</tr>
+<tr>
+<td>6.2</td>
+<td>Reviewer competence, workload and authority to override</td>
+<td>Inspect</td>
+<td>Interview; check volume against capacity</td>
+</tr>
+<tr>
+<td>6.3</td>
+<td>Escalation and contestability: a way to challenge and correct an output</td>
+<td>Inspect</td>
+<td>Trace one challenged item end to end</td>
+</tr>
+<tr>
+<td>6.4</td>
+<td>False positive burden is manageable, so reviewers are not desensitised</td>
+<td>Inspect metrics</td>
+<td>Compare flag volume with review capacity</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="7-logging-traceability-and-monitoring">7. Logging, traceability and monitoring</h2>
+<div class="scroll"><table>
+<thead>
+<tr>
+<th>#</th>
+<th>Control / check</th>
+<th>Test of design</th>
+<th>Test of operating effectiveness</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>7.1</td>
+<td>Every run logged: input hash, code and model version, prompt version, dependency versions, timestamp, user, output hash</td>
+<td>Inspect schema</td>
+<td>Re-perform a past result from its log entry; completeness = logged runs ÷ all runs</td>
+</tr>
+<tr>
+<td>7.2</td>
+<td>Logs are append-only and retained</td>
+<td>Inspect</td>
+<td>Attempt to alter; check retention</td>
+</tr>
+<tr>
+<td>7.3</td>
+<td>Ongoing monitoring of accuracy and drift, with thresholds and owner</td>
+<td>Inspect</td>
+<td>Review recent monitoring outputs and actions</td>
+</tr>
+<tr>
+<td>7.4</td>
+<td>Incident process: how an error found later is recorded and fed back</td>
+<td>Inspect</td>
+<td>Trace a past incident</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="8-change-management">8. Change management</h2>
+<div class="scroll"><table>
+<thead>
+<tr>
+<th>#</th>
+<th>Control / check</th>
+<th>Test of design</th>
+<th>Test of operating effectiveness</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>8.1</td>
+<td>Version control with review and release tags</td>
+<td>Inspect repository settings</td>
+<td>Check history, tags, branch protection</td>
+</tr>
+<tr>
+<td>8.2</td>
+<td>Automated regression suite (known errors and clean items) run before release</td>
+<td>Inspect</td>
+<td>Run it; break something and confirm it fails</td>
+</tr>
+<tr>
+<td>8.3</td>
+<td>Dependencies and model versions pinned, with a lockfile</td>
+<td>Inspect</td>
+<td>Rebuild from a clean environment</td>
+</tr>
+<tr>
+<td>8.4</td>
+<td>Parameters (thresholds, tolerances, windows, prompts) documented with rationale, approver and date</td>
+<td>Inspect</td>
+<td>Compare code values with the approved record</td>
+</tr>
+<tr>
+<td>8.5</td>
+<td>Silent provider changes (model updates, API changes) detected</td>
+<td>Inspect</td>
+<td>Compare recorded model version with current</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="9-security-and-access">9. Security and access</h2>
+<div class="scroll"><table>
+<thead>
+<tr>
+<th>#</th>
+<th>Control / check</th>
+<th>Test of design</th>
+<th>Test of operating effectiveness</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>9.1</td>
+<td>Least privilege: granted permissions match what the system needs (can it write to the source system?)</td>
+<td>Compare requested scope with code</td>
+<td>Confirm granted scope in the vendor portal; grep for write calls</td>
+</tr>
+<tr>
+<td>9.2</td>
+<td>Secrets in a secrets manager or keychain, not plaintext files or code</td>
+<td>Inspect</td>
+<td>Scan history and working tree; check token storage</td>
+</tr>
+<tr>
+<td>9.3</td>
+<td>Secrets and real data never committed to public repositories</td>
+<td>Inspect ignore rules</td>
+<td>Pattern and scanner search of full history, including non-code files</td>
+</tr>
+<tr>
+<td>9.4</td>
+<td>Authentication and access on the application itself (including public demos)</td>
+<td>Inspect</td>
+<td>Attempt access as an unauthorised user</td>
+</tr>
+<tr>
+<td>9.5</td>
+<td>LLM systems only: prompt injection via data fields, sensitive data disclosure, excessive agency, insecure output handling (see OWASP LLM Top 10)</td>
+<td>Inspect prompt construction</td>
+<td>Adversarial items in the test set, for example injected instructions in description fields; report successful attempts ÷ attempts</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="10-third-parties">10. Third parties</h2>
+<div class="scroll"><table>
+<thead>
+<tr>
+<th>#</th>
+<th>Control / check</th>
+<th>Test of design</th>
+<th>Test of operating effectiveness</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>10.1</td>
+<td>Provider terms reviewed: data use, retention, training, sub-processors</td>
+<td>Read terms</td>
+<td>Confirm settings match the terms</td>
+</tr>
+<tr>
+<td>10.2</td>
+<td>Provider outage and change plan</td>
+<td>Inspect</td>
+<td>Tabletop or failover test</td>
+</tr>
+<tr>
+<td>10.3</td>
+<td>Licence and supply-chain review of libraries</td>
+<td>Inspect</td>
+<td>Dependency scan</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="11-transparency-and-documentation">11. Transparency and documentation</h2>
+<div class="scroll"><table>
+<thead>
+<tr>
+<th>#</th>
+<th>Control / check</th>
+<th>Test of design</th>
+<th>Test of operating effectiveness</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>11.1</td>
+<td>Users are told what the system is, what it can and cannot detect, and that outputs need review</td>
+<td>Read</td>
+<td>Check the statement is visible where results are shown</td>
+</tr>
+<tr>
+<td>11.2</td>
+<td>Static or published figures are labelled as static</td>
+<td>Inspect UI</td>
+<td>Compare displayed values with live computation</td>
+</tr>
+<tr>
+<td>11.3</td>
+<td>Known limitations and error types not covered are listed</td>
+<td>Read</td>
+<td>Compare with the test results</td>
+</tr>
+</tbody>
+</table></div>
+<hr />
+<h2 id="evidence-and-reporting-conventions">Evidence and reporting conventions</h2>
+<ul>
+<li><strong>Evidence log:</strong> for each test record time, what, how, sample size, result, evidence reference. Write entries as you test, not afterwards.</li>
+<li><strong>Freeze before running:</strong> record hashes of the test data, labels and harness before the first run, and say the record is self-attested.</li>
+<li><strong>Criteria before results:</strong> set thresholds first; report every criterion, including the ones that are not met.</li>
+<li><strong>Findings:</strong> Condition, Criteria, Cause, Effect, Recommendation, with a High, Medium or Low rating and references to risks and controls.</li>
+<li><strong>Sensitivity and uncertainty:</strong> show how outcomes change under alternative labelling; note clustering of errors and small samples.</li>
+<li><strong>Challenge:</strong> have the testing challenged by someone who has not seen your reasoning. A model-based challenge is useful but is not independent human review; say which you used.</li>
+<li><strong>Wording:</strong> "conclusion", not "audit opinion". Do not claim assurance or certification for a self-assessment.</li>
+<li><strong>Remediation:</strong> if you fix things, do it on a copy or in a labelled version, retest with the same frozen data, and report costs and side effects as well as improvements.</li>
+</ul>
+<h2 id="quick-triage-30-minutes">Quick triage (30 minutes)</h2>
+<p>If time is short, answer these first: (1) does it use AI or fixed rules; (2) can it write to the source system; (3) is there a record of each run; (4) does a person accept or reject each flag; (5) has accuracy been tested on data the developer did not write the rules for, including clean items; (6) does the output change if the input order changes; (7) is the description of the system accurate. A "no" or "don't know" on any of these is where to look first.</p>
+</div></main>
+<footer><div class="wrap">Subject: <a href="https://github.com/VAishwaryaSingh/Northbridge-Ledger-Agent">Northbridge Ledger Agent</a>, commit <code>9c4127a</code> (23 Sep 2026). Live demo: <a href="https://northbridge-ledger-agent.streamlit.app/">northbridge-ledger-agent.streamlit.app</a>. Synthetic and sandbox data only. The Northbridge project itself was not changed. This page states a conclusion, not an audit opinion, and gives no certification.</div></footer>
+<script>
+(function(){var r=document.documentElement,t=null;try{t=localStorage.getItem('theme')}catch(e){}if(t)r.setAttribute('data-theme',t);
+var b=document.getElementById('themebtn');if(b)b.addEventListener('click',function(){var d=r.getAttribute('data-theme')||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');var n=d==='dark'?'light':'dark';r.setAttribute('data-theme',n);try{localStorage.setItem('theme',n)}catch(e){}});
+document.querySelectorAll('input.filter').forEach(function(i){i.addEventListener('input',function(){var q=i.value.toLowerCase(),tb=document.getElementById(i.dataset.target);tb.querySelectorAll('tbody tr').forEach(function(tr){tr.style.display=tr.textContent.toLowerCase().indexOf(q)>-1?'':'none'})})});})();
+</script></body></html>

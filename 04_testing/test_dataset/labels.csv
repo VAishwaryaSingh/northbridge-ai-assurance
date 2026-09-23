@@ -1,0 +1,231 @@
+item_id,unit_type,contact,date,amount,group,is_error,error_type,expected_rule,construction
+AP-001,bill,Harbour Cloud Hosting,2026-05-13,145.96,clean,0,,,Ordinary Harbour Cloud Hosting bill
+AP-002,bill,Harbour Cloud Hosting,2026-06-19,187.57,clean,0,,,Ordinary Harbour Cloud Hosting bill
+AP-003,bill,Harbour Cloud Hosting,2026-02-02,183.00,clean,0,,,Ordinary Harbour Cloud Hosting bill
+AP-004,bill,Harbour Cloud Hosting,2026-08-24,184.21,clean,0,,,Ordinary Harbour Cloud Hosting bill
+AP-005,bill,Harbour Cloud Hosting,2026-05-27,170.05,clean,0,,,Ordinary Harbour Cloud Hosting bill
+AP-006,bill,Harbour Cloud Hosting,2026-06-01,161.03,clean,0,,,Ordinary Harbour Cloud Hosting bill
+AP-007,bill,Pixelworks Software,2026-07-13,128.35,clean,0,,,Ordinary Pixelworks Software bill
+AP-008,bill,Pixelworks Software,2026-05-11,144.36,clean,0,,,Ordinary Pixelworks Software bill
+AP-009,bill,Pixelworks Software,2026-06-04,142.57,clean,0,,,Ordinary Pixelworks Software bill
+AP-010,bill,Pixelworks Software,2026-01-05,120.88,clean,0,,,Ordinary Pixelworks Software bill
+AP-011,bill,Pixelworks Software,2026-02-02,132.99,clean,0,,,Ordinary Pixelworks Software bill
+AP-012,bill,Stationery Direct,2026-01-30,60.11,clean,0,,,Ordinary Stationery Direct bill
+AP-013,bill,Stationery Direct,2026-08-03,71.48,clean,0,,,Ordinary Stationery Direct bill
+AP-014,bill,Stationery Direct,2026-05-11,102.37,clean,0,,,Ordinary Stationery Direct bill
+AP-015,bill,Stationery Direct,2026-02-27,87.56,clean,0,,,Ordinary Stationery Direct bill
+AP-016,bill,Stationery Direct,2026-04-06,67.81,clean,0,,,Ordinary Stationery Direct bill
+AP-017,bill,Office Depot UK,2026-04-06,118.69,clean,0,,,Ordinary Office Depot UK bill
+AP-018,bill,Office Depot UK,2026-07-14,107.33,clean,0,,,Ordinary Office Depot UK bill
+AP-019,bill,Office Depot UK,2026-01-26,88.38,clean,0,,,Ordinary Office Depot UK bill
+AP-020,bill,Office Depot UK,2026-01-27,102.00,clean,0,,,Ordinary Office Depot UK bill
+AP-021,bill,Office Depot UK,2026-03-20,91.23,clean,0,,,Ordinary Office Depot UK bill
+AP-022,bill,Rail Europe Ltd,2026-02-10,156.15,clean,0,,,Ordinary Rail Europe Ltd bill
+AP-023,bill,Rail Europe Ltd,2026-07-06,291.59,clean,0,,,Ordinary Rail Europe Ltd bill
+AP-024,bill,Rail Europe Ltd,2026-03-25,254.78,error,1,VAT_MISCODE,A2,Rail Europe Ltd is VAT-registered and normally INPUT2; this bill coded NONE (VAT lost)
+AP-025,bill,Rail Europe Ltd,2026-07-06,95.69,clean,0,,,Ordinary Rail Europe Ltd bill
+AP-026,bill,City Cabs,2026-05-04,66.35,clean,0,,,Ordinary City Cabs bill
+AP-027,bill,City Cabs,2026-04-17,70.89,clean,0,,,Ordinary City Cabs bill
+AP-028,bill,City Cabs,2026-05-26,110.73,clean,0,,,Ordinary City Cabs bill
+AP-029,bill,City Cabs,2026-02-03,77.37,clean,0,,,Ordinary City Cabs bill
+AP-030,bill,Skyline Hotels,2026-07-29,220.83,clean,0,,,Ordinary Skyline Hotels bill
+AP-031,bill,Skyline Hotels,2026-06-08,282.53,clean,0,,,Ordinary Skyline Hotels bill
+AP-032,bill,Skyline Hotels,2026-04-16,306.33,clean,0,,,Ordinary Skyline Hotels bill
+AP-033,bill,Skyline Hotels,2026-03-12,314.18,clean,0,,,Ordinary Skyline Hotels bill
+AP-034,bill,AdSpark Media,2026-05-29,361.12,clean,0,,,Ordinary AdSpark Media bill
+AP-035,bill,AdSpark Media,2026-05-07,381.56,clean,0,,,Ordinary AdSpark Media bill
+AP-036,bill,AdSpark Media,2026-07-30,278.24,error,1,VAT_MISCODE,A2,AdSpark Media is VAT-registered and normally INPUT2; this bill coded NONE (VAT lost)
+AP-037,bill,AdSpark Media,2026-03-03,156.34,clean,0,,,Ordinary AdSpark Media bill
+AP-038,bill,AdSpark Media,2026-08-03,341.46,clean,0,,,Ordinary AdSpark Media bill
+AP-039,bill,Brightside Print,2026-07-06,128.80,clean,0,,,Ordinary Brightside Print bill
+AP-040,bill,Brightside Print,2026-06-25,214.18,clean,0,,,Ordinary Brightside Print bill
+AP-041,bill,Brightside Print,2026-06-15,138.46,clean,0,,,Ordinary Brightside Print bill
+AP-042,bill,Brightside Print,2026-02-10,197.29,clean,0,,,Ordinary Brightside Print bill
+AP-043,bill,Brightside Print,2026-03-04,206.78,clean,0,,,Ordinary Brightside Print bill
+AP-044,bill,Marlowe Legal LLP,2026-02-05,394.44,clean,0,,,Ordinary Marlowe Legal LLP bill
+AP-045,bill,Marlowe Legal LLP,2026-05-01,356.53,clean,0,,,Ordinary Marlowe Legal LLP bill
+AP-046,bill,Marlowe Legal LLP,2026-07-06,364.63,clean,0,,,Ordinary Marlowe Legal LLP bill
+AP-047,bill,Marlowe Legal LLP,2026-05-25,408.01,clean,0,,,Ordinary Marlowe Legal LLP bill
+AP-048,bill,Pearce Accounting,2026-04-17,290.12,clean,0,,,Ordinary Pearce Accounting bill
+AP-049,bill,Pearce Accounting,2026-03-24,340.37,clean,0,,,Ordinary Pearce Accounting bill
+AP-050,bill,Pearce Accounting,2026-06-19,325.78,clean,0,,,Ordinary Pearce Accounting bill
+AP-051,bill,Pearce Accounting,2026-05-07,320.23,clean,0,,,Ordinary Pearce Accounting bill
+AP-052,bill,Northern Power Ltd,2026-04-17,166.34,clean,0,,,Ordinary Northern Power Ltd bill
+AP-053,bill,Northern Power Ltd,2026-03-23,140.31,clean,0,,,Ordinary Northern Power Ltd bill
+AP-054,bill,Northern Power Ltd,2026-01-07,168.23,error,1,VAT_MISCODE,A2,Northern Power Ltd is VAT-registered and normally INPUT2; this bill coded NONE (VAT lost)
+AP-055,bill,Northern Power Ltd,2026-06-22,112.32,clean,0,,,Ordinary Northern Power Ltd bill
+AP-056,bill,Northern Power Ltd,2026-05-04,171.74,clean,0,,,Ordinary Northern Power Ltd bill
+AP-057,bill,Northern Power Ltd,2026-05-11,166.25,clean,0,,,Ordinary Northern Power Ltd bill
+AP-058,bill,Clearwater Utilities,2026-02-25,114.80,clean,0,,,Ordinary Clearwater Utilities bill
+AP-059,bill,Clearwater Utilities,2026-05-11,109.31,clean,0,,,Ordinary Clearwater Utilities bill
+AP-060,bill,Clearwater Utilities,2026-07-20,120.67,clean,0,,,Ordinary Clearwater Utilities bill
+AP-061,bill,Clearwater Utilities,2026-07-30,140.44,clean,0,,,Ordinary Clearwater Utilities bill
+AP-062,bill,Clearwater Utilities,2026-06-23,118.88,clean,0,,,Ordinary Clearwater Utilities bill
+AP-063,bill,Clearwater Utilities,2026-08-05,144.90,clean,0,,,Ordinary Clearwater Utilities bill
+AP-064,bill,Aoife Byrne Freelance,2026-05-04,343.51,clean,0,,,Ordinary Aoife Byrne Freelance bill
+AP-065,bill,Aoife Byrne Freelance,2026-01-30,437.52,clean,0,,,Ordinary Aoife Byrne Freelance bill
+AP-066,bill,Aoife Byrne Freelance,2026-07-07,365.77,clean,0,,,Ordinary Aoife Byrne Freelance bill
+AP-067,bill,Aoife Byrne Freelance,2026-05-18,417.76,clean,0,,,Ordinary Aoife Byrne Freelance bill
+AP-068,bill,Studio Kite Ltd,2026-02-20,356.24,clean,0,,,Ordinary Studio Kite Ltd bill
+AP-069,bill,Studio Kite Ltd,2026-08-10,455.42,clean,0,,,Ordinary Studio Kite Ltd bill
+AP-070,bill,Studio Kite Ltd,2026-01-21,421.92,error,1,VAT_MISCODE,A2,Studio Kite Ltd is VAT-registered and normally INPUT2; this bill coded NONE (VAT lost)
+AP-071,bill,Studio Kite Ltd,2026-08-24,410.80,clean,0,,,Ordinary Studio Kite Ltd bill
+AP-072,bill,DevCraft Contractors,2026-01-29,374.79,clean,0,,,Ordinary DevCraft Contractors bill
+AP-073,bill,DevCraft Contractors,2026-08-12,335.30,clean,0,,,Ordinary DevCraft Contractors bill
+AP-074,bill,DevCraft Contractors,2026-04-30,363.47,clean,0,,,Ordinary DevCraft Contractors bill
+AP-075,bill,DevCraft Contractors,2026-01-28,429.14,clean,0,,,Ordinary DevCraft Contractors bill
+AP-076,bill,Techbench Supplies,2026-06-02,200.04,clean,0,,,Ordinary Techbench Supplies bill
+AP-077,bill,Techbench Supplies,2026-08-07,298.39,clean,0,,,Ordinary Techbench Supplies bill
+AP-078,bill,Techbench Supplies,2026-07-27,214.95,clean,0,,,Ordinary Techbench Supplies bill
+AP-079,bill,Techbench Supplies,2026-02-04,235.78,clean,0,,,Ordinary Techbench Supplies bill
+AP-080,bill,Ergo Office Furniture,2026-07-16,321.79,clean,0,,,Ordinary Ergo Office Furniture bill
+AP-081,bill,Ergo Office Furniture,2026-03-16,308.36,clean,0,,,Ordinary Ergo Office Furniture bill
+AP-082,bill,Ergo Office Furniture,2026-06-16,330.33,clean,0,,,Ordinary Ergo Office Furniture bill
+AP-083,bill,Ergo Office Furniture,2026-01-06,274.31,clean,0,,,Ordinary Ergo Office Furniture bill
+AP-084,bill,FixedFee Backup Services,2026-01-12,144.00,clean,0,,,"Fixed monthly subscription, same amount each month (legitimate)"
+AP-085,bill,FixedFee Backup Services,2026-02-11,144.00,clean,0,,,"Fixed monthly subscription, same amount each month (legitimate)"
+AP-086,bill,FixedFee Backup Services,2026-03-13,144.00,clean,0,,,"Fixed monthly subscription, same amount each month (legitimate)"
+AP-087,bill,FixedFee Backup Services,2026-04-13,144.00,clean,0,,,"Fixed monthly subscription, same amount each month (legitimate)"
+AP-088,bill,FixedFee Backup Services,2026-05-12,144.00,clean,0,,,"Fixed monthly subscription, same amount each month (legitimate)"
+AP-089,bill,FixedFee Backup Services,2026-06-11,144.00,clean,0,,,"Fixed monthly subscription, same amount each month (legitimate)"
+AP-090,bill,DevCraft Contractors,2026-03-12,488.00,error,1,THRESHOLD,A3,Split job: two bills same week both just under 500 approval limit
+AP-091,bill,DevCraft Contractors,2026-03-16,492.00,error,1,THRESHOLD,A3,Second half of split job (see previous)
+AP-092,bill,AdSpark Media,2026-06-24,497.00,error,1,THRESHOLD,A3,Single bill priced 3 GBP under the approval limit after quote revised
+AP-093,bill,Cobalt Analytics,2026-04-06,489.00,clean_hard,0,,,Legitimate fixed-price licence that happens to sit in the 475-500 band
+AP-094,bill,Cobalt Analytics,2026-05-06,489.00,clean_hard,0,,,Legitimate fixed-price licence that happens to sit in the 475-500 band
+AP-095,bill,Cobalt Analytics,2026-06-05,489.00,clean_hard,0,,,Legitimate fixed-price licence that happens to sit in the 475-500 band
+AP-096,bill,Cobalt Analytics,2026-06-03,474.99,clean_hard,0,,,"Boundary: just below the 95% band, should not flag"
+AP-097,bill,Cobalt Analytics,2026-06-01,500.00,clean_hard,0,,,"Boundary: exactly at limit, should not flag"
+AP-098,bill,Stationery Direct,2026-02-07,210.82,error,1,WEEKEND,A4,"Bill dated on a weekend for a supplier that does not trade at weekends (unusual timing, review)"
+AP-099,bill,City Cabs,2026-05-17,241.49,error,1,WEEKEND,A4,"Bill dated on a weekend for a supplier that does not trade at weekends (unusual timing, review)"
+AP-100,bill,Pearce Accounting,2026-07-11,163.64,error,1,WEEKEND,A4,"Bill dated on a weekend for a supplier that does not trade at weekends (unusual timing, review)"
+AP-101,bill,Kestrel Couriers,2026-03-14,206.89,clean_hard,0,,,Kestrel Couriers trades at weekends; a weekend date is legitimate
+AP-102,bill,Kestrel Couriers,2026-06-20,95.62,clean_hard,0,,,Kestrel Couriers trades at weekends; a weekend date is legitimate
+AP-103,bill,Kestrel Couriers,2026-03-03,181.71,clean,0,,,Ordinary Kestrel Couriers bill
+AP-104,bill,Kestrel Couriers,2026-05-06,252.07,clean,0,,,Ordinary Kestrel Couriers bill
+AP-105,bill,Marlow Events Catering,2026-04-25,236.44,clean_hard,0,,,Marlow Events Catering trades at weekends; a weekend date is legitimate
+AP-106,bill,Marlow Events Catering,2026-07-04,165.90,clean_hard,0,,,Marlow Events Catering trades at weekends; a weekend date is legitimate
+AP-107,bill,Marlow Events Catering,2026-01-26,197.03,clean,0,,,Ordinary Marlow Events Catering bill
+AP-108,bill,Marlow Events Catering,2026-04-21,247.66,clean,0,,,Ordinary Marlow Events Catering bill
+AP-109,bill,Fenwick Design,2026-03-24,260.92,clean_hard,0,,,Before supplier's VAT registration on 1 Jun 2026: NONE is correct
+AP-110,bill,Fenwick Design,2026-04-14,296.96,clean_hard,0,,,Before supplier's VAT registration on 1 Jun 2026: NONE is correct
+AP-111,bill,Fenwick Design,2026-05-18,296.83,clean_hard,0,,,Before supplier's VAT registration on 1 Jun 2026: NONE is correct
+AP-112,bill,Fenwick Design,2026-07-21,201.70,clean,0,,,After VAT registration: INPUT2 is correct
+AP-113,bill,Fenwick Design,2026-06-16,246.72,clean,0,,,After VAT registration: INPUT2 is correct
+AP-114,bill,Fenwick Design,2026-06-12,206.17,clean,0,,,After VAT registration: INPUT2 is correct
+AP-115,bill,Fenwick Design,2026-07-17,277.55,clean,0,,,After VAT registration: INPUT2 is correct
+AP-116,bill,Rail Europe Ltd,2026-07-21,2890.00,error,1,OUTLIER,A7,Amount roughly 9x the normal amount for this account with no supporting explanation
+AP-117,bill,Stationery Direct,2026-01-12,1150.00,error,1,OUTLIER,A7,Amount roughly 9x the normal amount for this account with no supporting explanation
+AP-118,bill,Clearwater Utilities,2026-01-12,1620.00,error,1,OUTLIER,A7,Amount roughly 9x the normal amount for this account with no supporting explanation
+AP-119,bill,Techbench Supplies,2026-05-15,2900.00,clean_hard,0,,,Legitimate one-off capital purchase (new equipment); large but valid
+AP-120,bill,Ergo Office Furniture,2026-05-06,3600.00,clean_hard,0,,,Legitimate one-off capital purchase (new equipment); large but valid
+AP-121,bill,Brightside Print,2026-07-10,128.80,error,1,DUP_AP,A1,"Duplicate of AP-039 (same supplier, same amount, days later)"
+AP-122,bill,Skyline Hotels,2026-08-03,220.83,error,1,DUP_AP,A1,"Duplicate of AP-030 (same supplier, same amount, days later)"
+AP-123,bill,Pearce Accounting,2026-04-22,290.12,error,1,DUP_AP,A1,"Duplicate of AP-048 (same supplier, same amount, days later)"
+AR-001,invoice,Alder Group,2026-01-15,1200.00,clean,0,,,Monthly retainer for Alder Group (legitimate recurring)
+AR-002,invoice,Alder Group,2026-02-16,1200.00,clean,0,,,Monthly retainer for Alder Group (legitimate recurring)
+AR-003,invoice,Alder Group,2026-03-16,1200.00,clean,0,,,Monthly retainer for Alder Group (legitimate recurring)
+AR-004,invoice,Alder Group,2026-04-15,1200.00,clean,0,,,Monthly retainer for Alder Group (legitimate recurring)
+AR-005,invoice,Alder Group,2026-05-15,1200.00,clean,0,,,Monthly retainer for Alder Group (legitimate recurring)
+AR-006,invoice,Alder Group,2026-06-15,1200.00,clean,0,,,Monthly retainer for Alder Group (legitimate recurring)
+AR-007,invoice,Brookes Partners,2026-01-15,1800.00,clean,0,,,Monthly retainer for Brookes Partners (legitimate recurring)
+AR-008,invoice,Brookes Partners,2026-02-16,1800.00,clean,0,,,Monthly retainer for Brookes Partners (legitimate recurring)
+AR-009,invoice,Brookes Partners,2026-03-16,1800.00,clean,0,,,Monthly retainer for Brookes Partners (legitimate recurring)
+AR-010,invoice,Brookes Partners,2026-04-15,1800.00,clean,0,,,Monthly retainer for Brookes Partners (legitimate recurring)
+AR-011,invoice,Brookes Partners,2026-05-15,1800.00,clean,0,,,Monthly retainer for Brookes Partners (legitimate recurring)
+AR-012,invoice,Brookes Partners,2026-06-15,1800.00,clean,0,,,Monthly retainer for Brookes Partners (legitimate recurring)
+AR-013,invoice,Crestline Retail,2026-01-15,2400.00,clean,0,,,Monthly retainer for Crestline Retail (legitimate recurring)
+AR-014,invoice,Crestline Retail,2026-02-16,2400.00,clean,0,,,Monthly retainer for Crestline Retail (legitimate recurring)
+AR-015,invoice,Crestline Retail,2026-03-16,2400.00,clean,0,,,Monthly retainer for Crestline Retail (legitimate recurring)
+AR-016,invoice,Crestline Retail,2026-04-15,2400.00,clean,0,,,Monthly retainer for Crestline Retail (legitimate recurring)
+AR-017,invoice,Crestline Retail,2026-05-15,2400.00,clean,0,,,Monthly retainer for Crestline Retail (legitimate recurring)
+AR-018,invoice,Crestline Retail,2026-06-15,2400.00,clean,0,,,Monthly retainer for Crestline Retail (legitimate recurring)
+AR-019,invoice,Dunmore Ltd,2026-03-30,2427.91,clean,0,,,Consulting invoice
+AR-020,invoice,Dunmore Ltd,2026-05-12,2497.56,clean,0,,,Consulting invoice
+AR-021,invoice,Dunmore Ltd,2026-06-01,1837.21,clean,0,,,Consulting invoice
+AR-022,invoice,Dunmore Ltd,2026-02-17,907.78,clean,0,,,Consulting invoice
+AR-023,invoice,Elm & Oak,2026-05-18,1013.97,clean,0,,,Consulting invoice
+AR-024,invoice,Elm & Oak,2026-06-15,1272.84,clean,0,,,Consulting invoice
+AR-025,invoice,Elm & Oak,2026-06-08,1066.65,clean,0,,,Consulting invoice
+AR-026,invoice,Elm & Oak,2026-07-06,739.02,clean,0,,,Consulting invoice
+AR-027,invoice,Fairway Foods,2026-04-17,668.31,clean,0,,,Consulting invoice
+AR-028,invoice,Fairway Foods,2026-06-19,2442.91,clean,0,,,Consulting invoice
+AR-029,invoice,Fairway Foods,2026-01-16,1896.46,clean,0,,,Consulting invoice
+AR-030,invoice,Fairway Foods,2026-08-07,696.37,clean,0,,,Consulting invoice
+AR-031,invoice,Granite Systems,2026-08-17,2109.42,clean,0,,,Consulting invoice
+AR-032,invoice,Granite Systems,2026-02-23,1567.68,clean,0,,,Consulting invoice
+AR-033,invoice,Granite Systems,2026-06-29,2355.63,clean,0,,,Consulting invoice
+AR-034,invoice,Granite Systems,2026-02-09,1891.30,clean,0,,,Consulting invoice
+AR-035,invoice,Hollis Media,2026-03-02,2170.82,clean,0,,,Consulting invoice
+AR-036,invoice,Hollis Media,2026-05-18,2389.23,clean,0,,,Consulting invoice
+AR-037,invoice,Hollis Media,2026-02-09,920.78,clean,0,,,Consulting invoice
+AR-038,invoice,Hollis Media,2026-08-10,972.01,clean,0,,,Consulting invoice
+AR-039,invoice,Ironbridge Labs,2026-02-02,900.00,clean_hard,0,,,"Bi-weekly billing at same amount, 14 days apart (legitimate)"
+AR-040,invoice,Ironbridge Labs,2026-02-16,900.00,clean_hard,0,,,"Bi-weekly billing at same amount, 14 days apart (legitimate)"
+AR-041,invoice,Ironbridge Labs,2026-03-02,900.00,clean_hard,0,,,"Bi-weekly billing at same amount, 14 days apart (legitimate)"
+AR-042,invoice,Ironbridge Labs,2026-03-16,900.00,clean_hard,0,,,"Bi-weekly billing at same amount, 14 days apart (legitimate)"
+AR-043,invoice,Jasper Co,2026-05-11,1500.00,clean_hard,0,,,Same amount and date as another customer's invoice (different customer)
+AR-044,invoice,Kilburn Ltd,2026-05-11,1500.00,clean_hard,0,,,Same amount and date as another customer's invoice (different customer)
+AR-045,invoice,Larch Holdings,2026-06-01,1350.00,clean_hard,0,,,Invoice later reversed by credit note
+AR-046,invoice,Larch Holdings,2026-06-04,-1350.00,clean_hard,0,,,Credit note reversing the invoice above (negative total)
+AR-047,invoice,Dunmore Ltd,2026-04-02,2427.91,error,1,DUP_AR,A1,"Duplicate of AR-019 (same customer and amount, within days)"
+AR-048,invoice,Fairway Foods,2026-04-21,668.31,error,1,DUP_AR,A1,"Duplicate of AR-027 (same customer and amount, within days)"
+AR-049,invoice,Hollis Media,2026-03-09,2170.82,error,1,DUP_AR,A1,"Duplicate of AR-035 (same customer and amount, within days)"
+AR-050,invoice,Granite Systems,2026-08-19,2109.42,error,1,DUP_AR,A1,Entered again (2th time) with same customer and amount: AR-031
+AR-051,invoice,Granite Systems,2026-08-21,2109.42,error,1,DUP_AR,A1,Entered again (3th time) with same customer and amount: AR-031
+BT-001,bank_txn,Pixelworks Software,2026-01-28,120.89,clean_hard,0,,,Rounding difference of GBP 0.01 vs bill (should still reconcile)
+BT-002,bank_txn,City Cabs,2026-06-15,110.23,clean_hard,0,,,Rounding difference of GBP -0.50 vs bill (should still reconcile)
+BT-003,bank_txn,Techbench Supplies,2026-06-26,201.29,clean_hard,0,,,Rounding difference of GBP 1.25 vs bill (should still reconcile)
+BT-004,bank_txn,Clearwater Utilities,2026-08-20,137.45,clean_hard,0,,,Rounding difference of GBP -2.99 vs bill (should still reconcile)
+BT-005,bank_txn,Office Depot UK,2026-02-17,102.00,clean,0,,,Payment of AP-020 by bank
+BT-006,bank_txn,Stationery Direct,2026-09-02,71.48,clean,0,,,Payment of AP-013 by bank
+BT-007,bank_txn,Ergo Office Furniture,2026-08-13,321.79,clean,0,,,Payment of AP-080 by bank
+BT-008,bank_txn,Skyline Hotels,2026-05-15,306.33,clean,0,,,Payment of AP-032 by bank
+BT-009,bank_txn,Clearwater Utilities,2026-03-23,114.80,clean,0,,,Payment of AP-058 by bank
+BT-010,bank_txn,Techbench Supplies,2026-03-02,235.78,clean,0,,,Payment of AP-079 by bank
+BT-011,bank_txn,Techbench Supplies,2026-08-28,214.95,clean,0,,,Payment of AP-078 by bank
+BT-012,bank_txn,Clearwater Utilities,2026-06-08,109.31,clean,0,,,Payment of AP-059 by bank
+BT-013,bank_txn,Aoife Byrne Freelance,2026-03-02,437.52,clean,0,,,Payment of AP-065 by bank
+BT-014,bank_txn,Rail Europe Ltd,2026-08-05,95.69,clean,0,,,Payment of AP-025 by bank
+BT-015,bank_txn,Harbour Cloud Hosting,2026-06-26,170.05,clean,0,,,Payment of AP-005 by bank
+BT-016,bank_txn,Harbour Cloud Hosting,2026-03-05,183.00,clean,0,,,Payment of AP-003 by bank
+BT-017,bank_txn,Northern Power Ltd,2026-06-02,171.74,clean,0,,,Payment of AP-056 by bank
+BT-018,bank_txn,Marlowe Legal LLP,2026-07-27,364.63,clean,0,,,Payment of AP-046 by bank
+BT-019,bank_txn,Office Depot UK,2026-05-04,118.69,clean,0,,,Payment of AP-017 by bank
+BT-020,bank_txn,Skyline Hotels,2026-07-03,282.53,clean,0,,,Payment of AP-031 by bank
+BT-021,bank_txn,Brookes Partners,2026-02-16,1800.00,clean,0,,,Receipt for AR-007
+BT-022,bank_txn,Hollis Media,2026-03-31,2170.82,clean,0,,,Receipt for AR-035
+BT-023,bank_txn,Alder Group,2026-03-09,1200.00,clean,0,,,Receipt for AR-002
+BT-024,bank_txn,Fairway Foods,2026-05-11,668.31,clean,0,,,Receipt for AR-027
+BT-025,bank_txn,Fairway Foods,2026-02-13,1896.46,clean,0,,,Receipt for AR-029
+BT-026,bank_txn,Brookes Partners,2026-06-04,1800.00,clean,0,,,Receipt for AR-011
+BT-027,bank_txn,Dunmore Ltd,2026-07-01,1837.21,clean,0,,,Receipt for AR-021
+BT-028,bank_txn,Dunmore Ltd,2026-03-17,907.78,clean,0,,,Receipt for AR-022
+BT-029,bank_txn,Brookes Partners,2026-05-11,1800.00,clean,0,,,Receipt for AR-010
+BT-030,bank_txn,Crestline Retail,2026-06-09,2400.00,clean,0,,,Receipt for AR-017
+BT-031,bank_txn,Alder Group,2026-05-15,1200.00,clean,0,,,Receipt for AR-004
+BT-032,bank_txn,Hollis Media,2026-06-15,2389.23,clean,0,,,Receipt for AR-036
+BT-033,bank_txn,Crestline Retail,2026-05-18,2400.00,clean,0,,,Receipt for AR-016
+BT-034,bank_txn,Granite Systems,2026-03-26,1567.68,clean,0,,,Receipt for AR-032
+BT-035,bank_txn,Crestline Retail,2026-04-10,2400.00,clean,0,,,Receipt for AR-015
+BT-036,bank_txn,Elm & Oak,2026-07-06,1272.84,clean,0,,,Receipt for AR-024
+BT-037,bank_txn,Granite Systems,2026-09-16,2109.42,clean,0,,,Receipt for AR-031
+BT-038,bank_txn,Crestline Retail,2026-07-06,2400.00,clean,0,,,Receipt for AR-018
+BT-039,bank_txn,Alder Group,2026-07-15,1200.00,clean,0,,,Receipt for AR-006
+BT-040,bank_txn,Fairway Foods,2026-07-13,2442.91,clean,0,,,Receipt for AR-028
+BT-041,bank_txn,Office Depot UK,2026-04-21,91.23,error,1,DUP_PAY,A5,Bill AP-021 already paid via recorded payment; second bank payment of the same amount
+BT-042,bank_txn,Clearwater Utilities,2026-09-07,144.90,error,1,DUP_PAY,A5,Bill AP-063 already paid via recorded payment; second bank payment of the same amount
+BT-043,bank_txn,Pearce Accounting,2026-04-27,340.37,error,1,DUP_PAY,A5,Bill AP-049 already paid via recorded payment; second bank payment of the same amount
+BT-044,bank_txn,Pearce Accounting,2026-05-20,290.12,error,1,DUP_PAY,A5,Bill AP-048 already paid via recorded payment; second bank payment of the same amount
+BT-045,bank_txn,Kingsley Consulting Ltd,2026-03-25,730.00,error,1,BREAK,A6,Payment to a payee with no bill or invoice in the ledger
+BT-046,bank_txn,Vantage Holdings,2026-02-23,1265.40,error,1,BREAK,A6,Payment to a payee with no bill or invoice in the ledger
+BT-047,bank_txn,Orchid Trading,2026-02-16,312.75,error,1,BREAK,A6,Payment to a payee with no bill or invoice in the ledger
+BT-048,bank_txn,Ergo Office Furniture,2026-07-13,285.33,error,1,BREAK,A6,Short payment against AP-082: bank amount differs from bill by more than tolerance
+BT-049,bank_txn,Studio Kite Ltd,2026-02-16,376.92,error,1,BREAK,A6,Short payment against AP-070: bank amount differs from bill by more than tolerance
+BT-050,bank_txn,,2026-06-15,415.00,error,1,BREAK,A6,Bank line with no contact and no matching document
+BT-051,bank_txn,Northbridge Bank,2026-01-28,15.00,clean_hard,0,,,Monthly bank charge; legitimately has no bill (reconciliation will list it as unmatched)
+BT-052,bank_txn,Northbridge Bank,2026-02-27,15.00,clean_hard,0,,,Monthly bank charge; legitimately has no bill (reconciliation will list it as unmatched)
+BT-053,bank_txn,Northbridge Bank,2026-03-27,15.00,clean_hard,0,,,Monthly bank charge; legitimately has no bill (reconciliation will list it as unmatched)
+BT-054,bank_txn,Northbridge Bank,2026-04-28,15.00,clean_hard,0,,,Monthly bank charge; legitimately has no bill (reconciliation will list it as unmatched)
+BT-055,bank_txn,Northbridge Bank,2026-05-28,15.00,clean_hard,0,,,Monthly bank charge; legitimately has no bill (reconciliation will list it as unmatched)
+BT-056,bank_txn,Northbridge Bank,2026-06-26,15.00,clean_hard,0,,,Monthly bank charge; legitimately has no bill (reconciliation will list it as unmatched)

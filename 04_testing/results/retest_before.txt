@@ -1,0 +1,8 @@
+synthetic: {'caught': 84, 'total_planted_anomalies': 84, 'false_positive_count': 24, 'precision': 0.778, 'recall': 1.0} (published: 84/84, 24 FP, 0.778)
+xero: {'caught': 7, 'total_planted_anomalies': 7, 'false_positive_count': 3, 'precision': 0.7, 'recall': 1.0} (published: 7/7, 3 FP, 0.70)
+quickbooks demo flags: 43
+variance sentences with a driver against the headline (sentences, contradicting):
+ test dataset: (52, 17)
+  demo_ledger.db (5, 0)
+  demo_ledger_quickbooks.db (14, 4)
+  demo_ledger_large.db (69, 35)

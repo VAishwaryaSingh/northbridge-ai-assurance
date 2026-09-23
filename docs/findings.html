@@ -1,0 +1,268 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Findings - Northbridge Assurance Review</title>
+<meta name="description" content="Self-assessment of a ledger anomaly-detection tool using audit methodology.">
+<style>
+:root{--bg:#fff;--fg:#1b1f27;--muted:#5a6270;--line:#d9dee6;--soft:#f3f5f9;--brand:#1f3864;--link:#1a5fb4;--bad:#b71c1c;--badbg:#fdecea;--warn:#8a5a00;--warnbg:#fff4d6;--ok:#1b6e34;--okbg:#e6f4ea;--code:#eef1f6}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#0f1420;--fg:#e6e9ef;--muted:#a3abb8;--line:#2b3446;--soft:#171e2e;--brand:#9db8ee;--link:#8ab4f8;--bad:#ff8a80;--badbg:#3a1a1a;--warn:#ffd27a;--warnbg:#3a2e12;--ok:#7fd99a;--okbg:#14301f;--code:#1d2536}}
+:root[data-theme=dark]{--bg:#0f1420;--fg:#e6e9ef;--muted:#a3abb8;--line:#2b3446;--soft:#171e2e;--brand:#9db8ee;--link:#8ab4f8;--bad:#ff8a80;--badbg:#3a1a1a;--warn:#ffd27a;--warnbg:#3a2e12;--ok:#7fd99a;--okbg:#14301f;--code:#1d2536}
+*{box-sizing:border-box}html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+a{color:var(--link)}a:focus-visible,button:focus-visible,input:focus-visible{outline:3px solid var(--link);outline-offset:2px}
+.skip{position:absolute;left:-999px;top:0;background:var(--brand);color:#fff;padding:8px 12px;z-index:10}.skip:focus{left:8px;top:8px}
+header.site{border-bottom:1px solid var(--line);background:var(--bg);position:sticky;top:0;z-index:5}
+.wrap{max-width:920px;margin:0 auto;padding:0 16px}
+header.site .wrap{display:flex;flex-wrap:wrap;align-items:center;gap:4px 14px;min-height:52px}
+.brand{font-weight:700;color:var(--brand);text-decoration:none;margin-right:6px}
+nav{display:flex;flex-wrap:wrap;gap:2px 4px}nav a{padding:6px 9px;border-radius:6px;text-decoration:none;color:var(--fg);font-size:.92rem}
+nav a:hover{background:var(--soft)}nav a[aria-current=page]{background:var(--soft);font-weight:600;box-shadow:inset 0 -2px 0 var(--brand)}
+.banner{background:var(--warnbg);color:var(--fg);border-bottom:1px solid var(--line);font-size:.88rem}
+.banner .wrap{padding-top:8px;padding-bottom:8px}.banner strong{color:var(--warn)}
+main{padding:24px 0 56px}h1{font-size:1.9rem;line-height:1.25;color:var(--brand);margin:.2em 0 .5em}h2{font-size:1.35rem;color:var(--brand);margin:1.8em 0 .5em;padding-top:.3em}h3{font-size:1.1rem;margin:1.4em 0 .4em}
+p,li{max-width:74ch}code{background:var(--code);padding:1px 5px;border-radius:4px;font-size:.88em}pre{background:var(--code);padding:12px;border-radius:8px;overflow:auto}pre code{background:none;padding:0}
+.scroll{overflow-x:auto;margin:12px 0;-webkit-overflow-scrolling:touch}table{border-collapse:collapse;width:100%;font-size:.9rem}
+th,td{border:1px solid var(--line);padding:6px 9px;text-align:left;vertical-align:top}th{background:var(--brand);color:#fff}@media (prefers-color-scheme:dark){:root:not([data-theme=light]) th{color:#0f1420}}
+tbody tr:nth-child(even){background:var(--soft)}
+.chip{display:inline-block;padding:1px 9px;border-radius:99px;font-size:.78rem;font-weight:700;white-space:nowrap}
+.High,.notmet{background:var(--badbg);color:var(--bad)}.Medium,.warn{background:var(--warnbg);color:var(--warn)}.Low,.met{background:var(--okbg);color:var(--ok)}
+.hero{background:var(--soft);border:1px solid var(--line);border-radius:12px;padding:20px 22px;margin:8px 0 22px}.hero p{max-width:none}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px;margin:14px 0}
+.card{border:1px solid var(--line);border-radius:10px;padding:12px 14px;background:var(--bg)}.card h3{margin:.1em 0 .3em;font-size:1rem}.card p{margin:.2em 0;font-size:.92rem;color:var(--muted)}
+.stat{font-size:1.6rem;font-weight:700;color:var(--brand);line-height:1.2}
+.filter{width:100%;max-width:420px;padding:8px 10px;border:1px solid var(--line);border-radius:6px;background:var(--bg);color:var(--fg);font:inherit;margin:6px 0}
+.chart text{fill:var(--fg);font:12px system-ui,sans-serif}.chart .muted{fill:var(--muted)}
+footer{border-top:1px solid var(--line);color:var(--muted);font-size:.85rem;padding:18px 0 34px}
+.toc{background:var(--soft);border:1px solid var(--line);border-radius:8px;padding:6px 16px;margin:14px 0}.toc ul{margin:.3em 0;padding-left:1.2em}
+button.theme{margin-left:auto;background:none;border:1px solid var(--line);border-radius:6px;color:var(--fg);padding:4px 9px;cursor:pointer;font:inherit;font-size:.85rem}
+@media (max-width:560px){h1{font-size:1.5rem}body{font-size:15.5px}}
+@media print{header.site,.filter,button.theme{display:none}body{font-size:11pt}}
+</style></head><body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site"><div class="wrap"><a class="brand" href="index.html">Northbridge Assurance Review</a><nav aria-label="Main"><a href="index.html">Home</a><a href="findings.html" aria-current="page">Findings</a><a href="method.html">Method</a><a href="testing.html">Testing</a><a href="remediation.html">Remediation</a><a href="toolkit.html">Toolkit</a><a href="downloads/assurance_report.pdf">Report (PDF)</a></nav><button class="theme" id="themebtn" type="button">Light / dark</button></div></header>
+<div class="banner"><div class="wrap"><strong>Self-assessment, not an independent audit.</strong> The reviewer also built the system. Figures describe a constructed test set and are not estimates of accuracy on real books. No human independent review has been done.</div></div>
+<main id="main"><div class="wrap">
+<h1 id="findings">Findings</h1>
+<p><strong>Subject:</strong> Northbridge Ledger Agent, commit <code>9c4127ad65aa5a9e7d362c2d05f69ecfdbf7c5f9</code>. <strong>Status:</strong> findings as at pinned commit <code>9c4127a</code> (23 Sep 2026). Remediation was demonstrated on a copy and is not applied to the live project: see <code>remediation.md</code>. Ratings and conditions below describe the original.
+<strong>Nature:</strong> self-assessment using audit methodology, not an independent audit. Testing challenged by a separate Claude session (model-based, not human): <code>04_testing/challenge_review.md</code>.
+<strong>Basis of results:</strong> the test set is a constructed mix designed by the reviewer after reading the rules. Metrics are properties of that mix, not estimates for real books, and samples are small (<code>01_planning/terms_of_reference.md</code>, Amendment 1).</p>
+<h2 id="rating-scale">Rating scale</h2>
+<ul>
+<li><strong>High:</strong> a defect or gap that could cause a material error to go undetected or unevidenced in the reconciliation process, or that makes results unreliable.</li>
+<li><strong>Medium:</strong> weakens reliability, control or transparency; would matter if the tool were used beyond a demo.</li>
+<li><strong>Low:</strong> minor defect or hygiene point.</li>
+</ul>
+<h2 id="summary">Summary</h2>
+<div class="scroll"><table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Finding</th>
+<th>Rating</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>F-01</td>
+<td>Duplicate supplier bills are not detected</td>
+<td><span class="chip High">High</span></td>
+</tr>
+<tr>
+<td>F-02</td>
+<td>Reconciliation output depends on record order and mis-attributes recurring payments</td>
+<td><span class="chip High">High</span></td>
+</tr>
+<tr>
+<td>F-03</td>
+<td>No run log or audit trail</td>
+<td><span class="chip High">High</span></td>
+</tr>
+<tr>
+<td>F-04</td>
+<td>No human disposition of flags; no owner or intended-use statement</td>
+<td><span class="chip High">High</span></td>
+</tr>
+<tr>
+<td>F-05</td>
+<td>Reported accuracy rests on circular validation and a static score</td>
+<td><span class="chip High">High</span></td>
+</tr>
+<tr>
+<td>F-06</td>
+<td>No regression tests, version tags or pinned dependencies</td>
+<td><span class="chip Medium">Medium</span></td>
+</tr>
+<tr>
+<td>F-07</td>
+<td>Variance explanations can point against the headline movement</td>
+<td><span class="chip Medium">Medium</span></td>
+</tr>
+<tr>
+<td>F-08</td>
+<td>False positives on legitimate items exceed the criterion</td>
+<td><span class="chip Medium">Medium</span></td>
+</tr>
+<tr>
+<td>F-09</td>
+<td>Excess QuickBooks permission and plaintext refresh tokens</td>
+<td><span class="chip Medium">Medium</span></td>
+</tr>
+<tr>
+<td>F-10</td>
+<td>Ambiguous "AI-native agent" positioning and missing limitations statement</td>
+<td><span class="chip Medium">Medium</span></td>
+</tr>
+<tr>
+<td>F-11</td>
+<td>Data completeness is not evidenced</td>
+<td><span class="chip Medium">Medium</span></td>
+</tr>
+<tr>
+<td>F-12</td>
+<td>Hard-coded, unapproved thresholds and message defects</td>
+<td><span class="chip Low">Low</span></td>
+</tr>
+<tr>
+<td>F-13</td>
+<td>QuickBooks bank purchases all reported as unmatched</td>
+<td><span class="chip Low">Low</span></td>
+</tr>
+</tbody>
+</table></div>
+<p>Criteria met on the full ToR list: 1 of 8 on point estimate (recall on other rules, with an interval spanning the threshold); 7 of 8 not met (<code>04_testing/results/criteria_assessment_full.csv</code>).</p>
+<hr />
+<h2 id="f-01">F-01 Duplicate supplier bills are not detected <span class="chip High">High</span></h2>
+<ul>
+<li><strong>Condition:</strong> 0 of 3 duplicated supplier bills (AP-121 to AP-123) were flagged. Duplicate sales invoices: 5 of 5; duplicate payments and reconciliation breaks were also detected.</li>
+<li><strong>Criteria:</strong> recall on duplicates and reconciliation breaks of at least 95%. Result 15/18 = 83.3%, not met. The shortfall is entirely this gap and is robust to relabelling (CH-04).</li>
+<li><strong>Cause:</strong> rule A1 selects <code>invoice_type = 'ACCREC'</code> only (<code>src/anomaly/rules.py:35-58</code>). No other rule compares supplier bills with each other.</li>
+<li><strong>Effect:</strong> a bill entered twice for the same supplier and amount is not reported. Duplicate payables are a principal cash-loss risk. The published 7/7 result does not reveal this.</li>
+<li><strong>Recommendation (High):</strong> run A1 over both sales invoices and supplier bills (also compare non-adjacent entries); add cases to a regression suite. Retest with the same dataset.</li>
+<li><strong>Refs:</strong> R04; C17; E-02.</li>
+</ul>
+<h2 id="f-02">F-02 Reconciliation output depends on record order and mis-attributes recurring payments <span class="chip High">High</span></h2>
+<ul>
+<li><strong>Condition:</strong> loading the same 230 items in a different row order changed the result: reversed order gave 53 flags and lost a true duplicate payment (BT-044); 5 of 6 random orderings also differed. In the original order, two legitimate receipts (BT-023, BT-035) were attributed to an earlier, already paid invoice of the same amount and flagged as duplicate payments (A5).</li>
+<li><strong>Criteria:</strong> identical output for the same data (determinism 100%), and matched documents attributed correctly.</li>
+<li><strong>Cause:</strong> the matcher accepts the first candidate within tolerance (<code>src/reconciliation/matcher.py:78-91</code>), with no ordering, no preference for the closest date and no one-to-one allocation of bank lines to invoices.</li>
+<li><strong>Effect:</strong> results vary with the order an ERP returns records. Detected errors can disappear and false ones appear without any change in the ledger. The demonstration is on constructed data, but the mechanism is in the code.</li>
+<li><strong>Recommendation (High):</strong> order candidates deterministically (closest date, then id), exclude invoices already matched or paid, allocate one-to-one, and add a row-order invariance test.</li>
+<li><strong>Refs:</strong> R08 (raised to High); C14, C19; E-02, E-06 (<code>results/order_sensitivity.txt</code>).</li>
+</ul>
+<h2 id="f-03">F-03 No run log or audit trail <span class="chip High">High</span></h2>
+<ul>
+<li><strong>Condition:</strong> no logging, input hash, code version, timestamp or run record exists; the schema has no audit table.</li>
+<li><strong>Criteria:</strong> 100% of runs traceable to input and code version; a reviewer must be able to re-perform a result.</li>
+<li><strong>Cause:</strong> not designed in (<code>src/db/schema.sql</code>; no logging code found, E-04).</li>
+<li><strong>Effect:</strong> a flag or a missed item cannot be tied to the data and code that produced it, so results cannot be evidenced or re-performed. This is a prerequisite for any reliance (ISA 315 IT controls).</li>
+<li><strong>Recommendation (High):</strong> record per run the input hash, code version (git SHA), dependency versions, timestamp, user and output hash in an append-only table.</li>
+<li><strong>Refs:</strong> R24; C26.</li>
+</ul>
+<h2 id="f-04">F-04 No human disposition of flags; no owner or intended-use statement <span class="chip High">High</span></h2>
+<ul>
+<li><strong>Condition:</strong> the dashboard displays flags with no accept, reject or reason step. Owner, intended use, users of the output and escalation route are undocumented.</li>
+<li><strong>Criteria:</strong> 100% of flags dispositioned before close; documented accountability.</li>
+<li><strong>Cause:</strong> display-only design; governance documents not written.</li>
+<li><strong>Effect:</strong> oversight cannot be evidenced, and there is no way to record that a flag was wrong or handled. The human review control, normally the key control, does not exist in the tool.</li>
+<li><strong>Recommendation (High):</strong> add a disposition record per flag (accept, reject, reason, user, time), tie it to the run log, and document owner and intended use.</li>
+<li><strong>Refs:</strong> R14, R25; C10, C21.</li>
+</ul>
+<h2 id="f-05">F-05 Reported accuracy rests on circular validation and a static score <span class="chip High">High</span></h2>
+<ul>
+<li><strong>Condition:</strong> the published 7/7 and 84/84 results reproduce exactly, but the planted anomalies were written to fit the rules (README). The public dashboard shows a hard-coded score when the private answer key is absent (<code>dashboard/app.py:35-41, 173-178</code>) and does not say so.</li>
+<li><strong>Criteria:</strong> accuracy claims evidenced on data the rules were not written to fit, with clean items so false positives are measured.</li>
+<li><strong>Cause:</strong> validation designed to show mechanics; the fallback score is a constant.</li>
+<li><strong>Effect:</strong> readers can take 7/7 as evidence of general accuracy. This review's own set (which is also not independent of the rules) shows precision 0.56 and 4 of 5 accuracy criteria not met on that mix, so the headline is misleading if read as accuracy.</li>
+<li><strong>Recommendation (High):</strong> restate results as mechanics tests; label the fallback score as static; add clean and hard cases and an independently built test set before making any accuracy claim.</li>
+<li><strong>Refs:</strong> R03, R15, R27; C09, C16, C28; E-02.</li>
+</ul>
+<h2 id="f-06">F-06 No regression tests, version tags or pinned dependencies <span class="chip Medium">Medium</span></h2>
+<ul>
+<li><strong>Condition:</strong> no tests directory, 13 commits and 0 tags, unpinned <code>requirements.txt</code>, no lockfile.</li>
+<li><strong>Criteria:</strong> changes retested before release; outputs tied to a version; dependencies controlled (PRA SS1/23 as a reference).</li>
+<li><strong>Cause:</strong> portfolio build without release discipline.</li>
+<li><strong>Effect:</strong> any edit can change detections unnoticed; the defects in F-01 and F-02 would have been caught by tests. A redeploy can change behaviour through library updates.</li>
+<li><strong>Recommendation (Medium; High if used beyond a demo):</strong> add the review's dataset and harness as a regression suite, tag releases, pin dependencies with a lockfile, and print the version in output.</li>
+<li><strong>Refs:</strong> R11, R20, R21, R23; C15, C24, C25.</li>
+</ul>
+<h2 id="f-07">F-07 Variance explanations can point against the headline movement <span class="chip Medium">Medium</span></h2>
+<ul>
+<li><strong>Condition:</strong> 17 of 52 sentences on the test data (35 of 69 on the synthetic set, 4 of 14 on QuickBooks) name at least one driver that moved opposite to the headline, e.g. "Consulting Fees down 56%, driven by Fairway Foods (+£1,114)". Only contacts present in the later period are ever named.</li>
+<li><strong>Criteria:</strong> explanations supported by the data and not misleading.</li>
+<li><strong>Cause:</strong> the two largest absolute contact changes in the later period are named "driven by" regardless of sign (<code>src/variance/explainer.py:88-99</code>).</li>
+<li><strong>Effect:</strong> the sentence reads as an explanation but can name an offsetting movement, and contacts that disappeared cannot be named. Figures themselves agree with source (15/15). No hallucination is involved; the text is templated.</li>
+<li><strong>Recommendation (Medium):</strong> rank drivers by movement in the direction of the headline, include contacts present only in the earlier period, and state when drivers do not account for the change.</li>
+<li><strong>Refs:</strong> R10; C20; E-05.</li>
+</ul>
+<h2 id="f-08">F-08 False positives on legitimate items exceed the criterion <span class="chip Medium">Medium</span></h2>
+<ul>
+<li><strong>Condition:</strong> 22 false positives (11.1%; criterion 10%), precision 0.56 per item (0.537 per flag; criterion 80%). Standard clean items: 2 of 167 (1.2%). Hard clean items: 20 of 32. Causes: bank charges 6, fixed-price and boundary bills 5, legitimate weekend suppliers 4, supplier VAT registration change 3, large equipment 2, recurring receipts 2 (F-02).</li>
+<li><strong>Criteria:</strong> precision at least 80%; false positive rate at most 10%.</li>
+<li><strong>Cause:</strong> context-free rules (weekend date, £500 band, outlier vs account median, no bill for bank charges).</li>
+<li><strong>Effect:</strong> reviewer time and desensitisation. Outcome is label-sensitive: FPR flips to 8.3% if the six bank charges are excluded (<code>results/sensitivity.csv</code>), so it is borderline; precision remains below 80% except when 15 hard cases are excluded together.</li>
+<li><strong>Recommendation (Medium):</strong> allow-lists or rules for recurring fixed charges and known weekend suppliers, a bank-charge account, and a way to record accepted exceptions (ties to F-04).</li>
+<li><strong>Refs:</strong> R02, R06, R09; C17; E-02.</li>
+</ul>
+<h2 id="f-09">F-09 Excess QuickBooks permission and plaintext refresh tokens <span class="chip Medium">Medium</span></h2>
+<ul>
+<li><strong>Condition:</strong> the QuickBooks scope requested is <code>com.intuit.quickbooks.accounting</code>, which permits writes, though the code only reads. Refresh tokens for both ERPs are written in plaintext to a local <code>.env</code> (<code>src/connectors/*_connector.py</code>, <code>set_key</code>). No credentials were found in git history by pattern search of code files.</li>
+<li><strong>Criteria:</strong> least privilege; secrets protected at rest.</li>
+<li><strong>Cause:</strong> the accounting scope is the only one available for reading; token persistence uses a plain file.</li>
+<li><strong>Effect:</strong> if the tokens or code were misused, the ledger could be changed (QuickBooks) and long-lived access is exposed on the machine. Xero requests only <code>.read</code> scopes.</li>
+<li><strong>Recommendation (Medium):</strong> use a read-only scope if the vendor offers one, otherwise document the constraint and add a test that no non-GET data call exists; store tokens in an OS keychain or secrets manager; rotate the tokens.</li>
+<li><strong>Refs:</strong> R16, R17, R18; C02, C03, C05, C06.</li>
+</ul>
+<h2 id="f-10">F-10 Ambiguous "AI-native agent" positioning and missing limitations statement <span class="chip Medium">Medium</span></h2>
+<ul>
+<li><strong>Condition:</strong> the README (line 5) positions the tool as "a small-scale version of the kind of AI-native ledger automation product accounting firms are increasingly adopting", and the title calls it an "Agent". That names the product category the project imitates; it is not a claim that the tool uses AI. But the README never says that no LLM or model is used, nothing in the tool is agentic (no model, no autonomous action), and "rule-based checks" appear only in the accuracy section (line 108). The README also does not state intended use, limits on real books, false negatives or production status.</li>
+<li><strong>Criteria:</strong> transparent description of how outputs are produced and what they can be relied on for (UK transparency principle; ISO/IEC 42001 information for users).</li>
+<li><strong>Cause:</strong> positioning language borrowed from the product category the build plan set out to imitate, and no limitations section.</li>
+<li><strong>Effect:</strong> users may assume adaptive AI behaviour or broader reliability than the deterministic rules give, and may over-rely on the tool.</li>
+<li><strong>Recommendation (Medium):</strong> describe it as rules-based with a statistical check, state that no LLM is used, and add intended use, known limitations (see F-01, F-02, F-08) and not-for-production wording.</li>
+<li><strong>Refs:</strong> R15, R25, R26; C09, C27; <code>02_risk/ai_act_classification.md</code> s2.5.</li>
+</ul>
+<h2 id="f-11">F-11 Data completeness is not evidenced <span class="chip Medium">Medium</span></h2>
+<ul>
+<li><strong>Condition:</strong> pagination was tested with mocks only and could not be re-run live (credentials and Xero trial unavailable). There is no validation gate for missing contacts, voided items or malformed rows, and the coverage table is not reconciled to source totals. Ingestion, multi-line bills and null data were not tested in this review.</li>
+<li><strong>Criteria:</strong> the complete population is processed and reported.</li>
+<li><strong>Cause:</strong> no completeness control at load time.</li>
+<li><strong>Effect:</strong> an incomplete pull would produce confident results on a partial ledger with no warning.</li>
+<li><strong>Recommendation (Medium):</strong> compare loaded counts and totals with the source system, fail or warn on differences, and test ingestion against live sandboxes.</li>
+<li><strong>Refs:</strong> R12, R13; C11, C12, C13; challenge review CH-09, CH-11.</li>
+</ul>
+<h2 id="f-12">F-12 Hard-coded, unapproved thresholds and message defects <span class="chip Low">Low</span></h2>
+<ul>
+<li><strong>Condition:</strong> tolerances, windows and the £500 band are constants in code with no rationale or approval. One message reads "Bank line for None (£415.00)" when there is no contact. The weekend rule message states "Northbridge doesn't operate on weekends" as a fact.</li>
+<li><strong>Criteria:</strong> parameters documented and approved; messages accurate.</li>
+<li><strong>Cause:</strong> constants and message templates written for the demo data.</li>
+<li><strong>Effect:</strong> fixed values can be avoided by small changes in amount or date; unclear messages slow review.</li>
+<li><strong>Recommendation (Low):</strong> move parameters to documented configuration with an approver and date, and correct the messages.</li>
+<li><strong>Refs:</strong> R06; C18, C22.</li>
+</ul>
+<h2 id="f-13">F-13 QuickBooks bank purchases all reported as unmatched <span class="chip Low">Low</span></h2>
+<ul>
+<li><strong>Condition:</strong> 0 of 40 QuickBooks bank lines auto-match. The challenge review found no bank line has a same-contact, same-amount invoice or bill in the sandbox, and 7 lines have no contact.</li>
+<li><strong>Criteria:</strong> reconciliation behaviour appropriate to each ERP's data model.</li>
+<li><strong>Cause:</strong> sandbox purchases are direct expenses with no bill; the matcher only looks for invoices and bills.</li>
+<li><strong>Effect:</strong> every such line is reported as unmatched, which is noise rather than a missed match. It is not shown to be a matcher failure.</li>
+<li><strong>Recommendation (Low):</strong> treat direct expenses as a separate class in the QuickBooks adapter, or state the limitation.</li>
+<li><strong>Refs:</strong> R08; C19; E-04, CH-08.</li>
+</ul>
+<hr />
+<h2 id="areas-working-as-intended-tested">Areas working as intended (tested)</h2>
+<ul>
+<li>Xero requests only read scopes, and no write calls exist in either connector.</li>
+<li><code>.env</code> is ignored and was never committed; <code>.env.example</code> holds no secrets.</li>
+<li>The published accuracy figures reproduce exactly from the pinned code and data.</li>
+<li>The dashboard's data-quality counts agree with an independent recount on the same databases.</li>
+<li>Duplicate sales invoices, duplicate payments (in the original row order), VAT miscoding, outliers, threshold and weekend cases were detected on the constructed set. This shows the rules operate on constructed cases, not accuracy on real books.</li>
+<li>Every flag carries a reason string; the engine runs in milliseconds on 230 items.</li>
+</ul>
+<h2 id="not-covered">Not covered</h2>
+<p>Connector ingestion against live systems, multi-currency, multi-line bills, voided or null data, further rule variations, real-book accuracy, security of the public deployment. A human independent review has not been done.</p><p><a href="downloads/findings.md">Download findings (Markdown)</a></p>
+</div></main>
+<footer><div class="wrap">Subject: <a href="https://github.com/VAishwaryaSingh/Northbridge-Ledger-Agent">Northbridge Ledger Agent</a>, commit <code>9c4127a</code> (23 Sep 2026). Live demo: <a href="https://northbridge-ledger-agent.streamlit.app/">northbridge-ledger-agent.streamlit.app</a>. Synthetic and sandbox data only. The Northbridge project itself was not changed. This page states a conclusion, not an audit opinion, and gives no certification.</div></footer>
+<script>
+(function(){var r=document.documentElement,t=null;try{t=localStorage.getItem('theme')}catch(e){}if(t)r.setAttribute('data-theme',t);
+var b=document.getElementById('themebtn');if(b)b.addEventListener('click',function(){var d=r.getAttribute('data-theme')||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');var n=d==='dark'?'light':'dark';r.setAttribute('data-theme',n);try{localStorage.setItem('theme',n)}catch(e){}});
+document.querySelectorAll('input.filter').forEach(function(i){i.addEventListener('input',function(){var q=i.value.toLowerCase(),tb=document.getElementById(i.dataset.target);tb.querySelectorAll('tbody tr').forEach(function(tr){tr.style.display=tr.textContent.toLowerCase().indexOf(q)>-1?'':'none'})})});})();
+</script></body></html>

@@ -1,0 +1,98 @@
+Control tests run 2026-09-23T17:35:10+00:00 subject 9c4127ad65aa5a9e7d362c2d05f69ecfdbf7c5f9
+
+=== C01 Xero scopes and HTTP calls ===
+scopes: ['offline_access', 'openid', 'profile', 'email', 'accounting.invoices.read', 'accounting.banktransactions.read', 'accounting.payments.read', 'accounting.settings.read', 'accounting.contacts.read']
+non-read scopes beyond identity/offline: []
+requests calls: ['get', 'post']
+post targets: ['TOKEN_URL', 'TOKEN_URL']
+
+=== C02/C03 QuickBooks scope and HTTP calls ===
+scope line: ['SCOPE = ["com.intuit.quickbooks.accounting"]', 'oauth = OAuth2Session(_client_id(), redirect_uri=_redirect_uri(), scope=SCOPE)']
+requests calls: ['get', 'post']
+post targets: ['TOKEN_URL', 'TOKEN_URL']
+non-GET data calls (get is query only): ['response = requests.get(', 'response = requests.get(']
+
+=== C04 .env handling ===
+git check-ignore .env -> .gitignore:1:.env	.env
+commits touching .env (all refs): 0
+.env.example keys: 10 | keys with a non-empty value: ['XERO_REDIRECT_URI', 'QB_REDIRECT_URI']
+
+=== C05 token storage ===
+['from dotenv import set_key', 'set_key(ENV_PATH, "XERO_REFRESH_TOKEN", refresh_token)', 'set_key(ENV_PATH, "XERO_TENANT_ID", tenant_id)', 'from dotenv import set_key', 'set_key(ENV_PATH, "QB_REFRESH_TOKEN", refresh_token)', 'set_key(ENV_PATH, "QB_REALM_ID", realm_id)']
+
+=== C06 secrets scan across all history at pinned commit ===
+hex32+: 0 file(s) []
+b64-40+: 1 file(s) ['src/seed_synthetic.py']
+client_secret assign: 0 file(s) []
+refresh_token assign: 0 file(s) []
+private key: 0 file(s) []
+bearer: 0 file(s) []
+
+=== C07 committed data: contact names in demo DBs; synthetic banner ===
+demo_ledger.db contacts: 16 sample: ['Amazon Business', 'Ardent Fitness Studios', 'BT Business', 'Bramwell Dental Practice', 'CloudStack Hosting Ltd', 'Harlow & Finch Estate Agents', 'J. Okafor Design', 'Kestrel Outdoor Gear', 'M. Andersson Copywriting', 'Meridian SaaS (Ireland)', 'NatWest', 'Regus Manchester']
+demo_ledger_quickbooks.db contacts: 55 sample: ['0969 Ocean View Road', '55 Twin Lane', "Amy's Bird Sanctuary", 'Barnett Design', "Bill's Windsurf Shop", "Bob's Burger Joint", 'Books by Bessie', 'Brosnahan Insurance Agency', 'Cal Telephone', "Chin's Gas and Oil", 'Cigna Health Care', 'Computers by Jenni']
+demo_ledger_large.db contacts: 69 sample: ['Customer 01', 'Customer 02', 'Customer 03', 'Customer 04', 'Customer 05', 'Customer 06', 'Customer 07', 'Customer 08', 'Customer 09', 'Customer 10', 'Customer 11', 'Customer 12']
+dashboard synthetic banner present: True
+
+=== C11 re-perform data coverage counts ===
+demo_ledger.db dashboard vs independent mismatches: none | values {'payments_unlinked': 0, 'bank_txns_no_contact': 0, 'total_cash_movements': 51, 'invoices_voided_or_deleted': 0}
+demo_ledger_quickbooks.db dashboard vs independent mismatches: none | values {'payments_unlinked': 0, 'bank_txns_no_contact': 7, 'total_cash_movements': 66, 'invoices_voided_or_deleted': 0}
+demo_ledger_large.db dashboard vs independent mismatches: none | values {'payments_unlinked': 0, 'bank_txns_no_contact': 0, 'total_cash_movements': 5144, 'invoices_voided_or_deleted': 0}
+
+=== Absent controls: confirm not in place (C13, C15, C21, C24, C25, C26, C28) ===
+tests dir / test files: none
+git tags: 0
+lockfile present: False
+requirements pinned (==): none
+keyword 'import logging' in code: False
+keyword 'logger' in code: False
+keyword 'hashlib' in code: False
+keyword 'run_id' in code: False
+keyword 'disposition' in code: False
+keyword 'approve' in code: False
+keyword 'reviewed_by' in code: False
+keyword 'sign_off' in code: False
+keyword '__version__' in code: False
+schema tables: ['accounts', 'contacts', 'invoices', 'bank_transactions', 'payments', 'line_items']
+app.py lines 184-187 caption mentions static/published figure: False
+
+=== C14 IsolationForest determinism (informational; not the default path) ===
+3 fresh-process hashes: ['6a104b30ce268a27', '6a104b30ce268a27', '6a104b30ce268a27'] identical: True
+
+=== C16 reproduce published accuracy figures ===
+synthetic: {'caught': 84, 'total_planted_anomalies': 84, 'false_positive_count': 24, 'precision': 0.778, 'recall': 1.0} (README: 84/84, 24 FP, precision 0.778)
+xero: {'caught': 7, 'total_planted_anomalies': 7, 'false_positive_count': 3, 'precision': 0.7, 'recall': 1.0} (README: 7/7, 3 FP, precision 0.70)
+
+=== C19 unmatched list completeness (test dataset) and QuickBooks investigation ===
+test data: bank lines 56 no_match 12 listed 12 complete: True pct_auto_matched 78.6
+QuickBooks demo: bank lines 40 auto-matched % 0.0
+  bank lines with contact_id: 33
+  bank types: [('RECEIVE', 5), ('SPEND', 35)]
+  invoices by type: [('ACCPAY', 15), ('ACCREC', 31)]
+  distinct bank contacts that also have invoices: 3
+  sample bank rows: [('2026-09-15', 34.0, 'SPEND', None), ('2026-08-27', 42.4, 'SPEND', 'VEND-41'), ('2026-09-02', 19.99, 'SPEND', 'VEND-57')]
+
+=== C20 variance sentences re-performed from source rows (test dataset) ===
+sentences checked: 15 figures agree with source: 15 disagree: 0
+ - 2026-05 2026-06 True Equipment down 92% vs 2026-05 (£5,417 → £442), driven by Ergo Office Furniture (-£2,725) and Techbench Supplies (-£2,250).
+ - 2026-05 2026-06 True Software Subscriptions up 92% vs 2026-05 (£911 → £1,749), driven by Cobalt Analytics (+£812) and Harbour Cloud Hosting (+£27).
+ - 2026-05 2026-06 True Contractor Fees down 100% vs 2026-05 (£761 → £0).
+ - 2026-05 2026-06 True Professional Fees down 46% vs 2026-05 (£1,201 → £649), driven by Fenwick Design (+£81) and Pearce Accounting (+£5).
+ - 2026-05 2026-06 True Travel down 44% vs 2026-05 (£559 → £315), driven by Skyline Hotels (+£235) and Kestrel Couriers (-£130).
+wording implying causation ('driven by') in sentences: 11 of 15
+
+=== C22 reason strings on flags (test dataset) ===
+flags 54 without reason 0 reason lacks contact name (non-A6) 0
+
+=== C27/C09 README wording and disclosures ===
+'AI-native' present: True | says rules-based: True | says no LLM: False
+README mentions 'fictional': True
+README mentions 'synthetic': True
+README mentions 'not affiliated': True
+README mentions 'independent': True
+README mentions 'false negative': False
+README mentions 'intended use': False
+README mentions 'owner': True
+README mentions 'limitation': False
+README mentions 'not production': False
+README mentions 'production': False

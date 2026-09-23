@@ -1,0 +1,606 @@
+diff --git a/README.md b/README.md
+index 2b336b4..8f643d7 100644
+--- a/README.md
++++ b/README.md
+@@ -2,12 +2,24 @@
+ 
+ **Status: core engine + multi-ledger proof complete (Phases 1-8) — connects to live Xero and QuickBooks organisations, reconciles, detects anomalies, and explains variance on both.**
+ 
+-A small-scale version of the kind of AI-native ledger automation product accounting firms are increasingly adopting: connects to a live Xero (and QuickBooks Online) organisation via OAuth, reconciles bank transactions against invoices/bills, flags anomalies (duplicates, VAT miscodings, threshold-adjacent amounts, weekend postings, duplicate payments, statistical outliers), and explains period-over-period variance in plain English.
++A small-scale, **rules-based** ledger automation tool (deterministic rules and a median/MAD statistical check; it does not call an LLM or any AI model): connects to a live Xero (and QuickBooks Online) organisation via OAuth, reconciles bank transactions against invoices/bills, flags anomalies (duplicates, VAT miscodings, threshold-adjacent amounts, weekend postings, duplicate payments, statistical outliers), and explains period-over-period variance in plain English.
+ 
+ Built against a fictional company ("Northbridge Creative", a UK digital marketing consultancy) seeded with realistic Xero transactions and 7 deliberately planted anomalies, so the detector's accuracy could be honestly measured against a private answer key rather than just claimed. The same engine also runs, unmodified, against a real QuickBooks Online sandbox — proving it's ledger-agnostic, not a Xero-only script.
+ 
+ **Live demo:** https://northbridge-ledger-agent.streamlit.app/ (runs against a frozen snapshot of the seeded data, since the live Xero connection needs local credentials)
+ 
++## Intended use and limitations
++
++**Intended use:** a demonstration of ledger reconciliation and anomaly review on fictional or vendor sandbox data. It is **not production software** and has not been validated on real books. Every flag needs a human review, and the tool does not record that review.
++
++**Known limitations** (from an assurance review of commit 9c4127a; see the review repository):
++- The 7/7 and 84/84 results use planted anomalies written to fit the rules. They test mechanics, not accuracy on real data. The dashboard's Xero score is a published constant when the private answer key is absent.
++- Context-free rules produce false positives on legitimate items (bank charges, weekend suppliers, fixed-price or large one-off bills, recurring fixed charges).
++- Rule parameters (thresholds, tolerances, windows) are fixed constants in `src/config.py` and are not approved by a control owner.
++- Data completeness is not checked against the source system; pagination was tested with mocks only.
++- Variance sentences list the largest contributors in the direction of the movement; they describe contributors, not causes.
++- Run logging is off unless `NORTHBRIDGE_RUN_LOG` points at a SQLite file.
++
+ ## Screenshot
+ 
+ ![Dashboard screenshot](dashboard/screenshots/dashboard-full.png)
+diff --git a/requirements.lock b/requirements.lock
+new file mode 100644
+index 0000000..bfe6d71
+--- /dev/null
++++ b/requirements.lock
+@@ -0,0 +1,44 @@
++altair==6.3.0
++anyio==4.15.1
++attrs==26.1.0
++certifi==2026.7.22
++charset-normalizer==3.5.1
++click==8.5.0
++cloudpickle==3.1.2
++h11==0.16.0
++httptools==0.8.0
++idna==3.19
++itsdangerous==2.2.0
++Jinja2==3.1.6
++joblib==1.6.0
++jsonschema==4.26.0
++jsonschema-specifications==2025.9.1
++MarkupSafe==3.0.3
++narwhals==2.26.0
++numpy==2.4.6
++oauthlib==3.3.1
++packaging==26.3
++pandas==3.0.5
++pillow==12.3.0
++protobuf==7.36.1
++pyarrow==25.0.1
++pydeck==0.9.3
++python-dateutil==2.9.0.post0
++python-dotenv==1.2.3
++python-multipart==0.0.32
++referencing==0.37.0
++requests==2.34.2
++requests-oauthlib==2.0.0
++rpds-py==2026.6.3
++scikit-learn==1.9.1
++scipy==1.17.1
++six==1.17.0
++starlette==1.6.0
++streamlit==1.64.0
++threadpoolctl==3.7.0
++toml==0.10.2
++typing_extensions==4.16.0
++urllib3==2.7.0
++uvicorn==0.53.0
++watchdog==6.0.0
++websockets==16.1.1
+diff --git a/requirements.txt b/requirements.txt
+index ab94ca3..56343d2 100644
+--- a/requirements.txt
++++ b/requirements.txt
+@@ -1,6 +1,8 @@
+-python-dotenv
+-requests
+-requests-oauthlib
+-pandas
+-scikit-learn
+-streamlit
++# Pinned to the versions used for the assurance review retest (review finding F-06).
++# Full transitive set: requirements.lock (pip freeze).
++python-dotenv==1.2.3
++requests==2.34.2
++requests-oauthlib==2.0.0
++pandas==3.0.5
++scikit-learn==1.9.1
++streamlit==1.64.0
+diff --git a/src/anomaly/rules.py b/src/anomaly/rules.py
+index fcdf409..ffab618 100644
+--- a/src/anomaly/rules.py
++++ b/src/anomaly/rules.py
+@@ -23,6 +23,7 @@ import sqlite3
+ from collections import Counter
+ from datetime import datetime
+ 
++from src.config import A1_DUPLICATE_WINDOW_DAYS, A3_APPROVAL_THRESHOLD, A3_BAND
+ from src.reconciliation.matcher import match_bank_transactions
+ 
+ 
+@@ -32,37 +33,47 @@ def _parse_date(date_str: str | None) -> datetime | None:
+     return datetime.fromisoformat(date_str.split("T")[0])
+ 
+ 
+-def find_duplicate_invoices(conn: sqlite3.Connection, date_window_days: int = 10) -> list[dict]:
++def find_duplicate_invoices(conn: sqlite3.Connection, date_window_days: int = A1_DUPLICATE_WINDOW_DAYS) -> list[dict]:
+     """A1 — same contact+amount entered twice within a short date window.
+ 
++    Covers BOTH sales invoices (ACCREC) and supplier bills (ACCPAY), review finding F-01. Every entry
++    that has an earlier entry (same type, contact and total) within the window is flagged, so a third
++    copy is flagged as well as the second.
++
+     Recurring monthly invoices to the same contact/amount are ~28-31 days apart,
+     so a window well under that (default 10 days) won't false-positive on them.
+     """
+     rows = conn.execute(
+-        """SELECT i.invoice_id, i.invoice_date, i.total, c.name
++        """SELECT i.invoice_id, i.invoice_date, i.total, c.name, i.invoice_type
+            FROM invoices i JOIN contacts c ON c.contact_id = i.contact_id
+-           WHERE i.invoice_type = 'ACCREC'
+-           ORDER BY c.name, i.total, i.invoice_date"""
++           WHERE i.invoice_type IN ('ACCREC', 'ACCPAY')
++           ORDER BY i.invoice_type, c.name, i.total, i.invoice_date, i.invoice_id"""
+     ).fetchall()
+ 
+     flagged = []
+-    for i in range(len(rows) - 1):
+-        id1, date1, total1, name1 = rows[i]
+-        id2, date2, total2, name2 = rows[i + 1]
+-        if name1 != name2 or total1 != total2:
+-            continue
+-        d1, d2 = _parse_date(date1), _parse_date(date2)
+-        if d1 and d2 and abs((d2 - d1).days) <= date_window_days:
++    groups: dict[tuple, list[tuple]] = {}
++    for inv_id, inv_date, total, name, inv_type in rows:
++        groups.setdefault((inv_type, name, total), []).append((inv_id, inv_date))
++    for (inv_type, name, total), items in groups.items():
++        for j in range(1, len(items)):
++            id2, date2 = items[j]
++            d2 = _parse_date(date2)
++            earlier = [(i1, dt1) for i1, dt1 in items[:j] if _parse_date(dt1) and d2 and abs((d2 - _parse_date(dt1)).days) <= date_window_days]
++            if not earlier:
++                continue
++            date1 = earlier[-1][1]
++            what = "invoiced" if inv_type == "ACCREC" else "billed"
+             flagged.append(
+                 {
+                     "target_anomaly_id": "A1",
+-                    "contact_name": name1,
+-                    "amount": total1,
++                    "contact_name": name,
++                    "amount": total,
+                     "date": date2,
+                     "record_id": id2,
+                     "reason": (
+-                        f"{name1} was invoiced £{total1:.2f} twice within "
+-                        f"{abs((d2 - d1).days)} days ({date1[:10]} and {date2[:10]}) — likely a duplicate invoice."
++                        f"{name} was {what} £{total:.2f} twice within "
++                        f"{abs((d2 - _parse_date(date1)).days)} days ({date1[:10]} and {date2[:10]}) — likely a duplicate "
++                        f"{'invoice' if inv_type == 'ACCREC' else 'bill'}."
+                     ),
+                 }
+             )
+@@ -116,7 +127,7 @@ def find_vat_code_mismatches(conn: sqlite3.Connection) -> list[dict]:
+     return flagged
+ 
+ 
+-def find_threshold_adjacent_round_amounts(conn: sqlite3.Connection, threshold: float = 500.0) -> list[dict]:
++def find_threshold_adjacent_round_amounts(conn: sqlite3.Connection, threshold: float = A3_APPROVAL_THRESHOLD) -> list[dict]:
+     """A3 — an expense suspiciously just under a plausible approval threshold."""
+     rows = conn.execute(
+         """SELECT i.invoice_id, i.invoice_date, i.total, c.name
+@@ -126,7 +137,7 @@ def find_threshold_adjacent_round_amounts(conn: sqlite3.Connection, threshold: f
+ 
+     flagged = []
+     for invoice_id, date, total, name in rows:
+-        if threshold * 0.95 <= total < threshold:
++        if threshold * A3_BAND <= total < threshold:
+             flagged.append(
+                 {
+                     "target_anomaly_id": "A3",
+@@ -167,7 +178,7 @@ def find_weekend_or_holiday_postings(conn: sqlite3.Connection) -> list[dict]:
+                     "record_id": invoice_id,
+                     "reason": (
+                         f"{name}'s bill for £{total:.2f} is dated {date[:10]}, a "
+-                        f"{dt.strftime('%A')} — Northbridge doesn't operate on weekends."
++                        f"{dt.strftime('%A')} — review whether this supplier legitimately trades at weekends."
+                     ),
+                 }
+             )
+diff --git a/src/config.py b/src/config.py
+new file mode 100644
+index 0000000..f4db10a
+--- /dev/null
++++ b/src/config.py
+@@ -0,0 +1,20 @@
++"""Detection parameters in one place (remediation of review finding F-12).
++
++Each value is a fixed constant chosen by the developer for the demo data. None has been approved by a
++control owner. When the tool is used beyond a demo, the owner should record the rationale, approver and
++date in PARAMETER_APPROVAL below and change values only through that record.
++"""
++
++# Reconciliation (src/reconciliation/matcher.py)
++AMOUNT_TOLERANCE_ABS = 5.0    # flat tolerance in GBP for a "probable" match
++AMOUNT_TOLERANCE_PCT = 0.02   # relative tolerance for a "probable" match
++EXACT_TOLERANCE_ABS = 0.01    # tolerance for an "exact" match
++EXACT_DATE_WINDOW_DAYS = 30   # invoice/due date within this many days = exact
++PROBABLE_DATE_WINDOW_DAYS = 45
++
++# Rules (src/anomaly/rules.py)
++A1_DUPLICATE_WINDOW_DAYS = 10   # same contact, same total, within this many days
++A3_APPROVAL_THRESHOLD = 500.0   # GBP approval limit assumed for the demo company
++A3_BAND = 0.95                  # flag bills from 95% up to the threshold
++
++PARAMETER_APPROVAL = {"approved_by": None, "approved_on": None, "rationale": None}  # to be completed by the owner
+diff --git a/src/pipeline.py b/src/pipeline.py
+index edad72c..a861a9b 100644
+--- a/src/pipeline.py
++++ b/src/pipeline.py
+@@ -2,6 +2,7 @@
+ 
+ from __future__ import annotations
+ 
++import os
+ import sqlite3
+ 
+ from src.anomaly.rules import (
+@@ -12,24 +13,29 @@ from src.anomaly.rules import (
+     find_weekend_or_holiday_postings,
+ )
+ from src.anomaly.statistical import find_statistical_outliers
++from src.run_log import log_run
+ 
+ 
+ def a6_from_reconciliation(recon_report: dict) -> list[dict]:
+     return [
+         {
+             "target_anomaly_id": "A6",
+-            "contact_name": item["contact_name"],
++            "contact_name": item["contact_name"] or "(no contact)",
+             "amount": item["total"],
+             "date": item["date"],
+             "record_id": item["bank_transaction_id"],
+-            "reason": f"Bank line for {item['contact_name']} (£{item['total']:.2f}) has no matching invoice/bill.",
++            "reason": f"Bank line for {item['contact_name'] or 'an unidentified contact'} (£{item['total']:.2f}) has no matching invoice/bill.",
+         }
+         for item in recon_report["unmatched_items"]
+     ]
+ 
+ 
+-def detect_all(conn: sqlite3.Connection, recon_report: dict, progress=None) -> list[dict]:
+-    """Run every anomaly check. `progress`, if given, is called as progress(done, total, label) per rule."""
++def detect_all(conn: sqlite3.Connection, recon_report: dict, progress=None, log_path: str | None = None) -> list[dict]:
++    """Run every anomaly check. `progress`, if given, is called as progress(done, total, label) per rule.
++
++    If `log_path` (or the NORTHBRIDGE_RUN_LOG environment variable) names a SQLite file, the run is
++    recorded in an append-only run log (review finding F-03).
++    """
+     steps = [
+         ("duplicate invoices", find_duplicate_invoices),
+         ("VAT code mismatches", find_vat_code_mismatches),
+@@ -43,4 +49,7 @@ def detect_all(conn: sqlite3.Connection, recon_report: dict, progress=None) -> l
+         detected += rule(conn)
+         if progress:
+             progress(n, len(steps), label)
++    log_path = log_path or os.environ.get("NORTHBRIDGE_RUN_LOG")
++    if log_path:
++        log_run(log_path, conn, detected)
+     return detected
+diff --git a/src/reconciliation/matcher.py b/src/reconciliation/matcher.py
+index cf2d54e..7e341b5 100644
+--- a/src/reconciliation/matcher.py
++++ b/src/reconciliation/matcher.py
+@@ -14,10 +14,13 @@ import sqlite3
+ from collections import defaultdict
+ from datetime import datetime
+ 
+-AMOUNT_TOLERANCE_ABS = 5.0    # flat tolerance in GBP for a "probable" match
+-AMOUNT_TOLERANCE_PCT = 0.02   # relative tolerance for a "probable" match
+-EXACT_DATE_WINDOW_DAYS = 30   # invoice/due date within this many days = exact
+-PROBABLE_DATE_WINDOW_DAYS = 45
++from src.config import (  # noqa: E402  (parameters live in src/config.py, review finding F-12)
++    AMOUNT_TOLERANCE_ABS,
++    AMOUNT_TOLERANCE_PCT,
++    EXACT_DATE_WINDOW_DAYS,
++    EXACT_TOLERANCE_ABS,
++    PROBABLE_DATE_WINDOW_DAYS,
++)
+ 
+ 
+ def _parse_date(date_str: str | None) -> datetime | None:
+@@ -46,6 +49,11 @@ def _amounts_close(a: float, b: float, tolerance_abs: float) -> bool:
+ def match_bank_transactions(conn: sqlite3.Connection, progress=None) -> list[dict]:
+     """Return one classification record per bank transaction.
+ 
++    Deterministic and order-independent (review finding F-02): bank lines are processed in (date, id)
++    order, candidate invoices are ranked by (already settled, closest date, id), and an invoice matched
++    by an earlier bank line counts as settled, so later lines prefer unsettled invoices (one-to-one
++    allocation). An invoice that already has a recorded payment is also treated as settled.
++
+     Invoices are loaded once and grouped by (contact, type), so cost scales with the
+     number of transactions rather than issuing one query per transaction.
+     `progress`, if given, is called as progress(done, total) every 250 transactions.
+@@ -56,6 +64,9 @@ def match_bank_transactions(conn: sqlite3.Connection, progress=None) -> list[dic
+            FROM bank_transactions bt
+            LEFT JOIN contacts c ON c.contact_id = bt.contact_id"""
+     ).fetchall()
++    transactions.sort(key=lambda t: (t[2] or "", t[0]))  # (date, id): independent of row order
++    paid_invoice_ids = {r[0] for r in conn.execute("SELECT DISTINCT invoice_id FROM payments WHERE invoice_id IS NOT NULL")}
++    claimed: set[str] = set()
+ 
+     candidates_by_key: dict[tuple, list[tuple]] = defaultdict(list)
+     for inv_id, contact_id, inv_type, inv_date, due_date, inv_total in conn.execute(
+@@ -72,23 +83,25 @@ def match_bank_transactions(conn: sqlite3.Connection, progress=None) -> list[dic
+         expected_invoice_type = "ACCPAY" if bt_type == "SPEND" else "ACCREC"
+         candidates = candidates_by_key.get((contact_id, expected_invoice_type), []) if contact_id else []
+ 
+-        best_match_id = None
+-        best_status = "no_match"
+-
++        exact, probable = [], []
+         for inv_id, inv_dt, due_dt, inv_total in candidates:
+             day_diff = _closest_day_diff(bt_dt, inv_dt, due_dt)
+             if day_diff is None:
+                 continue
+-
+-            if _amounts_close(total, inv_total, tolerance_abs=0.01) and day_diff <= EXACT_DATE_WINDOW_DAYS:
+-                best_match_id, best_status = inv_id, "exact_match"
+-                break
+-            if (
+-                best_status == "no_match"
+-                and _amounts_close(total, inv_total, tolerance_abs=AMOUNT_TOLERANCE_ABS)
+-                and day_diff <= PROBABLE_DATE_WINDOW_DAYS
+-            ):
+-                best_match_id, best_status = inv_id, "probable_match"
++            settled = inv_id in claimed or inv_id in paid_invoice_ids
++            key = (settled, day_diff, inv_id)
++            if _amounts_close(total, inv_total, tolerance_abs=EXACT_TOLERANCE_ABS) and day_diff <= EXACT_DATE_WINDOW_DAYS:
++                exact.append((key, inv_id))
++            elif _amounts_close(total, inv_total, tolerance_abs=AMOUNT_TOLERANCE_ABS) and day_diff <= PROBABLE_DATE_WINDOW_DAYS:
++                probable.append((key, inv_id))
++
++        best_match_id, best_status = None, "no_match"
++        if exact:
++            best_match_id, best_status = min(exact)[1], "exact_match"
++        elif probable:
++            best_match_id, best_status = min(probable)[1], "probable_match"
++        if best_match_id:
++            claimed.add(best_match_id)
+ 
+         results.append(
+             {
+diff --git a/src/run_log.py b/src/run_log.py
+new file mode 100644
+index 0000000..5db81ad
+--- /dev/null
++++ b/src/run_log.py
+@@ -0,0 +1,69 @@
++"""Append-only run log (remediation of review finding F-03).
++
++Each detection run can record: run id, UTC time, tool version, git commit, input hash, dependency
++versions, user, and a hash of the output. Enable by passing log_path to detect_all() or setting the
++NORTHBRIDGE_RUN_LOG environment variable to a SQLite file path. Logging is off by default so existing
++behaviour is unchanged.
++"""
++
++from __future__ import annotations
++
++import getpass
++import hashlib
++import json
++import sqlite3
++import subprocess
++import uuid
++from datetime import datetime, timezone
++from importlib import metadata
++
++from src.version import __version__
++
++_SCHEMA = """CREATE TABLE IF NOT EXISTS run_log (
++    run_id TEXT PRIMARY KEY, run_utc TEXT NOT NULL, tool_version TEXT, git_commit TEXT,
++    input_hash TEXT NOT NULL, output_hash TEXT NOT NULL, flag_count INTEGER, dependencies TEXT, run_user TEXT
++)"""
++_TABLES = ("accounts", "contacts", "invoices", "bank_transactions", "payments", "line_items")
++
++
++def input_hash(conn: sqlite3.Connection) -> str:
++    """Hash of the ledger content, independent of row order."""
++    h = hashlib.sha256()
++    for t in _TABLES:
++        rows = sorted(repr(r) for r in conn.execute(f"SELECT * FROM {t}"))
++        h.update(t.encode())
++        h.update("\n".join(rows).encode())
++    return h.hexdigest()
++
++
++def output_hash(detected: list[dict]) -> str:
++    return hashlib.sha256("\n".join(sorted(json.dumps(d, sort_keys=True, default=str) for d in detected)).encode()).hexdigest()
++
++
++def _git_commit() -> str:
++    try:
++        return subprocess.run(["git", "rev-parse", "HEAD"], capture_output=True, text=True, timeout=5).stdout.strip() or "unknown"
++    except Exception:
++        return "unknown"
++
++
++def _deps() -> dict:
++    out = {}
++    for p in ("pandas", "scikit-learn", "streamlit", "requests"):
++        try:
++            out[p] = metadata.version(p)
++        except metadata.PackageNotFoundError:
++            out[p] = "not installed"
++    return out
++
++
++def log_run(log_path: str, conn: sqlite3.Connection, detected: list[dict]) -> str:
++    run_id = str(uuid.uuid4())
++    with sqlite3.connect(log_path) as log:
++        log.execute(_SCHEMA)
++        log.execute(
++            "INSERT INTO run_log VALUES (?,?,?,?,?,?,?,?,?)",
++            (run_id, datetime.now(timezone.utc).isoformat(timespec="seconds"), __version__, _git_commit(),
++             input_hash(conn), output_hash(detected), len(detected), json.dumps(_deps()), getpass.getuser()),
++        )
++    return run_id
+diff --git a/src/variance/explainer.py b/src/variance/explainer.py
+index 06ff339..9013b7b 100644
+--- a/src/variance/explainer.py
++++ b/src/variance/explainer.py
+@@ -77,7 +77,7 @@ def explain_movement(conn: sqlite3.Connection, account_code: str, period_a: str,
+     else:
+         headline = f"{account_name}: new spend of £{amount_b:,.0f} in {period_b} (nothing in {period_a})"
+ 
+-    # What's new/bigger in period_b that wasn't in period_a, by contact
++    # Contact-level movement between the two periods (contacts present in either period)
+     by_contact_a: dict[str, float] = defaultdict(float)
+     for name, amount in lines_a:
+         by_contact_a[name] += amount
+@@ -85,15 +85,16 @@ def explain_movement(conn: sqlite3.Connection, account_code: str, period_a: str,
+     for name, amount in lines_b:
+         by_contact_b[name] += amount
+ 
+-    driving = sorted(
+-        ((name, amount - by_contact_a.get(name, 0.0)) for name, amount in by_contact_b.items()),
+-        key=lambda x: abs(x[1]),
+-        reverse=True,
+-    )
+-    driving = [(name, amt) for name, amt in driving if abs(amt) > 0.01][:2]
++    # Review finding F-07: name only contacts that moved in the SAME direction as the headline, including
++    # contacts that appear in the earlier period only, and say how much of the movement they explain.
++    moves = {name: by_contact_b.get(name, 0.0) - by_contact_a.get(name, 0.0) for name in set(by_contact_a) | set(by_contact_b)}
++    same_direction = [(name, amt) for name, amt in moves.items() if abs(amt) > 0.01 and (amt >= 0) == (delta >= 0)]
++    driving = sorted(same_direction, key=lambda x: (-abs(x[1]), x[0]))[:2]
+ 
+     if not driving:
+-        return headline + "."
++        return headline + "; no single contact explains the change."
+ 
+     parts = [f"{name} (+£{amt:,.0f})" if amt >= 0 else f"{name} (-£{abs(amt):,.0f})" for name, amt in driving]
+-    return f"{headline}, driven by {' and '.join(parts)}."
++    explained = sum(amt for _, amt in driving)
++    share = f", accounting for {explained / delta * 100:.0f}% of the movement" if delta else ""
++    return f"{headline}; largest contributors in that direction: {' and '.join(parts)}{share}."
+diff --git a/src/version.py b/src/version.py
+new file mode 100644
+index 0000000..40435ca
+--- /dev/null
++++ b/src/version.py
+@@ -0,0 +1,2 @@
++"""Tool version, printed in the run log so results can be tied to a release (review finding F-06)."""
++__version__ = "0.2.0-remediation-demo"
+diff --git a/tests/__init__.py b/tests/__init__.py
+new file mode 100644
+index 0000000..e69de29
+diff --git a/tests/test_regression.py b/tests/test_regression.py
+new file mode 100644
+index 0000000..9177f96
+--- /dev/null
++++ b/tests/test_regression.py
+@@ -0,0 +1,112 @@
++"""Regression tests (review finding F-06). Run: python -m unittest discover -s tests -t .
++Small in-memory ledgers only; no network, no real data."""
++import random
++import sqlite3
++import tempfile
++import unittest
++from pathlib import Path
++
++from src.anomaly.rules import find_duplicate_invoices, find_threshold_adjacent_round_amounts
++from src.pipeline import a6_from_reconciliation, detect_all
++from src.reconciliation.matcher import build_reconciliation_report, match_bank_transactions
++from src.variance.explainer import explain_movement
++
++SCHEMA = (Path(__file__).resolve().parent.parent / "src/db/schema.sql").read_text()
++
++
++def ledger():
++    c = sqlite3.connect(":memory:")
++    c.executescript(SCHEMA)
++    for cid, name in [("C1", "Alder Group"), ("S1", "Brightside Print"), ("S2", "Kestrel Couriers")]:
++        c.execute("INSERT INTO contacts VALUES (?,?,?,?)", (cid, name, cid.startswith("C"), cid.startswith("S")))
++    return c
++
++
++def inv(c, iid, cid, typ, date, total, due=None, acct="425"):
++    c.execute("INSERT INTO invoices VALUES (?,?,?,?,?,?,?,?)", (iid, cid, typ, date + "T00:00:00", (due or date) + "T00:00:00", total, "INPUT2", "AUTHORISED"))
++    c.execute("INSERT INTO line_items VALUES (?,?,?,?,?,?,?,?,?)", (iid + "-L1", iid, acct, "x", 1, total, total, "INPUT2", 0))
++
++
++def bank(c, bid, cid, date, total, typ="RECEIVE"):
++    c.execute("INSERT INTO bank_transactions VALUES (?,?,?,?,?,?)", (bid, cid, date + "T00:00:00", total, typ, 0))
++
++
++class TestDuplicates(unittest.TestCase):
++    def test_supplier_bill_duplicate_detected(self):  # F-01
++        c = ledger(); inv(c, "B1", "S1", "ACCPAY", "2026-03-02", 250.0); inv(c, "B2", "S1", "ACCPAY", "2026-03-05", 250.0)
++        self.assertEqual([f["record_id"] for f in find_duplicate_invoices(c)], ["B2"])
++
++    def test_sales_invoice_duplicate_and_triple(self):
++        c = ledger()
++        for i, d in enumerate(["2026-03-02", "2026-03-04", "2026-03-06"]): inv(c, f"A{i}", "C1", "ACCREC", d, 900.0)
++        self.assertEqual(sorted(f["record_id"] for f in find_duplicate_invoices(c)), ["A1", "A2"])
++
++    def test_monthly_recurring_not_flagged(self):
++        c = ledger()
++        for i, d in enumerate(["2026-01-15", "2026-02-14", "2026-03-16"]): inv(c, f"R{i}", "C1", "ACCREC", d, 1200.0)
++        self.assertEqual(find_duplicate_invoices(c), [])
++
++    def test_threshold_band(self):
++        c = ledger(); inv(c, "T1", "S1", "ACCPAY", "2026-03-02", 497.0); inv(c, "T2", "S1", "ACCPAY", "2026-04-02", 474.99); inv(c, "T3", "S1", "ACCPAY", "2026-05-04", 500.0)
++        self.assertEqual([f["record_id"] for f in find_threshold_adjacent_round_amounts(c)], ["T1"])
++
++
++class TestMatcher(unittest.TestCase):
++    def recurring(self):
++        c = ledger()
++        for i, d in enumerate(["2026-01-15", "2026-02-16", "2026-03-16"]):
++            inv(c, f"AR{i+1}", "C1", "ACCREC", d, 1200.0, due=d[:8] + "28")
++        c.execute("INSERT INTO payments VALUES ('P1','AR1',NULL,'2026-02-10T00:00:00',1200,'ACCRECPAYMENT','AUTHORISED')")
++        bank(c, "BT1", "C1", "2026-03-09", 1200.0)  # receipt intended for AR2
++        return c
++
++    def test_recurring_receipt_not_attributed_to_paid_invoice(self):  # F-02
++        m = {r["bank_transaction_id"]: r for r in match_bank_transactions(self.recurring())}
++        self.assertNotEqual(m["BT1"]["matched_invoice_id"], "AR1")
++        flags = detect_all(self.recurring(), build_reconciliation_report(match_bank_transactions(self.recurring())))
++        self.assertFalse([f for f in flags if f["target_anomaly_id"] == "A5"])
++
++    def test_true_duplicate_payment_still_flagged(self):
++        c = ledger(); inv(c, "B1", "S1", "ACCPAY", "2026-03-02", 300.0, due="2026-04-01")
++        c.execute("INSERT INTO payments VALUES ('P1','B1',NULL,'2026-03-20T00:00:00',300,'ACCPAYPAYMENT','AUTHORISED')")
++        bank(c, "BT1", "S1", "2026-03-25", 300.0, "SPEND")
++        flags = detect_all(c, build_reconciliation_report(match_bank_transactions(c)))
++        self.assertEqual([f["record_id"] for f in flags if f["target_anomaly_id"] == "A5"], ["BT1"])
++
++    def test_output_independent_of_row_order(self):  # F-02 / determinism criterion
++        def build(order_seed):
++            c = ledger(); rows = []
++            for i in range(6): rows.append(("AR%d" % i, "C1", "ACCREC", "2026-%02d-15" % (i + 1), 1200.0))
++            random.Random(order_seed).shuffle(rows)
++            for r in rows: inv(c, r[0], r[1], r[2], r[3], r[4], due=r[3][:8] + "28")
++            for k, (bid, d) in enumerate([("BT1", "2026-02-10"), ("BT2", "2026-03-12"), ("BT3", "2026-04-11")]): bank(c, bid, "C1", d, 1200.0)
++            return c
++        results = {tuple((m["bank_transaction_id"], m["matched_invoice_id"], m["match_status"]) for m in match_bank_transactions(build(s))) for s in range(8)}
++        self.assertEqual(len(results), 1)
++
++
++class TestMessagesAndVariance(unittest.TestCase):
++    def test_no_contact_message(self):  # F-12
++        rep = {"unmatched_items": [{"contact_name": None, "total": 415.0, "date": "2026-03-02", "bank_transaction_id": "BT9"}]}
++        self.assertNotIn("None", a6_from_reconciliation(rep)[0]["reason"])
++
++    def test_variance_drivers_follow_headline_direction(self):  # F-07
++        c = ledger()
++        inv(c, "A", "S1", "ACCPAY", "2026-01-10", 1000.0); inv(c, "B", "S2", "ACCPAY", "2026-01-12", 100.0)
++        inv(c, "C", "S2", "ACCPAY", "2026-02-10", 150.0)  # S1 disappears (-1000), S2 rises (+50): total down
++        s = explain_movement(c, "425", "2026-01", "2026-02")
++        self.assertIn("down", s); self.assertIn("Brightside Print (-£1,000)", s); self.assertNotIn("Kestrel Couriers", s)
++
++
++class TestRunLog(unittest.TestCase):
++    def test_run_is_logged(self):  # F-03
++        c = ledger(); inv(c, "B1", "S1", "ACCPAY", "2026-03-02", 250.0)
++        with tempfile.TemporaryDirectory() as d:
++            path = str(Path(d) / "log.db")
++            detect_all(c, build_reconciliation_report(match_bank_transactions(c)), log_path=path)
++            row = sqlite3.connect(path).execute("SELECT run_id, input_hash, output_hash, tool_version, dependencies FROM run_log").fetchone()
++        self.assertTrue(all(row))
++
++
++if __name__ == "__main__":
++    unittest.main()

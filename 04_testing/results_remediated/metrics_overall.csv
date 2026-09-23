@@ -1,0 +1,16 @@
+metric,value,ci95_low,ci95_high
+Items (units) tested,230,,
+Real errors,31,,
+Clean items (standard + hard),199,,
+True positives,30,,
+False negatives,1,,
+False positives,20,,
+True negatives,179,,
+"Recall (item level, any rule)",0.968,0.838,0.994
+Precision (item level),0.600,0.462,0.724
+F1,0.741,,
+False positive rate (all clean),0.101,0.066,0.150
+False positive rate (standard clean),0.000,0.000,0.022
+False positive rate (hard clean),0.625,0.453,0.771
+Flags on unknown records (harness check),0,,
+Engine run time (s),0.014,,

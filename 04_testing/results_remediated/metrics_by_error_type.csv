@@ -1,0 +1,9 @@
+error_type,expected_rule,n_errors,detected_any_rule,recall_any_rule,ci95_low,ci95_high,detected_by_expected_rule,recall_expected_rule,missed_items
+BREAK,A6,6,6,1.000,0.610,1.000,6,1.000,
+DUP_AP,A1,3,3,1.000,0.438,1.000,3,1.000,
+DUP_AR,A1,5,5,1.000,0.566,1.000,5,1.000,
+DUP_PAY,A5,4,3,0.750,0.301,0.954,3,0.750,BT-044
+OUTLIER,A7,3,3,1.000,0.438,1.000,3,1.000,
+THRESHOLD,A3,3,3,1.000,0.438,1.000,3,1.000,
+VAT_MISCODE,A2,4,4,1.000,0.510,1.000,4,1.000,
+WEEKEND,A4,3,3,1.000,0.438,1.000,3,1.000,

@@ -1,0 +1,250 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>System description - Northbridge Assurance Review</title>
+<meta name="description" content="Self-assessment of a ledger anomaly-detection tool using audit methodology.">
+<style>
+:root{--bg:#fff;--fg:#1b1f27;--muted:#5a6270;--line:#d9dee6;--soft:#f3f5f9;--brand:#1f3864;--link:#1a5fb4;--bad:#b71c1c;--badbg:#fdecea;--warn:#8a5a00;--warnbg:#fff4d6;--ok:#1b6e34;--okbg:#e6f4ea;--code:#eef1f6}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#0f1420;--fg:#e6e9ef;--muted:#a3abb8;--line:#2b3446;--soft:#171e2e;--brand:#9db8ee;--link:#8ab4f8;--bad:#ff8a80;--badbg:#3a1a1a;--warn:#ffd27a;--warnbg:#3a2e12;--ok:#7fd99a;--okbg:#14301f;--code:#1d2536}}
+:root[data-theme=dark]{--bg:#0f1420;--fg:#e6e9ef;--muted:#a3abb8;--line:#2b3446;--soft:#171e2e;--brand:#9db8ee;--link:#8ab4f8;--bad:#ff8a80;--badbg:#3a1a1a;--warn:#ffd27a;--warnbg:#3a2e12;--ok:#7fd99a;--okbg:#14301f;--code:#1d2536}
+*{box-sizing:border-box}html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+a{color:var(--link)}a:focus-visible,button:focus-visible,input:focus-visible{outline:3px solid var(--link);outline-offset:2px}
+.skip{position:absolute;left:-999px;top:0;background:var(--brand);color:#fff;padding:8px 12px;z-index:10}.skip:focus{left:8px;top:8px}
+header.site{border-bottom:1px solid var(--line);background:var(--bg);position:sticky;top:0;z-index:5}
+.wrap{max-width:920px;margin:0 auto;padding:0 16px}
+header.site .wrap{display:flex;flex-wrap:wrap;align-items:center;gap:4px 14px;min-height:52px}
+.brand{font-weight:700;color:var(--brand);text-decoration:none;margin-right:6px}
+nav{display:flex;flex-wrap:wrap;gap:2px 4px}nav a{padding:6px 9px;border-radius:6px;text-decoration:none;color:var(--fg);font-size:.92rem}
+nav a:hover{background:var(--soft)}nav a[aria-current=page]{background:var(--soft);font-weight:600;box-shadow:inset 0 -2px 0 var(--brand)}
+.banner{background:var(--warnbg);color:var(--fg);border-bottom:1px solid var(--line);font-size:.88rem}
+.banner .wrap{padding-top:8px;padding-bottom:8px}.banner strong{color:var(--warn)}
+main{padding:24px 0 56px}h1{font-size:1.9rem;line-height:1.25;color:var(--brand);margin:.2em 0 .5em}h2{font-size:1.35rem;color:var(--brand);margin:1.8em 0 .5em;padding-top:.3em}h3{font-size:1.1rem;margin:1.4em 0 .4em}
+p,li{max-width:74ch}code{background:var(--code);padding:1px 5px;border-radius:4px;font-size:.88em}pre{background:var(--code);padding:12px;border-radius:8px;overflow:auto}pre code{background:none;padding:0}
+.scroll{overflow-x:auto;margin:12px 0;-webkit-overflow-scrolling:touch}table{border-collapse:collapse;width:100%;font-size:.9rem}
+th,td{border:1px solid var(--line);padding:6px 9px;text-align:left;vertical-align:top}th{background:var(--brand);color:#fff}@media (prefers-color-scheme:dark){:root:not([data-theme=light]) th{color:#0f1420}}
+tbody tr:nth-child(even){background:var(--soft)}
+.chip{display:inline-block;padding:1px 9px;border-radius:99px;font-size:.78rem;font-weight:700;white-space:nowrap}
+.High,.notmet{background:var(--badbg);color:var(--bad)}.Medium,.warn{background:var(--warnbg);color:var(--warn)}.Low,.met{background:var(--okbg);color:var(--ok)}
+.hero{background:var(--soft);border:1px solid var(--line);border-radius:12px;padding:20px 22px;margin:8px 0 22px}.hero p{max-width:none}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px;margin:14px 0}
+.card{border:1px solid var(--line);border-radius:10px;padding:12px 14px;background:var(--bg)}.card h3{margin:.1em 0 .3em;font-size:1rem}.card p{margin:.2em 0;font-size:.92rem;color:var(--muted)}
+.stat{font-size:1.6rem;font-weight:700;color:var(--brand);line-height:1.2}
+.filter{width:100%;max-width:420px;padding:8px 10px;border:1px solid var(--line);border-radius:6px;background:var(--bg);color:var(--fg);font:inherit;margin:6px 0}
+.chart text{fill:var(--fg);font:12px system-ui,sans-serif}.chart .muted{fill:var(--muted)}
+footer{border-top:1px solid var(--line);color:var(--muted);font-size:.85rem;padding:18px 0 34px}
+.toc{background:var(--soft);border:1px solid var(--line);border-radius:8px;padding:6px 16px;margin:14px 0}.toc ul{margin:.3em 0;padding-left:1.2em}
+button.theme{margin-left:auto;background:none;border:1px solid var(--line);border-radius:6px;color:var(--fg);padding:4px 9px;cursor:pointer;font:inherit;font-size:.85rem}
+@media (max-width:560px){h1{font-size:1.5rem}body{font-size:15.5px}}
+@media print{header.site,.filter,button.theme{display:none}body{font-size:11pt}}
+</style></head><body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site"><div class="wrap"><a class="brand" href="index.html">Northbridge Assurance Review</a><nav aria-label="Main"><a href="index.html">Home</a><a href="findings.html">Findings</a><a href="method.html">Method</a><a href="testing.html">Testing</a><a href="remediation.html">Remediation</a><a href="toolkit.html">Toolkit</a><a href="downloads/assurance_report.pdf">Report (PDF)</a></nav><button class="theme" id="themebtn" type="button">Light / dark</button></div></header>
+<div class="banner"><div class="wrap"><strong>Self-assessment, not an independent audit.</strong> The reviewer also built the system. Figures describe a constructed test set and are not estimates of accuracy on real books. No human independent review has been done.</div></div>
+<main id="main"><div class="wrap">
+<h1 id="system-description">System Description</h1>
+<p><strong>Subject:</strong> Northbridge Ledger Agent, commit <code>9c4127ad65aa5a9e7d362c2d05f69ecfdbf7c5f9</code> (23 Sep 2026)
+<strong>Repository:</strong> https://github.com/VAishwaryaSingh/Northbridge-Ledger-Agent
+<strong>Owner:</strong> Aishwarya Singh (sole developer). No documented intended-use statement or named control owner beyond this (see Section 9).</p>
+<p>Paths below are relative to the Northbridge repository. Items marked <strong>[uncertain]</strong> were not fully verified.</p>
+<h2 id="1-purpose">1. Purpose</h2>
+<p>Connects to Xero and QuickBooks Online, loads ledger data into SQLite, reconciles standalone bank transactions against invoices and bills, flags anomalies, and produces plain-English variance explanations. Presented as a portfolio project. The build plan (not the README) describes it as "not production software"; the README does not state production status (confirmed in Phase 4, E-04).</p>
+<h2 id="2-is-there-an-ai-model">2. Is there an AI model?</h2>
+<p><strong>No LLM is called anywhere.</strong> A search of the code for anthropic, openai, claude, gemini, llm, prompt, model and api_key found no use, and <code>requirements.txt</code> lists no LLM SDK. There is therefore no model, provider, version or prompt to inventory. The decision-making is:</p>
+<div class="scroll"><table>
+<thead>
+<tr>
+<th>Component</th>
+<th>Method</th>
+<th>Source</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Reconciliation</td>
+<td>Fuzzy match on amount (±£5 or 2%), date (30 day exact, 45 day probable window) and contact</td>
+<td><code>src/reconciliation/matcher.py:17-20, 83-91</code></td>
+</tr>
+<tr>
+<td>A1 duplicate invoice</td>
+<td>Same contact and total within 10 days, <strong>sales invoices (ACCREC) only</strong></td>
+<td><code>src/anomaly/rules.py:35-58</code></td>
+</tr>
+<tr>
+<td>A2 VAT code mismatch</td>
+<td>Line item tax code differs from the contact's established pattern</td>
+<td><code>src/anomaly/rules.py:72</code></td>
+</tr>
+<tr>
+<td>A3 threshold-adjacent amount</td>
+<td>Amounts just under £500</td>
+<td><code>src/anomaly/rules.py:119</code></td>
+</tr>
+<tr>
+<td>A4 weekend posting</td>
+<td>Weekday is Saturday or Sunday (no holiday calendar evident in the excerpt read)</td>
+<td><code>src/anomaly/rules.py:146-160</code></td>
+</tr>
+<tr>
+<td>A5 duplicate payment</td>
+<td>Bank line matches a bill that already has a linked payment</td>
+<td><code>src/anomaly/rules.py:177-192</code></td>
+</tr>
+<tr>
+<td>A6 unmatched bank line</td>
+<td>Reconciliation <code>no_match</code> items</td>
+<td><code>src/pipeline.py:17-28</code></td>
+</tr>
+<tr>
+<td>A7 statistical outlier</td>
+<td>Median/MAD modified z-score above 3.5 on payable line amounts, per account. Optional IsolationForest (<code>random_state=0</code>) is not the default</td>
+<td><code>src/anomaly/statistical.py:13-60, 80</code></td>
+</tr>
+<tr>
+<td>Variance explanation</td>
+<td>String templates over SQL aggregates; no network code</td>
+<td><code>src/variance/explainer.py:48-99</code></td>
+</tr>
+</tbody>
+</table></div>
+<p>Because the behaviour is deterministic, the same input should produce the same output. This is tested rather than assumed in Phase 4.</p>
+<p>The README (<code>README.md:5</code>) positions the tool as "a small-scale version of the kind of AI-native ledger automation product accounting firms are increasingly adopting", and the title calls it an "Agent". That describes the product category the project imitates rather than claiming the tool uses AI, but it does not say that no model is used, and nothing in the tool is agentic (no model, no autonomous action). The README mentions "rule-based checks" only in its accuracy section (line 108). Recorded for evaluation as a transparency matter.</p>
+<h2 id="3-components">3. Components</h2>
+<div class="scroll"><table>
+<thead>
+<tr>
+<th>Component</th>
+<th>Path</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Xero connector (OAuth, paged pulls)</td>
+<td><code>src/connectors/xero_connector.py</code></td>
+</tr>
+<tr>
+<td>QuickBooks connector and adapter</td>
+<td><code>src/connectors/quickbooks_connector.py</code>, <code>quickbooks_adapter.py</code></td>
+</tr>
+<tr>
+<td>Load into SQLite (upsert) and schema</td>
+<td><code>src/db/load.py</code>, <code>src/db/schema.sql</code></td>
+</tr>
+<tr>
+<td>Reconciliation and coverage stats</td>
+<td><code>src/reconciliation/matcher.py</code>, <code>stats.py</code></td>
+</tr>
+<tr>
+<td>Anomaly rules</td>
+<td><code>src/anomaly/rules.py</code>, <code>statistical.py</code></td>
+</tr>
+<tr>
+<td>Shared pipeline</td>
+<td><code>src/pipeline.py</code> (<code>detect_all</code>, runs matcher output plus six rule steps)</td>
+</tr>
+<tr>
+<td>Variance explainer</td>
+<td><code>src/variance/explainer.py</code></td>
+</tr>
+<tr>
+<td>Dashboard</td>
+<td><code>dashboard/app.py</code> (Streamlit)</td>
+</tr>
+<tr>
+<td>Synthetic data generator</td>
+<td><code>src/seed_synthetic.py</code> (seed 42, 5,000 bank transactions)</td>
+</tr>
+<tr>
+<td>Scoring</td>
+<td><code>score_against_answer_key</code>, <code>score_against_planted_records</code> in <code>src/anomaly/statistical.py</code></td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="4-inputs-and-outputs">4. Inputs and outputs</h2>
+<p><strong>Inputs:</strong> live Xero trial organisation (OAuth); QuickBooks sandbox company (OAuth); frozen SQLite snapshots (<code>data/demo_ledger.db</code>, <code>demo_ledger_quickbooks.db</code>, <code>demo_ledger_large.db</code>); the synthetic seed. All data is fictional or Intuit/Xero demo data.</p>
+<p><strong>Outputs:</strong> Streamlit dashboard tables and metrics (reconciliation summary, anomaly list with reasons, precision and recall, variance sentences); CLI reports from <code>src/detect_anomalies.py</code> and <code>src/reconcile.py</code>. The dashboard does not write files or write back to the ERPs (no file-write or network code found in <code>dashboard/app.py</code>).</p>
+<p><strong>Who acts on outputs:</strong> not documented. There is no accept, reject, override or sign-off step in the code. The reviewer is implicit.</p>
+<h2 id="5-data-flow">5. Data flow</h2>
+<figure><svg class="chart" role="img" aria-label="Data flow: Xero and QuickBooks APIs to connectors, local SQLite, matcher and rules, dashboard; demo databases published to GitHub and Streamlit Cloud" viewBox="0 0 720 250" width="100%" style="max-width:720px">
+<g font-size="12" font-family="system-ui,sans-serif">
+<rect x="0" y="20" width="120" height="56" rx="6" fill="#fdecea" stroke="#b71c1c"/><text x="60" y="44" text-anchor="middle">Xero API</text><text x="60" y="60" text-anchor="middle">read scopes</text>
+<rect x="0" y="110" width="120" height="70" rx="6" fill="#fdecea" stroke="#b71c1c"/><text x="60" y="134" text-anchor="middle">QuickBooks API</text><text x="60" y="150" text-anchor="middle">read/write scope</text><text x="60" y="166" text-anchor="middle">granted</text>
+<rect x="170" y="50" width="130" height="90" rx="6" fill="#e8eef7" stroke="#1f3864"/><text x="235" y="76" text-anchor="middle" fill="#1b1f27">Connectors</text><text x="235" y="94" text-anchor="middle" fill="#1b1f27">OAuth + GET</text><text x="235" y="110" text-anchor="middle" fill="#1b1f27">.env: keys,</text><text x="235" y="126" text-anchor="middle" fill="#1b1f27">plaintext tokens</text>
+<rect x="340" y="50" width="100" height="90" rx="6" fill="#e8eef7" stroke="#1f3864"/><text x="390" y="90" text-anchor="middle" fill="#1b1f27">SQLite</text><text x="390" y="108" text-anchor="middle" fill="#1b1f27">ledger (local)</text>
+<rect x="480" y="50" width="110" height="90" rx="6" fill="#e8eef7" stroke="#1f3864"/><text x="535" y="84" text-anchor="middle" fill="#1b1f27">Matcher, rules</text><text x="535" y="102" text-anchor="middle" fill="#1b1f27">A1-A7, variance</text><text x="535" y="120" text-anchor="middle" fill="#1b1f27">templates</text>
+<rect x="620" y="50" width="100" height="90" rx="6" fill="#e8eef7" stroke="#1f3864"/><text x="670" y="86" text-anchor="middle" fill="#1b1f27">Dashboard</text><text x="670" y="104" text-anchor="middle" fill="#1b1f27">display only,</text><text x="670" y="120" text-anchor="middle" fill="#1b1f27">no sign-off</text>
+<rect x="340" y="190" width="200" height="46" rx="6" fill="#fdecea" stroke="#b71c1c"/><text x="440" y="210" text-anchor="middle" fill="#1b1f27">Public GitHub +</text><text x="440" y="226" text-anchor="middle" fill="#1b1f27">Streamlit Cloud (demo copies)</text>
+<g stroke="currentColor" stroke-width="1.5" fill="none"><path d="M120 48 L170 80"/><path d="M120 145 L170 115"/><path d="M300 95 L340 95"/><path d="M440 95 L480 95"/><path d="M590 95 L620 95"/><path d="M390 140 L410 190"/></g></g></svg>
+<figcaption>Red boxes are where data leaves the developer machine. No LLM provider receives data.</figcaption></figure>
+<p>Where data leaves the environment: API calls to <code>api.xero.com</code>, <code>login.xero.com</code>, <code>identity.xero.com</code>, <code>sandbox-quickbooks.api.intuit.com</code>, <code>appcenter.intuit.com</code> and <code>oauth.platform.intuit.com</code>; and publication of frozen demo databases to GitHub and Streamlit Cloud. No LLM provider receives data. The public dashboard makes no live API calls and shows a hard-coded published score when the private answer key is absent (<code>dashboard/app.py:35-41, 173-178</code>).</p>
+<h2 id="6-access-and-permissions">6. Access and permissions</h2>
+<ul>
+<li><strong>Xero:</strong> scopes are all <code>.read</code> plus <code>offline_access</code>, <code>openid</code>, <code>profile</code>, <code>email</code> (<code>src/connectors/xero_connector.py:18-28</code>). Only POSTs are token exchange and refresh (<code>:75</code>, <code>:91</code>).</li>
+<li><strong>QuickBooks:</strong> scope requested is <code>com.intuit.quickbooks.accounting</code>, which is <strong>read/write</strong>, although the code only issues queries (GET) and token POSTs (<code>src/connectors/quickbooks_connector.py:24, 73, 90</code>). Read-only behaviour is a property of the code, not of the granted permission.</li>
+</ul>
+<h2 id="7-secrets">7. Secrets</h2>
+<p>Credentials are stored in a local <code>.env</code> (git-ignored; <code>.env.example</code> with blanks is committed). Refresh tokens are written back to <code>.env</code> in plaintext by <code>save_tokens</code> (<code>src/connectors/xero_connector.py:190-193</code>). <code>git log --all -- .env</code> returned no history, so <code>.env</code> was never committed. No use of <code>st.secrets</code>. Secret values were not read during this review. A secrets scan is reported in the build plan (Session 6); an independent scan of all history at the pinned commit found no credentials (Phase 4, evidence log E-04).</p>
+<h2 id="8-logging-persistence-and-change-control">8. Logging, persistence and change control</h2>
+<ul>
+<li><strong>Run logging:</strong> none found. No logging module use, input hash, code version, timestamp or run table. The schema has six data tables (accounts, contacts, invoices, bank_transactions, payments, line_items) and no audit table.</li>
+<li><strong>Persistence:</strong> local SQLite (<code>ledger.db</code>, <code>ledger_quickbooks.db</code>, git-ignored) and three committed demo snapshots.</li>
+<li><strong>Automated tests:</strong> none (no <code>tests/</code> directory).</li>
+<li><strong>Dependencies:</strong> <code>requirements.txt</code> is unpinned (python-dotenv, requests, requests-oauthlib, pandas, scikit-learn, streamlit); no lockfile. Local environment observed: Python 3.11, streamlit 1.64.0.</li>
+<li><strong>Version history:</strong> 13 commits on <code>main</code>; no releases or tags noted.</li>
+<li><strong>Development provenance:</strong> built largely with Claude Code per the build plan's session log.</li>
+</ul>
+<h2 id="9-existing-validation-and-documented-limitations">9. Existing validation and documented limitations</h2>
+<div class="scroll"><table>
+<thead>
+<tr>
+<th>Result</th>
+<th>Value</th>
+<th>Caveat stated by the project</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Xero planted anomalies</td>
+<td>7 of 7 caught, 3 false positives, precision 0.70, recall 1.00</td>
+<td>Very small live sample (about 5 bank lines and 46 payments); A2 rule tailored to per-contact VAT</td>
+</tr>
+<tr>
+<td>Synthetic (5,000 bank lines)</td>
+<td>84 of 84 caught, 24 false positives, precision 0.778</td>
+<td>"Planted patterns were written to fit the rules"; shows scale and mechanics, not accuracy</td>
+</tr>
+<tr>
+<td>QuickBooks</td>
+<td>No answer key, no accuracy claim</td>
+<td>Sandbox data; auto-matches 0 of 40 bank lines (not investigated)</td>
+</tr>
+<tr>
+<td>Pagination</td>
+<td>Tested against mocks only</td>
+<td>Not re-run against live APIs</td>
+</tr>
+</tbody>
+</table></div>
+<p>The private answer key (<code>data/anomaly_answer_key.csv</code>) is git-ignored and present locally only.</p>
+<p><strong>Not documented:</strong> intended use, named control owner, users of the output, known limitations on real books (materiality, false negatives), or how an unusual result would be handled.</p>
+<h2 id="10-observations-to-test-in-phase-4-not-conclusions">10. Observations to test in Phase 4 (not conclusions)</h2>
+<ul>
+<li>A1 checks sales invoices only; whether duplicate supplier bills (ACCPAY) are detected by any rule is untested.</li>
+<li>A1 compares adjacent rows after sorting, so behaviour with three or more near-identical entries needs testing.</li>
+<li>A4 flags all weekend postings; false positive behaviour on legitimately weekend-dated items needs testing.</li>
+<li>A3 uses a fixed £500 threshold.</li>
+<li>Reconciliation tolerances and windows are fixed constants, not configurable or documented as approved.</li>
+</ul>
+<h2 id="11-uncertain-items">11. Uncertain items</h2>
+<ul>
+<li>Contents of <code>src/seed_synthetic.py</code> beyond its header, and <code>src/reconciliation/stats.py</code>, were not read in full.</li>
+<li>Whether any script writes output files other than to <code>data/</code>.</li>
+<li>Current Streamlit deployment state and commit deployed.</li>
+<li>QuickBooks production (non-sandbox) scope behaviour.</li>
+</ul>
+</div></main>
+<footer><div class="wrap">Subject: <a href="https://github.com/VAishwaryaSingh/Northbridge-Ledger-Agent">Northbridge Ledger Agent</a>, commit <code>9c4127a</code> (23 Sep 2026). Live demo: <a href="https://northbridge-ledger-agent.streamlit.app/">northbridge-ledger-agent.streamlit.app</a>. Synthetic and sandbox data only. The Northbridge project itself was not changed. This page states a conclusion, not an audit opinion, and gives no certification.</div></footer>
+<script>
+(function(){var r=document.documentElement,t=null;try{t=localStorage.getItem('theme')}catch(e){}if(t)r.setAttribute('data-theme',t);
+var b=document.getElementById('themebtn');if(b)b.addEventListener('click',function(){var d=r.getAttribute('data-theme')||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');var n=d==='dark'?'light':'dark';r.setAttribute('data-theme',n);try{localStorage.setItem('theme',n)}catch(e){}});
+document.querySelectorAll('input.filter').forEach(function(i){i.addEventListener('input',function(){var q=i.value.toLowerCase(),tb=document.getElementById(i.dataset.target);tb.querySelectorAll('tbody tr').forEach(function(tr){tr.style.display=tr.textContent.toLowerCase().indexOf(q)>-1?'':'none'})})});})();
+</script></body></html>

@@ -1,0 +1,10 @@
+.env
+__pycache__/
+venv/
+*.pyc
+# Test databases are committed deliberately; anything else is not
+*.db
+!04_testing/test_dataset/*.db
+# Pinned clone of the system under review (reproduce with 04_testing/test_scripts/setup_subject.sh)
+04_testing/_subject/
+_subject_remediated/

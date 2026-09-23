@@ -1,0 +1,6 @@
+criterion,threshold,result,met,counts
+"Recall, duplicates and reconciliation breaks",>= 0.95,0.833,NO,15/18
+"Recall, other rules (A2, A3, A4, A7)",>= 0.85,1.000,YES,13/13
+Precision,>= 0.80,0.560,NO,28/50
+F1,>= 0.85,0.691,NO,
+False positive rate,<= 0.10,0.111,NO,22/199

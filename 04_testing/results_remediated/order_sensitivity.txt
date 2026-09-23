@@ -1,0 +1,7 @@
+original order: {'flags': 54, 'true_positive_items': 30, 'false_positive_items': 20, 'bank_false_positives': ['BT-051', 'BT-052', 'BT-053', 'BT-054', 'BT-055', 'BT-056'], 'missed_errors': ['BT-044']}
+reversed {'flags': 54, 'true_positive_items': 30, 'false_positive_items': 20, 'bank_false_positives': ['BT-051', 'BT-052', 'BT-053', 'BT-054', 'BT-055', 'BT-056'], 'missed_errors': ['BT-044']}
+shuffle seed 1 {'flags': 54, 'true_positive_items': 30, 'false_positive_items': 20, 'bank_false_positives': ['BT-051', 'BT-052', 'BT-053', 'BT-054', 'BT-055', 'BT-056'], 'missed_errors': ['BT-044']}
+shuffle seed 2 {'flags': 54, 'true_positive_items': 30, 'false_positive_items': 20, 'bank_false_positives': ['BT-051', 'BT-052', 'BT-053', 'BT-054', 'BT-055', 'BT-056'], 'missed_errors': ['BT-044']}
+shuffle seed 3 {'flags': 54, 'true_positive_items': 30, 'false_positive_items': 20, 'bank_false_positives': ['BT-051', 'BT-052', 'BT-053', 'BT-054', 'BT-055', 'BT-056'], 'missed_errors': ['BT-044']}
+shuffle seed 4 {'flags': 54, 'true_positive_items': 30, 'false_positive_items': 20, 'bank_false_positives': ['BT-051', 'BT-052', 'BT-053', 'BT-054', 'BT-055', 'BT-056'], 'missed_errors': ['BT-044']}
+shuffle seed 5 {'flags': 54, 'true_positive_items': 30, 'false_positive_items': 20, 'bank_false_positives': ['BT-051', 'BT-052', 'BT-053', 'BT-054', 'BT-055', 'BT-056'], 'missed_errors': ['BT-044']}

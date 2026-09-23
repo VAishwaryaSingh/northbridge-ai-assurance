@@ -1,0 +1,9 @@
+criterion,threshold,result,assessment,note
+"Recall, duplicates and reconciliation breaks",>= 95%,83.3% (15/18),NOT MET,"Fails only because A1 checks sales invoices, not supplier bills (0/3). Robust to relabelling."
+"Recall, other rules (A2, A3, A4, A7)",>= 85%,100% (13/13),MET on point estimate,"Near-guaranteed by construction; Wilson lower bound about 0.77 spans the threshold; weekend/threshold labels are judgement (CH-02, 03, 05)."
+"Precision (per item, as scored)",>= 80%,56.0% (28/50),NOT MET,Per flag: 53.7% (29/54). Depends on the constructed mix; reaches 80% only if 15 hard cases are dropped.
+F1,>= 0.85,0.691,NOT MET,"0.848 in the most favourable exclusion (S3), still below 0.85."
+False positive rate,<= 10%,11.1% (22/199),"NOT MET (borderline, label-sensitive)","Flips to met if the 6 bank charges are excluded (8.3%). 1.2% on standard clean, 62.5% on hard clean."
+Determinism (identical output on rerun),100%,Fixed row order: 5/5 identical. Reordered rows: differs in 6 of 7 orderings,NOT MET,"Output depends on database row order (matcher takes the first match, no one-to-one allocation). See order_sensitivity.txt."
+Audit trail completeness,100%,0% (no run log exists),NOT MET,C26 not in place.
+Human disposition of flags,100%,0% (no disposition step),NOT MET,C21 not in place.

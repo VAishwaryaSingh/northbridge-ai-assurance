@@ -1,0 +1,11 @@
+sentences with an up/down headline and named drivers: 52
+of which a named driver moves opposite to the headline: 17
+ - Equipment down 14% vs 2026-01 (£229 → £196), driven by Techbench Supplies (+£196).
+ - Office Supplies down 69% vs 2026-02 (£249 → £76), driven by Office Depot UK (+£76).
+ - Consulting Fees down 56% vs 2026-03 (£7,141 → £3,137), driven by Fairway Foods (+£1,114).
+ - Travel down 63% vs 2026-03 (£840 → £314), driven by City Cabs (+£59) and Skyline Hotels (-£7).
+
+Same check on Northbridge's own committed demo databases (run 2026-09-23, pinned commit):
+demo_ledger.db (Xero snapshot): 5 sentences with named drivers, 0 contradicting
+demo_ledger_quickbooks.db: 14 sentences, 4 contradicting
+demo_ledger_large.db (synthetic 5,000): 69 sentences, 35 contradicting

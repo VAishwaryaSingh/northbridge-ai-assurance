@@ -1,0 +1,55 @@
+rule,item_id,record_id,contact,amount,reason
+A6,BT-051,BT-051,Northbridge Bank,15.0,Bank line for Northbridge Bank (£15.00) has no matching invoice/bill.
+A6,BT-047,BT-047,Orchid Trading,312.75,Bank line for Orchid Trading (£312.75) has no matching invoice/bill.
+A6,BT-049,BT-049,Studio Kite Ltd,376.92,Bank line for Studio Kite Ltd (£376.92) has no matching invoice/bill.
+A6,BT-046,BT-046,Vantage Holdings,1265.4,Bank line for Vantage Holdings (£1265.40) has no matching invoice/bill.
+A6,BT-052,BT-052,Northbridge Bank,15.0,Bank line for Northbridge Bank (£15.00) has no matching invoice/bill.
+A6,BT-045,BT-045,Kingsley Consulting Ltd,730.0,Bank line for Kingsley Consulting Ltd (£730.00) has no matching invoice/bill.
+A6,BT-053,BT-053,Northbridge Bank,15.0,Bank line for Northbridge Bank (£15.00) has no matching invoice/bill.
+A6,BT-054,BT-054,Northbridge Bank,15.0,Bank line for Northbridge Bank (£15.00) has no matching invoice/bill.
+A6,BT-055,BT-055,Northbridge Bank,15.0,Bank line for Northbridge Bank (£15.00) has no matching invoice/bill.
+A6,BT-050,BT-050,(no contact),415.0,Bank line for an unidentified contact (£415.00) has no matching invoice/bill.
+A6,BT-056,BT-056,Northbridge Bank,15.0,Bank line for Northbridge Bank (£15.00) has no matching invoice/bill.
+A6,BT-048,BT-048,Ergo Office Furniture,285.33,Bank line for Ergo Office Furniture (£285.33) has no matching invoice/bill.
+A1,AP-121,AP-121,Brightside Print,128.8,Brightside Print was billed £128.80 twice within 4 days (2026-07-06 and 2026-07-10) — likely a duplicate bill.
+A1,AP-123,AP-123,Pearce Accounting,290.12,Pearce Accounting was billed £290.12 twice within 5 days (2026-04-17 and 2026-04-22) — likely a duplicate bill.
+A1,AP-122,AP-122,Skyline Hotels,220.83,Skyline Hotels was billed £220.83 twice within 5 days (2026-07-29 and 2026-08-03) — likely a duplicate bill.
+A1,AR-047,AR-047,Dunmore Ltd,2427.91,Dunmore Ltd was invoiced £2427.91 twice within 3 days (2026-03-30 and 2026-04-02) — likely a duplicate invoice.
+A1,AR-048,AR-048,Fairway Foods,668.31,Fairway Foods was invoiced £668.31 twice within 4 days (2026-04-17 and 2026-04-21) — likely a duplicate invoice.
+A1,AR-050,AR-050,Granite Systems,2109.42,Granite Systems was invoiced £2109.42 twice within 2 days (2026-08-17 and 2026-08-19) — likely a duplicate invoice.
+A1,AR-051,AR-051,Granite Systems,2109.42,Granite Systems was invoiced £2109.42 twice within 2 days (2026-08-19 and 2026-08-21) — likely a duplicate invoice.
+A1,AR-049,AR-049,Hollis Media,2170.82,Hollis Media was invoiced £2170.82 twice within 7 days (2026-03-02 and 2026-03-09) — likely a duplicate invoice.
+A2,AP-036,AP-036-L1,AdSpark Media,278.24,"AdSpark Media's bill on 2026-07-30 is coded NONE, but their other bills are consistently coded INPUT2 — VAT code mismatch."
+A2,AP-109,AP-109-L1,Fenwick Design,260.92,"Fenwick Design's bill on 2026-03-24 is coded NONE, but their other bills are consistently coded INPUT2 — VAT code mismatch."
+A2,AP-110,AP-110-L1,Fenwick Design,296.96,"Fenwick Design's bill on 2026-04-14 is coded NONE, but their other bills are consistently coded INPUT2 — VAT code mismatch."
+A2,AP-111,AP-111-L1,Fenwick Design,296.83,"Fenwick Design's bill on 2026-05-18 is coded NONE, but their other bills are consistently coded INPUT2 — VAT code mismatch."
+A2,AP-054,AP-054-L1,Northern Power Ltd,168.23,"Northern Power Ltd's bill on 2026-01-07 is coded NONE, but their other bills are consistently coded INPUT2 — VAT code mismatch."
+A2,AP-024,AP-024-L1,Rail Europe Ltd,254.78,"Rail Europe Ltd's bill on 2026-03-25 is coded NONE, but their other bills are consistently coded INPUT2 — VAT code mismatch."
+A2,AP-070,AP-070-L1,Studio Kite Ltd,421.92,"Studio Kite Ltd's bill on 2026-01-21 is coded NONE, but their other bills are consistently coded INPUT2 — VAT code mismatch."
+A3,AP-090,AP-090,DevCraft Contractors,488.0,DevCraft Contractors's bill for £488.00 on 2026-03-12 sits suspiciously just under the £500 approval threshold.
+A3,AP-091,AP-091,DevCraft Contractors,492.0,DevCraft Contractors's bill for £492.00 on 2026-03-16 sits suspiciously just under the £500 approval threshold.
+A3,AP-092,AP-092,AdSpark Media,497.0,AdSpark Media's bill for £497.00 on 2026-06-24 sits suspiciously just under the £500 approval threshold.
+A3,AP-093,AP-093,Cobalt Analytics,489.0,Cobalt Analytics's bill for £489.00 on 2026-04-06 sits suspiciously just under the £500 approval threshold.
+A3,AP-094,AP-094,Cobalt Analytics,489.0,Cobalt Analytics's bill for £489.00 on 2026-05-06 sits suspiciously just under the £500 approval threshold.
+A3,AP-095,AP-095,Cobalt Analytics,489.0,Cobalt Analytics's bill for £489.00 on 2026-06-05 sits suspiciously just under the £500 approval threshold.
+A4,AP-098,AP-098,Stationery Direct,210.82,"Stationery Direct's bill for £210.82 is dated 2026-02-07, a Saturday — review whether this supplier legitimately trades at weekends."
+A4,AP-099,AP-099,City Cabs,241.49,"City Cabs's bill for £241.49 is dated 2026-05-17, a Sunday — review whether this supplier legitimately trades at weekends."
+A4,AP-100,AP-100,Pearce Accounting,163.64,"Pearce Accounting's bill for £163.64 is dated 2026-07-11, a Saturday — review whether this supplier legitimately trades at weekends."
+A4,AP-101,AP-101,Kestrel Couriers,206.89,"Kestrel Couriers's bill for £206.89 is dated 2026-03-14, a Saturday — review whether this supplier legitimately trades at weekends."
+A4,AP-102,AP-102,Kestrel Couriers,95.62,"Kestrel Couriers's bill for £95.62 is dated 2026-06-20, a Saturday — review whether this supplier legitimately trades at weekends."
+A4,AP-105,AP-105,Marlow Events Catering,236.44,"Marlow Events Catering's bill for £236.44 is dated 2026-04-25, a Saturday — review whether this supplier legitimately trades at weekends."
+A4,AP-106,AP-106,Marlow Events Catering,165.9,"Marlow Events Catering's bill for £165.90 is dated 2026-07-04, a Saturday — review whether this supplier legitimately trades at weekends."
+A5,BT-041,BT-041,Office Depot UK,91.23,"Bill for Office Depot UK (£91.23) already has a recorded payment, but bank transaction on 2026-04-21 also matches it — looks like a duplicate payment."
+A5,BT-043,BT-043,Pearce Accounting,340.37,"Bill for Pearce Accounting (£340.37) already has a recorded payment, but bank transaction on 2026-04-27 also matches it — looks like a duplicate payment."
+A5,BT-042,BT-042,Clearwater Utilities,144.9,"Bill for Clearwater Utilities (£144.90) already has a recorded payment, but bank transaction on 2026-09-07 also matches it — looks like a duplicate payment."
+A7,AP-093,AP-093-L1,Cobalt Analytics,407.5,Cobalt Analytics's £407.50 line on account 402 is far outside the normal range for that account (median £120.97); modified z-score 14.2.
+A7,AP-094,AP-094-L1,Cobalt Analytics,407.5,Cobalt Analytics's £407.50 line on account 402 is far outside the normal range for that account (median £120.97); modified z-score 14.2.
+A7,AP-095,AP-095-L1,Cobalt Analytics,407.5,Cobalt Analytics's £407.50 line on account 402 is far outside the normal range for that account (median £120.97); modified z-score 14.2.
+A7,AP-096,AP-096-L1,Cobalt Analytics,395.83,Cobalt Analytics's £395.83 line on account 402 is far outside the normal range for that account (median £120.97); modified z-score 13.6.
+A7,AP-097,AP-097-L1,Cobalt Analytics,416.67,Cobalt Analytics's £416.67 line on account 402 is far outside the normal range for that account (median £120.97); modified z-score 14.6.
+A7,AP-098,AP-098-L1,Stationery Direct,175.68,Stationery Direct's £175.68 line on account 413 is far outside the normal range for that account (median £80.52); modified z-score 4.7.
+A7,AP-117,AP-117-L1,Stationery Direct,958.33,Stationery Direct's £958.33 line on account 413 is far outside the normal range for that account (median £80.52); modified z-score 43.3.
+A7,AP-116,AP-116-L1,Rail Europe Ltd,2408.33,Rail Europe Ltd's £2408.33 line on account 420 is far outside the normal range for that account (median £184.02); modified z-score 21.2.
+A7,AP-118,AP-118-L1,Clearwater Utilities,1350.0,Clearwater Utilities's £1350.00 line on account 440 is far outside the normal range for that account (median £117.03); modified z-score 38.7.
+A7,AP-119,AP-119-L1,Techbench Supplies,2416.67,Techbench Supplies's £2416.67 line on account 450 is far outside the normal range for that account (median £252.81); modified z-score 36.2.
+A7,AP-120,AP-120-L1,Ergo Office Furniture,3000.0,Ergo Office Furniture's £3000.00 line on account 450 is far outside the normal range for that account (median £252.81); modified z-score 46.0.

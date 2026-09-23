@@ -1,0 +1,8 @@
+S0 Base (as frozen) {'TP': 28, 'FN': 3, 'FP': 22, 'TN': 177, 'recall': 0.903, 'precision': 0.56, 'F1': 0.691, 'FPR': 0.111}
+S1 Weekend and threshold errors relabelled as review indicators (clean) {'TP': 22, 'FN': 3, 'FP': 28, 'TN': 177, 'recall': 0.88, 'precision': 0.44, 'F1': 0.587, 'FPR': 0.137}
+S2 Drop 6 bank charges {'TP': 28, 'FN': 3, 'FP': 16, 'TN': 177, 'recall': 0.903, 'precision': 0.636, 'F1': 0.747, 'FPR': 0.083}
+S3 Drop bank charges, legit weekend, fixed-price/boundary bills (15 hard cases) {'TP': 28, 'FN': 3, 'FP': 7, 'TN': 177, 'recall': 0.903, 'precision': 0.8, 'F1': 0.848, 'FPR': 0.038}
+S4 Drop duplicate supplier bills (A1 scope) {'TP': 28, 'FN': 0, 'FP': 22, 'TN': 177, 'recall': 1.0, 'precision': 0.56, 'F1': 0.718, 'FPR': 0.111}
+per-flag precision 0.537 29 / 54
+FP clusters: {'bank charges': 6, 'weekend supplier': 4, 'fixed-price/boundary': 5, 'VAT registration change': 3, 'large equipment': 2, 'recurring receipt attribution': 2} unassigned: []
+criteria not met: 7 of 8
